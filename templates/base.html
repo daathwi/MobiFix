@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="{{ page_description | default('MOBIFIX — Expert smartphone repairs while you wait. Genuine parts, 90-day warranty, certified technicians.') }}"/>
+  <meta name="color-scheme" content="dark light"/>
+  <title>{{ page_title | default('MOBIFIX | Professional Smartphone Repair') }}</title>
+  <link rel="icon" href="/static/images/favicon.svg" type="image/svg+xml"/>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("mobifix-theme");
+        var theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@500;600;700&family=Outfit:wght@400;500;600;700&family=Pacifico&family=Space+Grotesk:wght@500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/styles.css"/>
+  {% block head_extra %}{% endblock %}
+</head>
+<body data-page="{{ active_page | default('home') }}" data-whatsapp="{{ whatsapp }}">
+  <header class="top-nav glass" id="top-nav">
+    <div class="nav-inner">
+      <div class="nav-start">
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+        </button>
+        <a class="brand-lockup" href="/" aria-label="SS Mobifix home">
+          <img class="logo-dark" src="/static/images/logo-dark.png" alt="SS Mobifix"/>
+          <img class="logo-light" src="/static/images/logo-light.png" alt="SS Mobifix"/>
+        </a>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/services" class="{{ 'active' if active_page == 'services' else '' }}">Services</a>
+        <a href="/gallery" class="{{ 'active' if active_page == 'gallery' else '' }}">Gallery</a>
+        <a href="/accessories" class="{{ 'active' if active_page == 'accessories' else '' }}">Accessories</a>
+        <a href="/reviews" class="{{ 'active' if active_page == 'reviews' else '' }}">Reviews</a>
+        <a href="/about" class="{{ 'active' if active_page == 'about' else '' }}">About Us</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light and dark mode">
+          <span class="material-symbols-outlined icon-dark">light_mode</span>
+          <span class="material-symbols-outlined icon-light">dark_mode</span>
+        </button>
+        <a class="btn btn-primary nav-wa" href="https://wa.me/{{ whatsapp }}?text={{ 'Hi SS Mobifix! I need help with my phone.' | urlencode }}" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined icon-sm">chat</span>
+          <span class="nav-wa-label">WhatsApp</span>
+        </a>
+      </div>
+    </div>
+    <div class="mobile-drawer" id="mobile-menu" hidden>
+      <nav class="mobile-menu" aria-label="Mobile">
+        <a href="/" class="{{ 'active' if active_page == 'home' else '' }}">Home</a>
+        <a href="/services" class="{{ 'active' if active_page == 'services' else '' }}">Services &amp; Pricing</a>
+        <a href="/gallery" class="{{ 'active' if active_page == 'gallery' else '' }}">Gallery</a>
+        <a href="/accessories" class="{{ 'active' if active_page == 'accessories' else '' }}">Accessories</a>
+        <a href="/reviews" class="{{ 'active' if active_page == 'reviews' else '' }}">Customer Reviews</a>
+        <a href="/about" class="{{ 'active' if active_page == 'about' else '' }}">About Us</a>
+      </nav>
+      <div class="mobile-menu-cta">
+        <a class="btn btn-primary btn-lg" href="https://wa.me/{{ whatsapp }}?text={{ 'Hi SS Mobifix! I need help with my phone.' | urlencode }}" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined icon-sm">chat</span>
+          Get free quote on WhatsApp
+        </a>
+        <a class="btn btn-secondary" href="tel:{{ phone | replace(' ', '') }}">
+          <span class="material-symbols-outlined icon-sm">call</span>
+          Call {{ phone }}
+        </a>
+        <p class="mobile-menu-note">Gandhi Nagar, Vijayawada · Opp. Hotel Ilapuram</p>
+      </div>
+    </div>
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand-lockup" href="/" aria-label="SS Mobifix">
+          <img class="logo-dark" src="/static/images/logo-dark.png" alt="SS Mobifix"/>
+          <img class="logo-light" src="/static/images/logo-light.png" alt="SS Mobifix"/>
+        </a>
+        <p class="body-sm" style="margin-top: 16px;">
+          <span class="tagline-brand" style="border: none; padding: 0; margin-bottom: 8px;">
+            <span><span class="cap">P</span>hone</span>
+            <span><span class="cap">R</span>epairing</span>
+            <span><span class="cap">U</span>nlocking</span>
+            <span><span class="cap">O</span>riginal</span>
+            <span><span class="cap">A</span>ccessories</span>
+          </span>
+        </p>
+        <div class="socials">
+          <a class="glass" href="mailto:{{ email }}" aria-label="Email">
+            <span class="material-symbols-outlined icon-sm">mail</span>
+          </a>
+          <a class="glass" href="tel:{{ phone | replace(' ', '') }}" aria-label="Phone">
+            <span class="material-symbols-outlined icon-sm">smartphone</span>
+          </a>
+          <a class="glass" href="https://wa.me/{{ whatsapp }}?text={{ 'Hi SS Mobifix! I need help with my phone.' | urlencode }}" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <span class="material-symbols-outlined icon-sm">chat</span>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/gallery">Gallery</a></li>
+          <li><a href="/accessories">Accessories</a></li>
+          <li><a href="/reviews">Reviews</a></li>
+          <li><a href="/about">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Trust</h4>
+        <div class="trust-item">
+          <span class="material-symbols-outlined">verified_user</span>
+          <span>Warranty on work</span>
+        </div>
+        <div class="trust-item">
+          <span class="material-symbols-outlined">receipt_long</span>
+          <span>Bill before repair</span>
+        </div>
+        <div class="trust-item">
+          <span class="material-symbols-outlined">chat</span>
+          <span>WhatsApp support</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 SS MOBIFIX. ALL RIGHTS RESERVED.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

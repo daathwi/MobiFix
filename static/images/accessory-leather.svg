@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1410"/>
+      <stop offset="100%" stop-color="#0e0e0e"/>
+    </linearGradient>
+    <linearGradient id="leather" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5c3a2a"/>
+      <stop offset="50%" stop-color="#3d2418"/>
+      <stop offset="100%" stop-color="#2a1810"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#lg)"/>
+  <ellipse cx="900" cy="200" rx="260" ry="180" fill="#AA0909" opacity="0.12"/>
+  <rect x="420" y="90" width="360" height="500" rx="40" fill="url(#leather)" stroke="#8a5a42" stroke-width="2"/>
+  <rect x="455" y="130" width="290" height="420" rx="28" fill="#241510" opacity="0.5"/>
+  <circle cx="600" cy="250" r="28" fill="#1a0f0c" stroke="#8a5a42" stroke-width="2"/>
+  <rect x="520" y="420" width="160" height="10" rx="5" fill="#8a5a42" opacity="0.5"/>
+  <rect x="540" y="450" width="120" height="8" rx="4" fill="#8a5a42" opacity="0.35"/>
+  <text x="80" y="600" fill="#e5e2e1" font-family="system-ui,sans-serif" font-size="28" font-weight="700">SIGNATURE LEATHER</text>
+  <text x="80" y="635" fill="#af8783" font-family="system-ui,sans-serif" font-size="16">Hand-crafted protection</text>
+</svg>

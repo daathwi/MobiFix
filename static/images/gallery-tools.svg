@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#131313"/>
+  <rect x="100" y="120" width="600" height="360" rx="16" fill="#1f2020" stroke="#353535"/>
+  <g stroke="#c9c6c5" stroke-width="6" stroke-linecap="round">
+    <path d="M200 200v200"/>
+    <path d="M280 180v220"/>
+    <path d="M360 210v190"/>
+    <path d="M440 170v230"/>
+    <path d="M520 200v200"/>
+    <path d="M600 190v210"/>
+  </g>
+  <g fill="#AA0909">
+    <circle cx="200" cy="180" r="8"/>
+    <circle cx="280" cy="160" r="8"/>
+    <circle cx="360" cy="190" r="8"/>
+    <circle cx="440" cy="150" r="8"/>
+    <circle cx="520" cy="180" r="8"/>
+    <circle cx="600" cy="170" r="8"/>
+  </g>
+  <text x="400" y="540" text-anchor="middle" fill="#af8783" font-family="system-ui,sans-serif" font-size="16">SURGICAL TOOLSET</text>
+</svg>

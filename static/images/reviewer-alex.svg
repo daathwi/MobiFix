@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" fill="#1b1c1c"/>
+  <circle cx="100" cy="78" r="36" fill="#2a2a2a"/>
+  <ellipse cx="100" cy="160" rx="54" ry="40" fill="#2a2a2a"/>
+  <circle cx="150" cy="50" r="28" fill="#AA0909" opacity="0.25"/>
+  <text x="100" y="190" text-anchor="middle" fill="#ffb4a9" font-family="system-ui,sans-serif" font-size="14" font-weight="700">AT</text>
+</svg>

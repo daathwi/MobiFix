@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="page-main">
+  <section class="page-hero section">
+    <div class="container">
+      <p class="script-accent" style="font-size: 32px;">{{ owner_name }}</p>
+      <h1 class="headline-xl">About Us</h1>
+      <span class="red-bar" aria-hidden="true"></span>
+      <p class="page-lead">
+        SS Mobifix — {{ tagline }}. Chip-level mobile service in Gandhi Nagar, Vijayawada. Walk-ins welcome.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container workshop-grid">
+      <div class="workshop-info">
+        <div class="contact-list">
+          <div class="contact-item">
+            <span class="material-symbols-outlined">badge</span>
+            <div>
+              <h4>Proprietor</h4>
+              <p>{{ owner_name }}</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="material-symbols-outlined">location_on</span>
+            <div>
+              <h4>Our Address</h4>
+              <p>{{ address }}</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="material-symbols-outlined">schedule</span>
+            <div>
+              <h4>Operating Hours</h4>
+              <p>Monday - Saturday: 10:00 AM - 08:00 PM<br/>Sunday: 11:00 AM - 04:00 PM</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="material-symbols-outlined">contact_support</span>
+            <div>
+              <h4>Reach Us</h4>
+              <p>{{ phone }}<br/>{{ email }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-ctas" style="margin-top: 8px;">
+          <a class="btn btn-primary btn-lg" href="{{ maps_url }}" target="_blank" rel="noopener">
+            Get Directions
+            <span class="material-symbols-outlined">directions</span>
+          </a>
+          <a class="btn btn-secondary btn-lg" href="https://wa.me/{{ whatsapp }}?text={{ 'Hi SS Mobifix! I need help with my phone.' | urlencode }}" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined">chat</span>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="map-frame glass shop-banner-frame">
+        <div class="map-inner">
+          <img
+            src="/static/images/shop-banner.png"
+            alt="SS Mobifix shop banner — Gandhi Nagar, Vijayawada"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

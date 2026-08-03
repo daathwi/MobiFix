@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="page-main">
+  <section class="page-hero section">
+    <div class="container">
+      <p class="script-accent" style="font-size: 32px;">bench life</p>
+      <h1 class="headline-xl">Gallery</h1>
+      <span class="red-bar" aria-hidden="true"></span>
+      <p class="page-lead">
+        ESD benches, calibration, genuine inventory, surgical tools — the shop where the X gets work done.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div class="gallery-grid">
+        <figure class="gallery-card">
+          <img src="/static/images/gallery/bench.jpg" alt="ESD-safe workbench with open device" loading="lazy"/>
+          <figcaption class="gallery-caption">ESD-safe workbench</figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img src="/static/images/gallery/screen.jpg" alt="Display calibration station" loading="lazy"/>
+          <figcaption class="gallery-caption">Display calibration</figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img src="/static/images/gallery/parts.jpg" alt="Genuine parts inventory trays" loading="lazy"/>
+          <figcaption class="gallery-caption">Genuine parts</figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img src="/static/images/gallery/tools.jpg" alt="Surgical precision toolset" loading="lazy"/>
+          <figcaption class="gallery-caption">Surgical toolset</figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img src="/static/images/gallery/board.jpg" alt="Smartphone board-level repair" loading="lazy"/>
+          <figcaption class="gallery-caption">Board-level repair</figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img src="/static/images/gallery/diagnostics.jpg" alt="Diagnostic micro-soldering station" loading="lazy"/>
+          <figcaption class="gallery-caption">Diagnostics bay</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container page-teaser glass">
+      <div>
+        <h2 class="headline-lg">Ready for a precision repair?</h2>
+        <p style="color: var(--on-surface-variant); margin-top: 8px;">Ping us on WhatsApp — most jobs finish while you wait.</p>
+      </div>
+      <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">Repair now</a>
+    </div>
+  </section>
+</main>
+{% endblock %}

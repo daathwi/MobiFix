@@ -1,0 +1,352 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="home-main">
+  <div class="depth-field" aria-hidden="true">
+    <span class="depth-ring depth-ring--a"></span>
+    <span class="depth-slab depth-slab--a"></span>
+    <span class="depth-ring depth-ring--b"></span>
+    <span class="depth-orb depth-orb--a"></span>
+    <span class="depth-slab depth-slab--b"></span>
+    <span class="depth-orb depth-orb--b"></span>
+    <span class="depth-ring depth-ring--c"></span>
+  </div>
+
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="hero-mark" aria-hidden="true">
+          <img class="logo-dark" src="/static/images/logo-dark.png" alt=""/>
+          <img class="logo-light" src="/static/images/logo-light.png" alt=""/>
+        </div>
+        <h1 class="headline-xl">
+          Phone fixed<br/>
+          <span class="accent">while you wait</span><span class="x-mark">.</span>
+        </h1>
+        <span class="red-bar" aria-hidden="true"></span>
+        <p class="hero-lead">
+          Clear <strong>starts-from</strong> prices. Free check-up. We repair only after you approve the quote —
+          no pressure, no surprise bills.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary btn-lg" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
+            Get free quote on WhatsApp
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+          <a class="btn btn-secondary btn-lg" href="tel:{{ phone | replace(' ', '') }}">
+            <span class="material-symbols-outlined">call</span>
+            {{ phone }}
+          </a>
+        </div>
+        <p class="hero-footnote">Send a photo of the issue on WhatsApp — get an estimate before you visit.</p>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <figure class="hero-photo">
+          <img
+            src="/static/images/hero-repair.jpg"
+            alt="Smartphone repair with precision tooling at SS Mobifix"
+            width="960"
+            height="1200"
+          />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-band" aria-label="Why customers choose SS Mobifix">
+    <div class="container trust-band-grid">
+      <article class="trust-band-item">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <h3>Price before repair</h3>
+        <p>We share the estimate first. You approve — then we start. No hidden charges.</p>
+      </article>
+      <article class="trust-band-item">
+        <span class="material-symbols-outlined">schedule</span>
+        <h3>Same-day, walk-in</h3>
+        <p>Most screen and battery jobs finish while you wait. Keep your day on track.</p>
+      </article>
+      <article class="trust-band-item">
+        <span class="material-symbols-outlined">verified</span>
+        <h3>Quality parts</h3>
+        <p>We use reliable assemblies and explain options — good / better — so you choose what fits your budget.</p>
+      </article>
+      <article class="trust-band-item">
+        <span class="material-symbols-outlined">location_on</span>
+        <h3>Local Vijayawada shop</h3>
+        <p>Opp. Hotel Ilapuram, Gandhi Nagar. Easy to find, easy to come back if you need support.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="carriers-strip" aria-label="Fancy numbers available">
+    <div class="container carriers-inner">
+      <p class="carriers-label">
+        <span class="material-symbols-outlined icon-sm">sim_card</span>
+        Fancy Numbers Available
+      </p>
+      <ul class="carriers-list brand-logo-row" aria-label="Networks">
+        <li>
+          <span class="logo-mark logo-mark--md" style="--logo: url('/static/images/brands/jio.svg')" role="img" aria-label="Jio"></span>
+        </li>
+        <li>
+          <span class="logo-mark logo-mark--md" style="--logo: url('/static/images/brands/airtel.svg')" role="img" aria-label="Airtel"></span>
+        </li>
+        <li>
+          <span class="logo-mark logo-mark--md" style="--logo: url('/static/images/brands/vi.svg')" role="img" aria-label="VI"></span>
+        </li>
+        <li>
+          <span class="logo-mark logo-mark--md" style="--logo: url('/static/images/brands/bsnl.svg')" role="img" aria-label="BSNL"></span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div class="section-bar">
+        <div>
+          <p class="script-accent" style="font-size: 28px;">honest pricing</p>
+          <h2 class="headline-lg">Popular repairs</h2>
+          <span class="red-bar" aria-hidden="true"></span>
+          <p class="section-lead">
+            All rates shown as <strong>starts from</strong>. Final cost depends on model and part quality —
+            confirmed before any work begins.
+          </p>
+        </div>
+        <a class="btn btn-tertiary" href="/services">
+          See all services
+          <span class="material-symbols-outlined icon-sm">arrow_forward</span>
+        </a>
+      </div>
+      <div class="services-grid services-gallery" id="services-grid" data-limit="4">
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+      </div>
+      <p class="section-note">
+        Tip: A new phone can cost ₹20,000+. A quality repair often costs a fraction — and saves your data, apps, and photos.
+      </p>
+    </div>
+  </section>
+
+  <section class="section brands-band">
+    <div class="container">
+      <div class="section-header">
+        <p class="script-accent" style="font-size: 28px;">all major brands</p>
+        <h2 class="headline-lg">We service the phones you use</h2>
+        <span class="red-bar" aria-hidden="true"></span>
+        <p class="section-lead centered">
+          iPhone, Samsung, OnePlus, Vivo, Xiaomi (Mi), Oppo and more — hardware + software under one roof.
+        </p>
+      </div>
+      <ul class="brand-logos brand-logo-row" aria-label="Supported brands">
+        <li>
+          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/apple.svg')" role="img" aria-label="iPhone / Apple"></span>
+        </li>
+        <li>
+          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/samsung.svg')" role="img" aria-label="Samsung"></span>
+        </li>
+        <li>
+          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/oneplus.svg')" role="img" aria-label="OnePlus"></span>
+        </li>
+        <li>
+          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/vivo.svg')" role="img" aria-label="Vivo"></span>
+        </li>
+        <li>
+          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/xiaomi.svg')" role="img" aria-label="Xiaomi"></span>
+        </li>
+        <li>
+          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/oppo.svg')" role="img" aria-label="Oppo"></span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-low">
+    <div class="container">
+      <div class="section-header">
+        <p class="script-accent" style="font-size: 28px;">simple process</p>
+        <h2 class="headline-lg">3 steps. No confusion.</h2>
+        <span class="red-bar" aria-hidden="true"></span>
+        <p class="section-lead centered">Built for busy families and working professionals who want clarity, not jargon.</p>
+      </div>
+      <div class="steps steps-three">
+        <div class="step">
+          <div class="step-num active glass">01</div>
+          <h4>WhatsApp us</h4>
+          <p>Share your model and the problem. Get a free estimate and guidance — before you leave home.</p>
+        </div>
+        <div class="step">
+          <div class="step-num glass">02</div>
+          <h4>Visit &amp; approve</h4>
+          <p>Walk into Gandhi Nagar. We diagnose in front of you, explain options, and wait for your go-ahead.</p>
+        </div>
+        <div class="step">
+          <div class="step-num glass">03</div>
+          <h4>Collect same day</h4>
+          <p>Most jobs finish while you wait. You leave with a working phone, warranty, and a clear bill.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-bar">
+        <div>
+          <p class="script-accent" style="font-size: 28px;">see the workshop</p>
+          <h2 class="headline-lg">Clean bench. Real tools.</h2>
+          <span class="red-bar" aria-hidden="true"></span>
+          <p class="section-lead">
+            Open workspace — not a closed back room. Ask questions. Watch the process. Trust what you can verify.
+          </p>
+        </div>
+        <a class="btn btn-tertiary" href="/gallery">
+          View gallery
+          <span class="material-symbols-outlined icon-sm">arrow_forward</span>
+        </a>
+      </div>
+      <div class="gallery-grid gallery-teaser">
+        <figure class="gallery-card">
+          <img src="/static/images/gallery/bench.jpg" alt="ESD-safe workbench at SS Mobifix" loading="lazy"/>
+          <figcaption class="gallery-caption">Organised repair bench</figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img src="/static/images/gallery/screen.jpg" alt="Display calibration" loading="lazy"/>
+          <figcaption class="gallery-caption">Display fitting &amp; checks</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted why-band">
+    <div class="container why-grid">
+      <div>
+        <p class="script-accent" style="font-size: 28px;">why SS Mobifix</p>
+        <h2 class="headline-lg">Repair is smarter than panic-buying</h2>
+        <span class="red-bar" aria-hidden="true"></span>
+        <p class="section-lead">
+          Indian buyers value value — and peace of mind. We fix what can be fixed, recommend upgrade only when it
+          truly makes sense, and keep every rupee accounted for.
+        </p>
+      </div>
+      <ul class="why-list">
+        <li>
+          <span class="material-symbols-outlined">savings</span>
+          <div>
+            <strong>Save vs buying new</strong>
+            <p>Repair cost is usually a small % of a replacement phone — with your apps and memories intact.</p>
+          </div>
+        </li>
+        <li>
+          <span class="material-symbols-outlined">handshake</span>
+          <div>
+            <strong>Talk before you pay</strong>
+            <p>Estimate on WhatsApp. Confirm in person. Pay for the approved job only.</p>
+          </div>
+        </li>
+        <li>
+          <span class="material-symbols-outlined">shield</span>
+          <div>
+            <strong>After-sale support</strong>
+            <p>Warranty on our work. Local shop you can return to — not a one-time booth.</p>
+          </div>
+        </li>
+        <li>
+          <span class="material-symbols-outlined">groups</span>
+          <div>
+            <strong>Trusted across Andhra</strong>
+            <p>Customers from Vijayawada, Guntur, Vizag and nearby towns choose us for chip-level work.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-bar">
+        <div>
+          <p class="script-accent" style="font-size: 28px;">protect your phone</p>
+          <h2 class="headline-lg">Original accessories</h2>
+          <span class="red-bar" aria-hidden="true"></span>
+          <p class="section-lead">
+            Good cover and charger prevent the next repair. Ask us to match accessories with your device while you wait.
+          </p>
+        </div>
+        <a class="btn btn-tertiary" href="/accessories">
+          Browse accessories
+          <span class="material-symbols-outlined icon-sm">arrow_forward</span>
+        </a>
+      </div>
+      <div class="accessories-grid" id="accessories-grid" data-limit="2">
+        <div class="skeleton" style="min-height: 280px;"></div>
+        <div class="skeleton" style="min-height: 280px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted reviews-home">
+    <div class="container">
+      <div class="section-header">
+        <div class="reviews-rating" id="reviews-rating" aria-label="Average rating 4.8 out of 5">
+          <span class="material-symbols-outlined filled">star</span>
+          <span class="material-symbols-outlined filled">star</span>
+          <span class="material-symbols-outlined filled">star</span>
+          <span class="material-symbols-outlined filled">star</span>
+          <span class="material-symbols-outlined filled">star_half</span>
+          <span class="number-display score">4.8/5</span>
+        </div>
+        <h2 class="headline-lg">What local customers say</h2>
+        <span class="red-bar" aria-hidden="true"></span>
+        <p class="section-lead centered">
+          Real feedback from Andhra Pradesh owners — transparent pricing and work they can verify.
+        </p>
+        <p><a class="btn btn-tertiary" href="/reviews">Read all reviews <span class="material-symbols-outlined icon-sm">arrow_forward</span></a></p>
+      </div>
+    </div>
+    <div class="reviews-marquee" aria-label="Customer reviews scrolling">
+      <div class="reviews-marquee-track" id="reviews-track">
+        <div class="skeleton review-ticker-card" style="min-width: 320px; min-height: 160px;"></div>
+        <div class="skeleton review-ticker-card" style="min-width: 320px; min-height: 160px;"></div>
+        <div class="skeleton review-ticker-card" style="min-width: 320px; min-height: 160px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-low">
+    <div class="container page-teaser glass">
+      <div>
+        <p class="script-accent" style="font-size: 24px;">visit us</p>
+        <h2 class="headline-lg">Gandhi Nagar, Vijayawada</h2>
+        <p style="color: var(--on-surface-variant); margin-top: 8px; max-width: 36rem;">
+          Dr.no. 26-27-63, Opp. Hotel Ilapuram Main Gate, Gandhi Nagar, Vijayawada - 520003.
+          Walk-ins welcome. Prefer WhatsApp first for a free quote.
+        </p>
+      </div>
+      <div class="page-teaser-actions">
+        <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
+          WhatsApp now
+        </a>
+        <a class="btn btn-secondary" href="/about">
+          Directions &amp; hours
+          <span class="material-symbols-outlined icon-sm">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="mobile-sticky-cta" aria-label="Quick contact">
+    <a class="btn btn-secondary" href="tel:{{ phone | replace(' ', '') }}">
+      <span class="material-symbols-outlined icon-sm">call</span>
+      Call
+    </a>
+    <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
+      <span class="material-symbols-outlined icon-sm">chat</span>
+      Free quote
+    </a>
+  </div>
+</main>
+{% endblock %}

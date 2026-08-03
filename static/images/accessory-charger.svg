@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="cg" x1="0" y1="675" x2="1200" y2="0">
+      <stop offset="0%" stop-color="#0e0e0e"/>
+      <stop offset="100%" stop-color="#1f2020"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#cg)"/>
+  <circle cx="300" cy="200" r="160" fill="#AA0909" opacity="0.1"/>
+  <rect x="420" y="210" width="220" height="260" rx="28" fill="#1b1c1c" stroke="#353535" stroke-width="3"/>
+  <rect x="450" y="250" width="160" height="120" rx="12" fill="#0e0e0e"/>
+  <circle cx="530" cy="300" r="10" fill="#AA0909"/>
+  <text x="530" y="340" text-anchor="middle" fill="#c9c6c5" font-family="system-ui,sans-serif" font-size="22" font-weight="700">65W</text>
+  <rect x="500" y="400" width="60" height="30" rx="6" fill="#2a2a2a"/>
+  <path d="M640 340h180" stroke="#4a4949" stroke-width="10" stroke-linecap="round"/>
+  <path d="M820 340h40" stroke="#AA0909" stroke-width="6" stroke-linecap="round"/>
+  <rect x="860" y="320" width="36" height="40" rx="6" fill="#c9c6c5"/>
+  <text x="80" y="590" fill="#e5e2e1" font-family="system-ui,sans-serif" font-size="28" font-weight="700">ULTRA FAST PD</text>
+  <text x="80" y="625" fill="#af8783" font-family="system-ui,sans-serif" font-size="16">GaN charging · USB-C</text>
+</svg>

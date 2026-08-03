@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="page-main">
+  <section class="page-hero section">
+    <div class="container">
+      <p class="script-accent" style="font-size: 32px;">original only</p>
+      <h1 class="headline-xl">Accessories</h1>
+      <span class="red-bar" aria-hidden="true"></span>
+      <p class="page-lead">
+        Cases, GaN power, cables — stacked next to the bench so your repair leaves ready to flex.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div class="accessories-grid" id="accessories-grid" data-limit="all">
+        <div class="skeleton" style="min-height: 280px;"></div>
+        <div class="skeleton" style="min-height: 280px;"></div>
+        <div class="skeleton" style="min-height: 280px;"></div>
+        <div class="skeleton" style="min-height: 280px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container page-teaser glass">
+      <div>
+        <h2 class="headline-lg">Need a part with your repair?</h2>
+        <p style="color: var(--on-surface-variant); margin-top: 8px;">Message us on WhatsApp — we'll check stock before you arrive.</p>
+      </div>
+      <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair and add an accessory. Please help." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">Chat on WhatsApp</a>
+    </div>
+  </section>
+</main>
+{% endblock %}

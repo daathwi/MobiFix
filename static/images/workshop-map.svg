@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" fill="none">
+  <rect width="900" height="600" fill="#1b1c1c"/>
+  <g opacity="0.35" stroke="#353535" stroke-width="2">
+    <path d="M0 120h900M0 240h900M0 360h900M0 480h900"/>
+    <path d="M120 0v600M240 0v600M360 0v600M480 0v600M600 0v600M720 0v600M840 0v600"/>
+  </g>
+  <path d="M80 420 C200 380, 280 300, 420 280 S650 220, 820 180" stroke="#4a4949" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <path d="M60 200 C180 220, 300 400, 450 420 S700 500, 860 460" stroke="#2a2a2a" stroke-width="14" fill="none"/>
+  <rect x="300" y="140" width="120" height="80" fill="#232323" stroke="#474646"/>
+  <rect x="500" y="300" width="160" height="100" fill="#232323" stroke="#474646"/>
+  <circle cx="460" cy="300" r="28" fill="#AA0909" opacity="0.9"/>
+  <circle cx="460" cy="300" r="48" fill="#AA0909" opacity="0.2"/>
+  <text x="460" y="520" text-anchor="middle" fill="#e8bcb7" font-family="system-ui,sans-serif" font-size="18" letter-spacing="3">ELECTRONIC CITY · BLR</text>
+</svg>

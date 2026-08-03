@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="page-main">
+  <section class="page-hero section">
+    <div class="container">
+      <p class="script-accent" style="font-size: 32px;">fix menu</p>
+      <h1 class="headline-xl">Services</h1>
+      <span class="red-bar" aria-hidden="true"></span>
+      <p class="page-lead">
+        Screens, unlocking, water damage, battery, software & motherboard — chip-level service in Vijayawada.
+      </p>
+      <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
+        Repair now
+        <span class="material-symbols-outlined icon-sm">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div class="services-grid services-gallery" id="services-grid" data-limit="all">
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="headline-lg">The Mobifix Advantage</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num active glass">01</div>
+          <h4>WhatsApp</h4>
+          <p>Message us the issue — we reply with quote and slot.</p>
+        </div>
+        <div class="step">
+          <div class="step-num glass">02</div>
+          <h4>Visit</h4>
+          <p>Drop by our workshop or use our pickup service.</p>
+        </div>
+        <div class="step">
+          <div class="step-num glass">03</div>
+          <h4>Repair</h4>
+          <p>Relax for 30 minutes while we work our magic.</p>
+        </div>
+        <div class="step">
+          <div class="step-num glass">04</div>
+          <h4>Done</h4>
+          <p>Collect your like-new phone with a warranty.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
