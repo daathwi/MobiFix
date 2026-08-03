@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: ssmobifix
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.8"
+      - key: DEBUG
+        value: "false"
+      - key: WHATSAPP_NUMBER
+        value: "919292353522"
+      - key: PHONE_DISPLAY
+        value: "9292 3535 22"
+      - key: EMAIL
+        value: "kothamasuyathinivas@gmail.com"
+      - key: ADDRESS
+        value: "Dr.no. 26-27-63, Opp. Hotel Ilapuram Main Gate, Gandhi Nagar, Vijayawada - 520003"
+      - key: MAPS_URL
+        value: "https://www.google.com/maps/search/?api=1&query=Hotel+Ilapuram+Gandhi+Nagar+Vijayawada+520003"
+      - key: OWNER_NAME
+        value: "K. Yathinivas"
