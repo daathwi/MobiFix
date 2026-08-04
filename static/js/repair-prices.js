@@ -1,4 +1,4 @@
-/** Shared issues — estimate dropdown + services before/after grid */
+/** Shared issues — estimate dropdown + services GIF grid */
 window.MOBIFIX_ISSUES = [
   {
     id: "display",
@@ -6,9 +6,7 @@ window.MOBIFIX_ISSUES = [
     price: 1199,
     time: "About 30 mins",
     icon: "smartphone",
-    /* Drop real pairs at these paths anytime */
-    before: "/static/images/services/ba/display-before.jpg",
-    after: "/static/images/services/ba/display-after.jpg",
+    gif: "/static/images/services/gifs/display.gif",
     fallback: "/static/images/services/display.jpg",
   },
   {
@@ -17,8 +15,7 @@ window.MOBIFIX_ISSUES = [
     price: 1199,
     time: "About 45 mins",
     icon: "phone_iphone",
-    before: "/static/images/services/ba/back-glass-before.jpg",
-    after: "/static/images/services/ba/back-glass-after.jpg",
+    gif: "/static/images/services/gifs/back-glass.gif",
     fallback: "/static/images/services/display.jpg",
   },
   {
@@ -27,8 +24,7 @@ window.MOBIFIX_ISSUES = [
     price: 899,
     time: "About 15 mins",
     icon: "battery_charging_full",
-    before: "/static/images/services/ba/battery-before.jpg",
-    after: "/static/images/services/ba/battery-after.jpg",
+    gif: "/static/images/services/gifs/battery.gif",
     fallback: "/static/images/services/battery.jpg",
   },
   {
@@ -37,8 +33,7 @@ window.MOBIFIX_ISSUES = [
     price: 399,
     time: "About 30 mins",
     icon: "power",
-    before: "/static/images/services/ba/charging-before.jpg",
-    after: "/static/images/services/ba/charging-after.jpg",
+    gif: "/static/images/services/gifs/charging-port.gif",
     fallback: "/static/images/services/charging.jpg",
   },
   {
@@ -47,8 +42,7 @@ window.MOBIFIX_ISSUES = [
     price: 199,
     time: "About 30 mins",
     icon: "power_off",
-    before: "/static/images/services/ba/no-power-before.jpg",
-    after: "/static/images/services/ba/no-power-after.jpg",
+    gif: "/static/images/services/gifs/no-power.gif",
     fallback: "/static/images/services/more.jpg",
   },
   {
@@ -57,8 +51,7 @@ window.MOBIFIX_ISSUES = [
     price: 499,
     time: "2–24 hrs",
     icon: "water_drop",
-    before: "/static/images/services/ba/water-before.jpg",
-    after: "/static/images/services/ba/water-after.jpg",
+    gif: "/static/images/services/gifs/water-damage.gif",
     fallback: "/static/images/services/water-damage.jpg",
   },
   {
@@ -67,8 +60,7 @@ window.MOBIFIX_ISSUES = [
     price: 399,
     time: "About 30 mins",
     icon: "volume_up",
-    before: "/static/images/services/ba/speaker-before.jpg",
-    after: "/static/images/services/ba/speaker-after.jpg",
+    gif: "/static/images/services/gifs/speaker.gif",
     fallback: "/static/images/services/speaker.jpg",
   },
   {
@@ -77,8 +69,7 @@ window.MOBIFIX_ISSUES = [
     price: 499,
     time: "About 45 mins",
     icon: "photo_camera",
-    before: "/static/images/services/ba/camera-before.jpg",
-    after: "/static/images/services/ba/camera-after.jpg",
+    gif: "/static/images/services/gifs/camera.gif",
     fallback: "/static/images/services/camera.jpg",
   },
   {
@@ -87,8 +78,7 @@ window.MOBIFIX_ISSUES = [
     price: 299,
     time: "About 30 mins",
     icon: "lock_open",
-    before: "/static/images/services/ba/unlocking-before.jpg",
-    after: "/static/images/services/ba/unlocking-after.jpg",
+    gif: "/static/images/services/gifs/unlocking.gif",
     fallback: "/static/images/services/face-id.jpg",
   },
   {
@@ -97,8 +87,7 @@ window.MOBIFIX_ISSUES = [
     price: 399,
     time: "About 30 mins",
     icon: "system_update",
-    before: "/static/images/services/ba/software-before.jpg",
-    after: "/static/images/services/ba/software-after.jpg",
+    gif: "/static/images/services/gifs/software.gif",
     fallback: "/static/images/services/more.jpg",
   },
   {
@@ -107,8 +96,7 @@ window.MOBIFIX_ISSUES = [
     price: 399,
     time: "About 45 mins",
     icon: "restart_alt",
-    before: "/static/images/services/ba/hang-logo-before.jpg",
-    after: "/static/images/services/ba/hang-logo-after.jpg",
+    gif: "/static/images/services/gifs/hang-logo.gif",
     fallback: "/static/images/services/more.jpg",
   },
   {
@@ -117,8 +105,7 @@ window.MOBIFIX_ISSUES = [
     price: 999,
     time: "1–2 days",
     icon: "memory",
-    before: "/static/images/services/ba/motherboard-before.jpg",
-    after: "/static/images/services/ba/motherboard-after.jpg",
+    gif: "/static/images/services/gifs/motherboard.gif",
     fallback: "/static/images/services/more.jpg",
   },
   {
@@ -127,8 +114,7 @@ window.MOBIFIX_ISSUES = [
     price: 1199,
     time: "About 30 mins",
     icon: "touch_app",
-    before: "/static/images/services/ba/touch-before.jpg",
-    after: "/static/images/services/ba/touch-after.jpg",
+    gif: "/static/images/services/gifs/touch.gif",
     fallback: "/static/images/services/display.jpg",
   },
   {
@@ -137,8 +123,7 @@ window.MOBIFIX_ISSUES = [
     price: 399,
     time: "After diagnosis",
     icon: "signal_cellular_alt",
-    before: "/static/images/services/ba/network-before.jpg",
-    after: "/static/images/services/ba/network-after.jpg",
+    gif: "/static/images/services/gifs/network.gif",
     fallback: "/static/images/services/more.jpg",
   },
   {
@@ -147,8 +132,7 @@ window.MOBIFIX_ISSUES = [
     price: 499,
     time: "About 45 mins",
     icon: "fingerprint",
-    before: "/static/images/services/ba/fingerprint-before.jpg",
-    after: "/static/images/services/ba/fingerprint-after.jpg",
+    gif: "/static/images/services/gifs/fingerprint.gif",
     fallback: "/static/images/services/face-id.jpg",
   },
   {
@@ -157,8 +141,7 @@ window.MOBIFIX_ISSUES = [
     price: 199,
     time: "After diagnosis",
     icon: "device_thermostat",
-    before: "/static/images/services/ba/overheat-before.jpg",
-    after: "/static/images/services/ba/overheat-after.jpg",
+    gif: "/static/images/services/gifs/overheat.gif",
     fallback: "/static/images/services/more.jpg",
   },
   {
@@ -167,8 +150,7 @@ window.MOBIFIX_ISSUES = [
     price: 199,
     time: "After diagnosis",
     icon: "build",
-    before: "/static/images/services/ba/other-before.jpg",
-    after: "/static/images/services/ba/other-after.jpg",
+    gif: "/static/images/services/gifs/other.gif",
     fallback: "/static/images/services/more.jpg",
   },
 ];
@@ -179,9 +161,10 @@ window.MOBIFIX_ISSUES = [
 
   const loadMoreBtn = document.getElementById("rate-load-more");
   const whatsapp = document.body?.dataset?.whatsapp || "919292353522";
-  const BATCH = 4;
+  const INITIAL = 6;
+  const BATCH = 3;
   const issues = window.MOBIFIX_ISSUES;
-  let visible = Math.min(BATCH, issues.length);
+  let visible = Math.min(INITIAL, issues.length);
 
   const formatINR = (n) =>
     new Intl.NumberFormat("en-IN", {
@@ -204,20 +187,10 @@ window.MOBIFIX_ISSUES = [
     }
   };
 
-  const canHover = () =>
-    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-  const setBa = (card, after) => {
-    card.classList.toggle("is-after", after);
-    const tag = card.querySelector("[data-ba-tag]");
-    if (tag) tag.textContent = after ? "After" : "Before";
-  };
-
   const cardHtml = (issue) => {
     const text = `Hi SS Mobifix! ${issue.label} — please confirm quote & slot.`;
     const href = `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`;
-    const before = escapeHtml(issue.before);
-    const after = escapeHtml(issue.after);
+    const gif = escapeHtml(issue.gif);
     const fallback = escapeHtml(issue.fallback || "/static/images/services/more.jpg");
     return `
       <a
@@ -227,29 +200,19 @@ window.MOBIFIX_ISSUES = [
         target="_blank"
         rel="noopener"
         data-id="${escapeHtml(issue.id)}"
-        aria-label="${escapeHtml(issue.label)}, from ${formatINR(issue.price)}. Tap to see after, then book on WhatsApp"
+        aria-label="${escapeHtml(issue.label)}, from ${formatINR(issue.price)}. Book on WhatsApp"
       >
         <div class="rate-card-inner">
           <div class="rate-card-media">
             <img
-              class="rate-photo rate-photo--before"
-              src="${before}"
+              class="rate-photo rate-photo--gif"
+              src="${gif}"
               data-fallback="${fallback}"
               alt=""
               loading="lazy"
-              width="640"
-              height="480"
+              width="480"
+              height="280"
             />
-            <img
-              class="rate-photo rate-photo--after"
-              src="${after}"
-              data-fallback="${fallback}"
-              alt=""
-              loading="lazy"
-              width="640"
-              height="480"
-            />
-            <span class="rate-ba-tag" data-ba-tag aria-hidden="true">Before</span>
           </div>
           <div class="rate-card-body">
             <div class="rate-card-top">
@@ -275,31 +238,6 @@ window.MOBIFIX_ISSUES = [
       img.addEventListener("error", () => onImgError(img));
       if (img.complete && img.naturalWidth === 0) onImgError(img);
     });
-
-    card.addEventListener("pointerenter", () => {
-      if (canHover()) setBa(card, true);
-    });
-    card.addEventListener("pointerleave", () => {
-      if (canHover()) setBa(card, false);
-    });
-    card.addEventListener("focus", () => {
-      if (canHover()) setBa(card, true);
-    });
-    card.addEventListener("blur", () => {
-      if (canHover()) setBa(card, false);
-    });
-
-    card.addEventListener("click", (e) => {
-      if (canHover()) return;
-      if (!card.classList.contains("is-after")) {
-        e.preventDefault();
-        board.querySelectorAll(".rate-card.is-after").forEach((other) => {
-          if (other !== card) setBa(other, false);
-        });
-        setBa(card, true);
-      }
-      /* second tap follows WhatsApp href */
-    });
   };
 
   const updateLoadMore = () => {
@@ -313,16 +251,38 @@ window.MOBIFIX_ISSUES = [
     loadMoreBtn.textContent = `Load more (${remaining})`;
   };
 
-  const render = () => {
-    board.innerHTML = issues.slice(0, visible).map(cardHtml).join("");
-    board.querySelectorAll(".rate-card").forEach(bindCard);
+  const render = (from = 0) => {
+    const slice = issues.slice(from, visible);
+    if (from === 0) {
+      board.innerHTML = slice.map(cardHtml).join("");
+    } else {
+      board.insertAdjacentHTML("beforeend", slice.map(cardHtml).join(""));
+    }
+
+    const cards = [...board.querySelectorAll(".rate-card")];
+    const newCards = cards.slice(from);
+    newCards.forEach((card, i) => {
+      bindCard(card);
+      card.style.setProperty("--i", String(i));
+    });
+
+    if (from === 0) {
+      window.MobifixMotion?.indexStagger?.(board);
+      if (board.classList.contains("is-staggered") || board.classList.contains("is-in-view")) {
+        window.MobifixMotion?.enter?.(newCards, 0);
+      }
+    } else {
+      window.MobifixMotion?.enter?.(newCards, 0);
+    }
+
     updateLoadMore();
   };
 
   loadMoreBtn?.addEventListener("click", () => {
+    const from = visible;
     visible = Math.min(visible + BATCH, issues.length);
-    render();
+    render(from);
   });
 
-  render();
+  render(0);
 })();

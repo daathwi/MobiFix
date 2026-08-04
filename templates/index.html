@@ -1,48 +1,83 @@
 {% extends "base.html" %}
 
 {% block content %}
-<main class="home-main home-modern home-local">
-  <section class="hero hero-visual" id="home">
-    <div class="container hero-visual-grid">
-      <div class="hero-visual-media" data-in-view="left">
-        <figure class="hero-stage">
-          <img
-            class="hero-stage-img"
-            src="/static/images/shop/hero.png"
-            alt="Phone screen being repaired on the workbench at SS Mobifix"
-            width="1536"
-            height="1024"
-            loading="eager"
-          />
-        </figure>
+<main class="home-main home-modern home-local home-kinetic">
+  <section class="hero hero-visual hero-kinetic" id="home">
+    <figure class="hero-kinetic-plane" data-in-view="scale">
+      <img
+        class="hero-kinetic-img"
+        src="/static/images/shop/hero.png"
+        alt="Phone screen being repaired on the workbench at SS Mobifix"
+        width="1536"
+        height="1024"
+        loading="eager"
+      />
+      <div class="hero-kinetic-veil" aria-hidden="true"></div>
+      <div class="hero-crack" aria-hidden="true">
+        <svg viewBox="0 0 1200 900" preserveAspectRatio="none">
+          <path class="hero-crack-glow" d="M780 0 L640 210 L710 280 L520 480 L610 560 L420 900"/>
+          <path class="hero-crack-path" d="M780 0 L640 210 L710 280 L520 480 L610 560 L420 900"/>
+          <path class="hero-crack-path" d="M640 210 L560 190 L590 250"/>
+          <path class="hero-crack-path" d="M520 480 L470 450 L500 510"/>
+        </svg>
       </div>
+    </figure>
 
-      <div class="hero-copy" data-in-view="right">
-        <p class="hero-eyebrow">SS Mobifix · Governorpet</p>
-        <h1 class="headline-xl hero-title">Phone repair in Vijayawada</h1>
+    <div class="container hero-kinetic-content">
+      <div class="hero-shard" data-in-view="right">
+        <div class="hero-copy">
+          <p class="hero-eyebrow hero-brand">SS Mobifix · Governorpet</p>
+          <h1 class="headline-xl hero-title" data-text-reveal>Phone repair in Vijayawada</h1>
 
-        <a class="trust-badge trust-badge--compact" href="/#reviews" aria-label="4.9 stars from 250+ customer reviews">
-          <strong>4.9</strong>
-          <span class="trust-stars" aria-hidden="true">★★★★★</span>
-          <span class="trust-count">250+ reviews</span>
-        </a>
-
-        <p class="hero-lead">
-          Most jobs finish while you wait. <strong>90-day warranty</strong>. Free home repair nearby.
-        </p>
-
-        <div class="hero-ctas">
-          <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need help with my phone." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
-            <span class="material-symbols-outlined icon-sm">chat</span>
-            WhatsApp us
+          <a class="trust-badge trust-badge--compact" href="/#reviews" aria-label="4.9 stars from 250+ customer reviews">
+            <strong>4.9</strong>
+            <span class="trust-stars" aria-hidden="true">★★★★★</span>
+            <span class="trust-count">250+ reviews</span>
           </a>
-          <a class="btn btn-secondary" href="#repair-estimate">
-            Check your price
-          </a>
+
+          <p class="hero-lead">
+            Most jobs finish while you wait. <strong>90-day warranty</strong>. Free home repair nearby.
+          </p>
+
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need help with my phone." | urlencode }}' target="_blank" rel="noopener" data-wa="repair" data-magnetic="20">
+              <span class="material-symbols-outlined icon-sm">chat</span>
+              WhatsApp us
+            </a>
+            <a class="btn btn-secondary" href="#repair-estimate">
+              Check your price
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="kinetic-ticker" aria-hidden="true">
+    <div class="kinetic-ticker-scan"></div>
+    <div class="kinetic-ticker-track">
+      <div class="kinetic-ticker-set">
+        <span>SS Mobifix</span>
+        <span>Governorpet</span>
+        <span>90-day warranty</span>
+        <span>While you wait</span>
+        <span>Free home repair</span>
+        <span>Phone repair in Vijayawada</span>
+        <span>Same day</span>
+        <span>Walk in</span>
+      </div>
+      <div class="kinetic-ticker-set">
+        <span>SS Mobifix</span>
+        <span>Governorpet</span>
+        <span>90-day warranty</span>
+        <span>While you wait</span>
+        <span>Free home repair</span>
+        <span>Phone repair in Vijayawada</span>
+        <span>Same day</span>
+        <span>Walk in</span>
+      </div>
+    </div>
+  </div>
 
   <section class="section shop-proof" id="our-shop" data-in-view>
     <div class="container">
@@ -53,55 +88,58 @@
           Real storefront, real bench. Walk in, wait for the repair, take your phone home the same day.
         </p>
       </div>
+    </div>
 
-      <div class="shop-bento" data-stagger>
-        <figure class="shop-bento-item shop-bento-item--hero">
-          <div class="shop-bento-frame">
-            <img src="/static/images/shop/storefront.jpg" alt="SS Mobifix storefront in Governorpet, Vijayawada" width="1000" height="1000" loading="eager"/>
-          </div>
-          <figcaption>Storefront</figcaption>
-        </figure>
-        <figure class="shop-bento-item">
-          <div class="shop-bento-frame">
-            <img src="/static/images/shop/workbench.jpg" alt="Clean repair workbench with tools" width="800" height="800" loading="lazy"/>
-          </div>
-          <figcaption>Repair desk</figcaption>
-        </figure>
-        <figure class="shop-bento-item">
-          <div class="shop-bento-frame">
-            <img src="/static/images/shop/tools.jpg" alt="Phone repair tools" width="800" height="800" loading="lazy"/>
-          </div>
-          <figcaption>Tools</figcaption>
-        </figure>
-        <figure class="shop-bento-item">
-          <div class="shop-bento-frame">
-            <img src="/static/images/shop/technician.jpg" alt="Technician repairing a smartphone at SS Mobifix" width="800" height="800" loading="lazy"/>
-          </div>
-          <figcaption>While you wait</figcaption>
-        </figure>
-        <figure class="shop-bento-item">
-          <div class="shop-bento-frame">
-            <img src="/static/images/shop/hero.png" alt="Phone screen repair in progress on the bench" width="800" height="800" loading="lazy"/>
-          </div>
-          <figcaption>Screen work</figcaption>
-        </figure>
-      </div>
+    <div class="shop-bento shop-bento--bleed" data-stagger>
+      <figure class="shop-bento-item shop-bento-item--hero">
+        <div class="shop-bento-frame">
+          <img src="/static/images/shop/storefront.jpg" alt="SS Mobifix storefront in Governorpet, Vijayawada" width="1000" height="1000" loading="eager"/>
+        </div>
+        <figcaption>Storefront</figcaption>
+      </figure>
+      <figure class="shop-bento-item">
+        <div class="shop-bento-frame">
+          <img src="/static/images/shop/workbench.jpg" alt="Clean repair workbench with tools" width="800" height="800" loading="lazy"/>
+        </div>
+        <figcaption>Repair desk</figcaption>
+      </figure>
+      <figure class="shop-bento-item">
+        <div class="shop-bento-frame">
+          <img src="/static/images/shop/tools.jpg" alt="Phone repair tools" width="800" height="800" loading="lazy"/>
+        </div>
+        <figcaption>Tools</figcaption>
+      </figure>
+      <figure class="shop-bento-item">
+        <div class="shop-bento-frame">
+          <img src="/static/images/shop/technician.jpg" alt="Technician repairing a smartphone at SS Mobifix" width="800" height="800" loading="lazy"/>
+        </div>
+        <figcaption>While you wait</figcaption>
+      </figure>
+      <figure class="shop-bento-item">
+        <div class="shop-bento-frame">
+          <img src="/static/images/shop/hero.png" alt="Phone screen repair in progress on the bench" width="800" height="800" loading="lazy"/>
+        </div>
+        <figcaption>Screen work</figcaption>
+      </figure>
     </div>
   </section>
 
   <section class="section rate-board-section" id="popular-services" data-in-view>
-    <div class="container rate-ledger">
+    <div class="container">
       <div class="rate-board-head">
         <div>
           <p class="section-kicker">Services</p>
           <h2 class="headline-lg">What we repair</h2>
           <p class="section-lead">
-            Hover or tap to see before → after. Free check-up first — book on WhatsApp.
+            Free check-up first — book on WhatsApp.
           </p>
         </div>
       </div>
+    </div>
 
-      <div class="rate-board rate-grid" id="rate-board" role="list" data-rate-board></div>
+    <div class="rate-board rate-grid rate-grid--bleed" id="rate-board" role="list" data-rate-board data-stagger></div>
+
+    <div class="container">
       <div class="rate-load-more-wrap">
         <button type="button" class="btn btn-secondary" id="rate-load-more" hidden>
           Load more

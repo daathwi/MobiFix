@@ -15,13 +15,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/static/css/styles.css"/>
   <link rel="stylesheet" href="/static/css/motion.css"/>
   <link rel="stylesheet" href="/static/css/pages.css"/>
+  <link rel="stylesheet" href="/static/css/kinetic.css"/>
   {% block head_extra %}{% endblock %}
 </head>
-<body data-page="{{ active_page | default('home') }}" data-whatsapp="{{ whatsapp }}">
+<body data-page="{{ active_page | default('home') }}" data-whatsapp="{{ whatsapp }}" class="site-kinetic">
   <header class="top-nav glass" id="top-nav">
     <div class="nav-inner">
       <div class="nav-start">
@@ -39,7 +40,7 @@
         <a href="/shop" class="{{ 'active' if active_page == 'accessories' else '' }}">Shop</a>
       </nav>
       <div class="nav-actions">
-        <a class="btn btn-primary nav-wa" href="https://wa.me/{{ whatsapp }}?text={{ 'Hi SS Mobifix! I need help with my phone.' | urlencode }}" target="_blank" rel="noopener">
+        <a class="btn btn-primary nav-wa" href="https://wa.me/{{ whatsapp }}?text={{ 'Hi SS Mobifix! I need help with my phone.' | urlencode }}" target="_blank" rel="noopener" data-magnetic="24">
           <span class="material-symbols-outlined icon-sm">chat</span>
           <span class="nav-wa-label">WhatsApp</span>
         </a>

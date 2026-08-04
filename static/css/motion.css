@@ -1,9 +1,11 @@
-/* Motion layer — Motion Primitives–inspired CSS/JS patterns */
+/* Motion layer — polished scroll reveals + UI interactivity */
 
 :root {
-  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --motion-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
-  --motion-duration: 700ms;
+  --motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-spring: cubic-bezier(0.34, 1.35, 0.64, 1);
+  --motion-duration: 620ms;
+  --motion-fast: 180ms;
+  --motion-press: 120ms;
 }
 
 .scroll-progress {
@@ -21,12 +23,12 @@
 /* —— In View (fade + rise + soft blur) —— */
 [data-in-view] {
   opacity: 0;
-  filter: blur(8px);
-  transform: translate3d(0, 28px, 0);
+  filter: blur(4px);
+  transform: translate3d(0, 36px, 0);
   transition:
     opacity var(--motion-duration) var(--motion-ease),
     transform var(--motion-duration) var(--motion-ease),
-    filter calc(var(--motion-duration) - 80ms) var(--motion-ease);
+    filter calc(var(--motion-duration) - 60ms) var(--motion-ease);
   transition-delay: var(--motion-delay, 0ms);
   will-change: opacity, transform, filter;
 }
@@ -78,6 +80,23 @@
   transform: translate3d(0, 0, 0);
 }
 
+/* Dynamic card enter (rate board load-more, catalog tiles) */
+.mp-enter {
+  animation: mp-enter 560ms var(--motion-ease) backwards;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+@keyframes mp-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* —— Text effect (word / char reveal) —— */
 [data-text-reveal] .mp-word,
 [data-text-reveal] .mp-char {
@@ -104,58 +123,72 @@
   width: 0.28em;
 }
 
-/* —— Interactive polish —— */
-.btn,
-.brand-chip,
-.place-seg-btn,
-.rate-card,
-.cdd-trigger {
+/* —— Buttons —— */
+.btn {
   transition:
     transform 280ms var(--motion-spring),
     box-shadow 280ms var(--motion-ease),
-    background-color 220ms ease,
-    border-color 220ms ease,
-    color 220ms ease,
-    gap 220ms ease,
-    opacity 220ms ease;
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    filter var(--motion-fast) ease,
+    gap var(--motion-fast) ease,
+    opacity var(--motion-fast) ease;
 }
 
 .btn:hover {
-  transform: none;
-  filter: brightness(0.97);
+  transform: translate3d(0, -1px, 0) scale(1.015);
 }
 
 .btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
+  transition-duration: var(--motion-press);
 }
 
-.brand-chip:hover {
+.btn-primary:hover {
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--brand-red) 36%, transparent);
+}
+
+.btn-secondary:hover {
+  transform: translate3d(0, -1px, 0);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.btn-tertiary {
+  position: relative;
+}
+
+.btn-tertiary::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 280ms var(--motion-ease);
+}
+
+.btn-tertiary:hover {
+  text-decoration: none;
+}
+
+.btn-tertiary:hover::after {
+  transform: scaleX(1);
+}
+
+.btn .material-symbols-outlined {
+  transition: transform 280ms var(--motion-spring);
+}
+
+.btn:hover .material-symbols-outlined {
+  transform: translate3d(1px, 0, 0);
+}
+
+.btn-primary:hover .material-symbols-outlined {
   transform: none;
-}
-
-.shop-bento-item {
-  transition: none;
-}
-
-.shop-bento-item:hover {
-  transform: none;
-}
-
-.shop-bento-frame {
-  transition: border-color 200ms ease;
-}
-
-.shop-bento-item:hover .shop-bento-frame {
-  border-color: color-mix(in srgb, var(--brand-red) 30%, var(--muted-border));
-  box-shadow: none;
-}
-
-.rate-card-price {
-  transition: color 220ms ease;
-}
-
-.rate-card:hover .rate-card-price {
-  color: var(--brand-red-deep);
 }
 
 /* Border trail on primary CTA */
@@ -219,6 +252,417 @@
   will-change: transform;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  [data-magnetic]:hover {
+    transform: none; /* JS owns transform while hovering */
+  }
+}
+
+/* —— Nav —— */
+.nav-links a {
+  position: relative;
+  border-bottom-color: transparent !important;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 320ms var(--motion-ease);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+.nav-links a.active::after {
+  transform-origin: center;
+}
+
+.nav-toggle {
+  transition:
+    transform var(--motion-fast) var(--motion-spring),
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease;
+}
+
+.nav-toggle:hover {
+  border-color: color-mix(in srgb, var(--brand-red) 35%, var(--muted-border));
+  color: var(--brand-red);
+}
+
+.nav-toggle:active {
+  transform: scale(0.94);
+}
+
+.brand-lockup {
+  transition: opacity var(--motion-fast) ease, transform 280ms var(--motion-spring);
+}
+
+.brand-lockup:hover {
+  opacity: 0.88;
+}
+
+.mobile-menu a {
+  transition:
+    transform 280ms var(--motion-ease),
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    opacity 320ms var(--motion-ease);
+}
+
+.mobile-drawer:not(.open) .mobile-menu a,
+.mobile-drawer:not(.open) .mobile-menu-cta > * {
+  opacity: 0;
+  transform: translate3d(-12px, 0, 0);
+}
+
+.mobile-drawer.open .mobile-menu a,
+.mobile-drawer.open .mobile-menu-cta > * {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(40ms + var(--i, 0) * 45ms);
+}
+
+.mobile-menu-cta > * {
+  transition:
+    opacity 320ms var(--motion-ease),
+    transform 320ms var(--motion-ease);
+}
+
+.nav-scrim {
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.nav-scrim:not([hidden]) {
+  opacity: 1;
+}
+
+/* —— Forms / estimate controls —— */
+.brand-chip,
+.place-seg-btn,
+.rate-card,
+.cdd-trigger,
+.brand-more-item,
+.cdd-option {
+  transition:
+    transform 280ms var(--motion-spring),
+    box-shadow 280ms var(--motion-ease),
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    opacity var(--motion-fast) ease;
+}
+
+.brand-chip:hover {
+  transform: translate3d(0, -1px, 0);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+}
+
+.brand-chip:active {
+  transform: scale(0.97);
+}
+
+.brand-chip.is-active {
+  transform: translate3d(0, -1px, 0);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--brand-red) 20%, transparent),
+    0 6px 16px color-mix(in srgb, var(--brand-red) 12%, transparent);
+}
+
+.place-seg-btn:hover:not(.is-active) {
+  color: var(--heading);
+}
+
+.place-seg-btn:active {
+  transform: scale(0.97);
+}
+
+.place-seg-btn.is-active {
+  transition:
+    transform 280ms var(--motion-spring),
+    box-shadow 280ms var(--motion-ease),
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease;
+}
+
+.cdd-trigger {
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+.cdd-trigger:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--brand-red) 28%, var(--muted-border));
+}
+
+.cdd.is-open > .cdd-trigger {
+  border-color: color-mix(in srgb, var(--brand-red) 40%, var(--muted-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-red) 10%, transparent);
+}
+
+.cdd-caret {
+  transition: transform 240ms var(--motion-ease);
+}
+
+.cdd.is-open .cdd-caret {
+  transform: rotate(180deg);
+}
+
+.cdd.is-open > .cdd-menu,
+.brand-more.is-open .brand-more-menu {
+  animation: mp-menu-in 240ms var(--motion-ease) both;
+}
+
+@keyframes mp-menu-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.estimate-stack .cdd.is-open > .cdd-menu {
+  animation-name: mp-menu-in-up;
+}
+
+@keyframes mp-menu-in-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -6px, 0) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cdd-option:hover,
+.brand-more-item:hover {
+  transform: translate3d(2px, 0, 0);
+}
+
+.estimate-result {
+  transition:
+    opacity 360ms var(--motion-ease),
+    transform 420ms var(--motion-spring),
+    border-color var(--motion-fast) ease,
+    box-shadow 360ms var(--motion-ease);
+}
+
+.estimate-result:not([hidden]) {
+  animation: mp-result-in 480ms var(--motion-spring) backwards;
+}
+
+.estimate-result.is-updating:not([hidden]) {
+  animation: mp-result-pulse 420ms var(--motion-ease) both;
+}
+
+@keyframes mp-result-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes mp-result-pulse {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.01);
+    border-color: color-mix(in srgb, var(--brand-red) 28%, var(--muted-border));
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--brand-red) 10%, transparent);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+/* —— Cards & bento —— */
+.shop-bento-frame {
+  overflow: hidden;
+  transition:
+    border-color 240ms ease,
+    box-shadow 280ms var(--motion-ease);
+}
+
+.shop-bento-frame img {
+  transition: transform 700ms var(--motion-ease), filter 400ms ease;
+}
+
+.shop-bento-item:hover .shop-bento-frame {
+  border-color: color-mix(in srgb, var(--brand-red) 30%, var(--muted-border));
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+.shop-bento-item:hover .shop-bento-frame img {
+  transform: scale(1.04);
+}
+
+.shop-bento-item figcaption {
+  transition: color var(--motion-fast) ease;
+}
+
+.shop-bento-item:hover figcaption {
+  color: var(--brand-red-deep, var(--brand-red));
+}
+
+.rate-card:hover,
+.rate-card:focus-visible {
+  transform: translate3d(0, -4px, 0);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+}
+
+.rate-card:active {
+  transform: translate3d(0, -1px, 0) scale(0.99);
+}
+
+.rate-card-price {
+  transition: color 220ms ease;
+}
+
+.rate-card:hover .rate-card-price,
+.rate-card:focus-visible .rate-card-price {
+  color: var(--brand-red-deep);
+}
+
+.rate-card-link {
+  transition: transform 280ms var(--motion-spring), opacity 220ms ease;
+}
+
+.rate-card:hover .rate-card-link {
+  transform: translate3d(2px, -1px, 0);
+}
+
+.rate-photo {
+  transition: opacity 380ms var(--motion-ease), transform 520ms var(--motion-ease);
+}
+
+.catalog-card,
+.gallery-card,
+.page-cta.card-surface,
+.location-copy.card-surface,
+.location-map.card-surface {
+  transition:
+    transform 320ms var(--motion-spring),
+    box-shadow 320ms var(--motion-ease),
+    border-color 240ms ease;
+}
+
+.catalog-card:hover,
+.gallery-card:hover {
+  transform: translate3d(0, -4px, 0);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+}
+
+.catalog-card:active {
+  transform: translate3d(0, -1px, 0) scale(0.99);
+}
+
+.catalog-card-media img,
+.gallery-card img {
+  transition: transform 700ms var(--motion-ease);
+}
+
+.catalog-card:hover .catalog-card-media img,
+.gallery-card:hover img {
+  transform: scale(1.04);
+}
+
+.catalog-cta {
+  transition: gap 240ms var(--motion-ease), color 220ms ease;
+}
+
+.catalog-card:hover .catalog-cta {
+  gap: 10px;
+  color: var(--brand-red);
+}
+
+/* —— Trust, status, socials —— */
+.trust-badge {
+  transition:
+    transform 280ms var(--motion-spring),
+    border-color 240ms ease,
+    box-shadow 280ms var(--motion-ease),
+    background-color 240ms ease;
+}
+
+.trust-badge:hover {
+  transform: translate3d(0, -1px, 0);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+}
+
+.doorstep-badge {
+  transition: transform 280ms var(--motion-spring), border-color 240ms ease;
+}
+
+.doorstep-badge:hover {
+  transform: translate3d(0, -1px, 0);
+}
+
+.open-status.is-open .open-dot {
+  animation: mp-pulse-dot 2.2s var(--motion-ease) infinite;
+}
+
+@keyframes mp-pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px color-mix(in srgb, #22c55e 22%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 7px color-mix(in srgb, #22c55e 8%, transparent);
+  }
+}
+
+.socials a {
+  transition:
+    transform 280ms var(--motion-spring),
+    color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+.socials a:hover {
+  transform: translate3d(0, -2px, 0);
+  color: var(--brand-red);
+}
+
+.site-footer a {
+  transition: color var(--motion-fast) ease, opacity var(--motion-fast) ease;
+}
+
+.footer-col a:hover {
+  color: var(--brand-red);
+}
+
+.trust-item {
+  transition: transform 280ms var(--motion-ease);
+}
+
+.trust-item:hover {
+  transform: translate3d(2px, 0, 0);
+}
+
 /* Soft spotlight under hero media */
 .hero-stage {
   transition: transform 500ms var(--motion-ease), box-shadow 500ms ease;
@@ -239,6 +683,67 @@
   }
 }
 
+.hero-ctas .btn {
+  transition-delay: 0ms;
+}
+
+.hero-shard.is-in-view .hero-ctas .btn:nth-child(1),
+.hero-copy.is-in-view .hero-ctas .btn:nth-child(1) {
+  animation: mp-enter 560ms var(--motion-spring) 180ms backwards;
+}
+
+.hero-shard.is-in-view .hero-ctas .btn:nth-child(2),
+.hero-copy.is-in-view .hero-ctas .btn:nth-child(2) {
+  animation: mp-enter 560ms var(--motion-spring) 260ms backwards;
+}
+
+.hero-shard.is-in-view .trust-badge,
+.hero-copy.is-in-view .trust-badge {
+  animation: mp-enter 520ms var(--motion-ease) 80ms backwards;
+}
+
+/* —— Mobile sticky CTA (slide up after hero) —— */
+@media (max-width: 1023px) {
+  .mobile-sticky-cta {
+    transform: translate3d(0, 120%, 0);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 420ms var(--motion-ease),
+      opacity 300ms ease;
+  }
+
+  .mobile-sticky-cta.is-visible {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-sticky-cta--modern > a {
+    transition:
+      transform 240ms var(--motion-spring),
+      background-color var(--motion-fast) ease,
+      border-color var(--motion-fast) ease,
+      box-shadow 240ms ease,
+      color var(--motion-fast) ease;
+  }
+
+  .mobile-sticky-cta--modern > a:hover,
+  .mobile-sticky-cta--modern > a:active {
+    transform: scale(0.97);
+  }
+
+  .mobile-sticky-cta--modern > a:last-child:hover {
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--brand-red) 35%, transparent);
+  }
+
+  body.nav-open .mobile-sticky-cta {
+    transform: translate3d(0, 120%, 0);
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scroll-progress,
   [data-in-view],
@@ -246,7 +751,20 @@
   [data-text-reveal] .mp-word,
   [data-text-reveal] .mp-char,
   .btn-primary.mp-trail::before,
-  .hero-visual-media.is-in-view .hero-stage {
+  .hero-visual-media.is-in-view .hero-stage,
+  .mp-enter,
+  .estimate-result:not([hidden]),
+  .estimate-result.is-updating:not([hidden]),
+  .cdd.is-open > .cdd-menu,
+  .brand-more.is-open .brand-more-menu,
+  .open-status.is-open .open-dot,
+  .hero-copy.is-in-view .hero-ctas .btn,
+  .hero-copy.is-in-view .trust-badge,
+  .hero-shard.is-in-view .hero-ctas .btn,
+  .hero-shard.is-in-view .trust-badge,
+  .mobile-sticky-cta,
+  .mobile-drawer .mobile-menu a,
+  .mobile-drawer .mobile-menu-cta > * {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;
@@ -256,5 +774,9 @@
 
   .scroll-progress {
     display: none;
+  }
+
+  .mobile-sticky-cta {
+    pointer-events: auto !important;
   }
 }

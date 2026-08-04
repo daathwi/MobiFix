@@ -1,5 +1,6 @@
 (() => {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   /* Scroll progress */
   const progress = document.createElement("div");
@@ -28,10 +29,63 @@
   );
   updateProgress();
 
+  /* Index stagger children */
+  function indexStagger(group) {
+    [...group.children].forEach((child, i) => {
+      child.style.setProperty("--i", String(i));
+    });
+  }
+
+  document.querySelectorAll("[data-stagger]").forEach(indexStagger);
+
+  /* Mobile drawer link delays */
+  document.querySelectorAll(".mobile-menu a, .mobile-menu-cta > *").forEach((el, i) => {
+    el.style.setProperty("--i", String(i));
+  });
+
+  /* Sticky CTA — reveal after leaving hero */
+  const sticky = document.querySelector(".mobile-sticky-cta");
+  const stickyAnchor =
+    document.querySelector(".hero") ||
+    document.querySelector(".page-hero") ||
+    document.querySelector("main");
+
+  function updateSticky() {
+    if (!sticky || reduce) {
+      sticky?.classList.add("is-visible");
+      return;
+    }
+    if (window.innerWidth > 1023) {
+      sticky.classList.remove("is-visible");
+      return;
+    }
+    const anchorBottom = stickyAnchor
+      ? stickyAnchor.getBoundingClientRect().bottom
+      : 120;
+    const show = anchorBottom < 64 || window.scrollY > 280;
+    sticky.classList.toggle("is-visible", show);
+  }
+
+  if (sticky) {
+    let stickyTick = false;
+    const onStickyScroll = () => {
+      if (stickyTick) return;
+      stickyTick = true;
+      requestAnimationFrame(() => {
+        stickyTick = false;
+        updateSticky();
+      });
+    };
+    window.addEventListener("scroll", onStickyScroll, { passive: true });
+    window.addEventListener("resize", updateSticky, { passive: true });
+    updateSticky();
+  }
+
   if (reduce) {
     document.querySelectorAll("[data-in-view], [data-stagger], [data-text-reveal]").forEach((el) => {
       el.classList.add("is-in-view", "is-staggered");
     });
+    sticky?.classList.add("is-visible");
     return;
   }
 
@@ -65,13 +119,6 @@
       .join("");
   });
 
-  /* Index stagger children */
-  document.querySelectorAll("[data-stagger]").forEach((group) => {
-    [...group.children].forEach((child, i) => {
-      child.style.setProperty("--i", String(i));
-    });
-  });
-
   /* In-view observer */
   const io = new IntersectionObserver(
     (entries) => {
@@ -90,13 +137,14 @@
     io.observe(el);
   });
 
-  /* Also reveal nested stagger when parent section enters */
   document.querySelectorAll("[data-in-view] [data-stagger]").forEach((group) => {
     io.observe(group);
   });
 
-  /* Magnetic buttons */
-  document.querySelectorAll("[data-magnetic]").forEach((el) => {
+  /* Magnetic buttons (desktop fine pointer only) */
+  function bindMagnetic(el) {
+    if (el.dataset.mpMagnetic === "1" || !canHover) return;
+    el.dataset.mpMagnetic = "1";
     const strength = Number(el.dataset.magnetic || 18);
     el.addEventListener("pointermove", (event) => {
       const rect = el.getBoundingClientRect();
@@ -107,14 +155,24 @@
     el.addEventListener("pointerleave", () => {
       el.style.transform = "";
     });
-  });
+  }
 
-  /* Trail class on homepage primary CTAs */
-  document.querySelectorAll(".hero-ctas .btn-primary").forEach((btn) => {
-    btn.classList.add("mp-trail");
-  });
+  document.querySelectorAll("[data-magnetic]").forEach(bindMagnetic);
 
-  /* FAQ accordion — one open at a time, smoother feel */
+  /* Trail + magnetic on key primary CTAs */
+  document
+    .querySelectorAll(
+      ".hero-ctas .btn-primary, .nav-wa, .page-hero-ctas .btn-primary, .page-cta .btn-primary, .location-copy .btn-primary"
+    )
+    .forEach((btn) => {
+      btn.classList.add("mp-trail");
+      if (!btn.hasAttribute("data-magnetic")) {
+        btn.setAttribute("data-magnetic", "22");
+      }
+      bindMagnetic(btn);
+    });
+
+  /* FAQ accordion — one open at a time */
   document.querySelectorAll("[data-faq-accordion]").forEach((list) => {
     list.querySelectorAll("details.faq-item").forEach((item) => {
       item.addEventListener("toggle", () => {
@@ -125,4 +183,25 @@
       });
     });
   });
+
+  /* Public helpers for dynamically rendered grids */
+  window.MobifixMotion = {
+    indexStagger,
+    observe(el) {
+      if (!el || reduce) {
+        el?.classList.add("is-in-view", "is-staggered");
+        return;
+      }
+      if (el.hasAttribute("data-stagger")) indexStagger(el);
+      io.observe(el);
+    },
+    enter(nodes, startIndex = 0) {
+      [...nodes].forEach((node, i) => {
+        node.style.setProperty("--i", String(startIndex + i));
+        node.classList.remove("mp-enter");
+        void node.offsetWidth;
+        node.classList.add("mp-enter");
+      });
+    },
+  };
 })();

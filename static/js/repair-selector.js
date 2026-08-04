@@ -460,8 +460,12 @@ const ISSUES = window.MOBIFIX_ISSUES || [];
   function updateResult() {
     const issue = selectedIssue();
     const ready = Boolean(state.brand && state.model && issue);
+    const wasHidden = resultEl.hidden;
     resultEl.hidden = !ready;
-    if (!ready) return;
+    if (!ready) {
+      resultEl.classList.remove("is-updating");
+      return;
+    }
 
     const atHome = state.place === "home";
     summaryEl.textContent = `${state.brand} ${state.model} · ${issue.label} · ${atHome ? "Home" : "Shop"}`;
@@ -490,6 +494,12 @@ const ISSUES = window.MOBIFIX_ISSUES || [];
 
     const text = lines.join("\n");
     bookEl.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+
+    if (!wasHidden) {
+      resultEl.classList.remove("is-updating");
+      void resultEl.offsetWidth;
+      resultEl.classList.add("is-updating");
+    }
   }
 
   bindDropdown(modelDd, {

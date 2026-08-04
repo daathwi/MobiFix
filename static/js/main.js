@@ -215,7 +215,10 @@
 
     grid.innerHTML = tiles;
 
-    grid.querySelectorAll("[data-service]").forEach((tile) => {
+    const tilesEl = grid.querySelectorAll("[data-service]");
+    window.MobifixMotion?.enter?.(tilesEl, 0);
+
+    tilesEl.forEach((tile) => {
       const service = servicesCache.find((s) => s.id === tile.dataset.service);
       const go = () => {
         if (!service) {
@@ -270,7 +273,10 @@
       )
       .join("");
 
-    grid.querySelectorAll("[data-accessory-card]").forEach((card) => {
+    const cards = grid.querySelectorAll("[data-accessory-card]");
+    window.MobifixMotion?.enter?.(cards, 0);
+
+    cards.forEach((card) => {
       const go = () => {
         const item = items.find((a) => a.id === card.dataset.accessoryCard);
         if (!item) {
