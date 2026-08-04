@@ -2,67 +2,91 @@
 
 {% block content %}
 <main class="page-main">
-  <section class="page-hero section">
+  <section class="page-hero" data-in-view>
     <div class="container">
-      <p class="script-accent" style="font-size: 32px;">{{ owner_name }}</p>
-      <h1 class="headline-xl">About Us</h1>
-      <span class="red-bar" aria-hidden="true"></span>
-      <p class="page-lead">
-        SS Mobifix — {{ tagline }}. Chip-level mobile service in Gandhi Nagar, Vijayawada. Walk-ins welcome.
+      <p class="section-kicker">About</p>
+      <h1 class="headline-xl">Your phone repair shop in Governorpet</h1>
+      <p class="section-lead">
+        Run by {{ owner_name }}. Walk-ins welcome. WhatsApp if you want a slot held for you.
       </p>
+      <div class="page-hero-ctas">
+        <a class="btn btn-primary" href="{{ maps_url }}" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined icon-sm">directions</span>
+          Get directions
+        </a>
+        <a class="btn btn-secondary" href="https://wa.me/{{ whatsapp }}?text={{ 'Hi SS Mobifix! I need help with my phone.' | urlencode }}" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined icon-sm">chat</span>
+          WhatsApp us
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="section section-muted">
-    <div class="container workshop-grid">
-      <div class="workshop-info">
-        <div class="contact-list">
-          <div class="contact-item">
+  <section class="section section-muted" data-in-view>
+    <div class="container about-grid">
+      <div class="about-card card-surface">
+        <div>
+          <p class="section-kicker">Visit</p>
+          <h2 class="headline-lg">Governorpet, Vijayawada</h2>
+        </div>
+        <ul class="about-meta">
+          <li>
             <span class="material-symbols-outlined">badge</span>
             <div>
-              <h4>Proprietor</h4>
+              <strong>Owner</strong>
               <p>{{ owner_name }}</p>
             </div>
-          </div>
-          <div class="contact-item">
+          </li>
+          <li>
             <span class="material-symbols-outlined">location_on</span>
             <div>
-              <h4>Our Address</h4>
+              <strong>Address</strong>
               <p>{{ address }}</p>
             </div>
-          </div>
-          <div class="contact-item">
+          </li>
+          <li>
             <span class="material-symbols-outlined">schedule</span>
             <div>
-              <h4>Operating Hours</h4>
-              <p>Monday - Saturday: 10:00 AM - 08:00 PM<br/>Sunday: 11:00 AM - 04:00 PM</p>
+              <strong>Hours</strong>
+              <p>Mon–Sat 10 AM – 8 PM<br/>Sunday 11 AM – 4 PM</p>
             </div>
-          </div>
-          <div class="contact-item">
-            <span class="material-symbols-outlined">contact_support</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">call</span>
             <div>
-              <h4>Reach Us</h4>
-              <p>{{ phone }}<br/>{{ email }}</p>
+              <strong>Call / WhatsApp</strong>
+              <p><a href="tel:{{ phone | replace(' ', '') }}">{{ phone }}</a><br/>{{ email }}</p>
             </div>
-          </div>
-        </div>
-        <div class="hero-ctas" style="margin-top: 8px;">
-          <a class="btn btn-primary btn-lg" href="{{ maps_url }}" target="_blank" rel="noopener">
-            Get Directions
-            <span class="material-symbols-outlined">directions</span>
-          </a>
-          <a class="btn btn-secondary btn-lg" href="https://wa.me/{{ whatsapp }}?text={{ 'Hi SS Mobifix! I need help with my phone.' | urlencode }}" target="_blank" rel="noopener">
-            <span class="material-symbols-outlined">chat</span>
-            WhatsApp
-          </a>
+          </li>
+        </ul>
+        <div class="page-hero-ctas">
+          <a class="btn btn-primary" href="{{ maps_url }}" target="_blank" rel="noopener">Open in Google Maps</a>
+          <a class="btn btn-tertiary" href="/#popular-services">See repair prices</a>
         </div>
       </div>
-      <div class="map-frame glass shop-banner-frame">
-        <div class="map-inner">
-          <img
-            src="/static/images/shop-banner.png"
-            alt="SS Mobifix shop banner — Gandhi Nagar, Vijayawada"
-          />
+
+      <figure class="about-media card-surface">
+        <img
+          src="/static/images/shop/storefront.jpg"
+          alt="SS Mobifix shop in Governorpet, Vijayawada"
+          width="1024"
+          height="768"
+          loading="lazy"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" data-in-view>
+    <div class="container">
+      <div class="page-cta card-surface">
+        <div>
+          <h2 class="headline-lg">Bring the phone in</h2>
+          <p>Free check-up. Bill before repair. Home service free in Governorpet &amp; nearby.</p>
+        </div>
+        <div class="page-cta-actions">
+          <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need a phone repair." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">WhatsApp the shop</a>
+          <a class="btn btn-tertiary" href="/#popular-services">See repair prices</a>
         </div>
       </div>
     </div>

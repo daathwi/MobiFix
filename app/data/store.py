@@ -107,7 +107,7 @@ ACCESSORIES: list[Accessory] = [
     Accessory(
         id="leather-case",
         name="Signature Leather Cases",
-        description="Hand-crafted genuine leather for the ultimate feel and protection.",
+        description="Genuine leather protection — premium feel, everyday wear.",
         price=2499,
         image_url="/static/images/accessories/leather.jpg",
         category="protection",
@@ -115,7 +115,7 @@ ACCESSORIES: list[Accessory] = [
     Accessory(
         id="gan-charger",
         name="Ultra Fast Chargers",
-        description="65W Power Delivery to get your device to 100% in no time.",
+        description="65W Power Delivery — charge to full without waiting around.",
         price=1999,
         image_url="/static/images/accessories/charger.jpg",
         category="power",
@@ -123,7 +123,7 @@ ACCESSORIES: list[Accessory] = [
     Accessory(
         id="braided-cable",
         name="Braided USB-C Cables",
-        description="Military-grade braided cables that survive daily chaos.",
+        description="Tough braided cable built for daily plug-in and pull-out.",
         price=699,
         image_url="/static/images/accessories/cable.jpg",
         category="power",
@@ -131,7 +131,7 @@ ACCESSORIES: list[Accessory] = [
     Accessory(
         id="earbuds",
         name="Wireless Earbuds",
-        description="Clean sound, solid battery, synced with your repaired device.",
+        description="Clean sound and solid battery — pick up with your repair.",
         price=2999,
         image_url="/static/images/accessories/earbuds.jpg",
         category="audio",
@@ -145,11 +145,10 @@ REVIEWS: list[Review] = [
         initials="VR",
         device="iPhone 14 Pro · Vijayawada",
         rating=5,
-        headline="Board repair when three shops in Vijayawada said throw it.",
+        headline=None,
         text=(
-            "My MacBook logic board failed and everyone said buy a new one. "
-            "SS Mobifix diagnosed a blown capacitor and fixed it same day. "
-            "Clear pricing — exactly what Andhra customers need."
+            "Three other shops said throw the phone. SS Mobifix found the board fault, "
+            "fixed it the same day, and told me the price before they opened it."
         ),
         category="micro-soldering",
         tags=["Micro-soldering", "Board Repair"],
@@ -165,10 +164,10 @@ REVIEWS: list[Review] = [
         initials="AC",
         device="iPhone 14 Pro · Guntur",
         rating=5,
-        headline="Display starts from ₹1199 — screen looked original in 20 mins.",
+        headline=None,
         text=(
-            "Came from Guntur for a cracked screen. They fitted it while I waited. "
-            "Touch and colours are perfect. Honest ‘starts from’ pricing."
+            "Drove in from Guntur with a cracked screen. They fitted a new one in about 20 minutes "
+            "right in front of me — touch and colours look original."
         ),
         category="screen",
         tags=["Screen Repairs"],
@@ -181,7 +180,10 @@ REVIEWS: list[Review] = [
         initials="RN",
         device="Pixel 7 · Visakhapatnam",
         rating=5,
-        text="Battery starts from ₹899 and mine was done clean. All-day backup again. From Vizag — worth the visit.",
+        text=(
+            "Battery was dying by lunch. Replaced cleanly while I waited — phone lasts the whole day again. "
+            "Worth the trip from Vizag."
+        ),
         category="battery",
         tags=["Battery"],
         layout="compact",
@@ -194,7 +196,10 @@ REVIEWS: list[Review] = [
         initials="SD",
         device="Samsung S23 Ultra · Tirupati",
         rating=4,
-        text="Diagnostic was open and detailed. Charging port starts from ₹199 — fixed in minutes. Solid shop.",
+        text=(
+            "They checked the phone openly and explained the charging-port issue before the bill. "
+            "Fixed in minutes. Honest shop."
+        ),
         category="screen",
         tags=["Diagnostics"],
         layout="compact",
@@ -207,7 +212,10 @@ REVIEWS: list[Review] = [
         initials="BR",
         device="iPhone 15 · Nellore",
         rating=5,
-        text="Quick WhatsApp updates throughout. Friendly Telugu support and clean work. Will send family here.",
+        text=(
+            "Kept me updated on WhatsApp the whole time. Friendly Telugu support and clean work. "
+            "Sending my family here next."
+        ),
         category="accessories",
         tags=["Support"],
         layout="live",
@@ -221,7 +229,10 @@ REVIEWS: list[Review] = [
         initials="LP",
         device="iPhone 13 · Kakinada",
         rating=5,
-        text="Fastest screen swap in Kakinada area for me. Looks OEM, no lag. Highly recommend SS Mobifix.",
+        text=(
+            "Fixed my iPhone 13 screen in 20 minutes right in front of me. "
+            "Best shop in Governorpet — looks and feels like original."
+        ),
         category="screen",
         tags=["Screen Repairs"],
         layout="compact",
@@ -233,7 +244,10 @@ REVIEWS: list[Review] = [
         initials="ST",
         device="Redmi Note 12 · Rajahmundry",
         rating=5,
-        text="Battery health finally made sense again. Transparent bill — starts from price matched what they said.",
+        text=(
+            "Battery health finally made sense again. Transparent bill — the WhatsApp quote "
+            "matched what I paid at the counter."
+        ),
         category="battery",
         tags=["Battery"],
         layout="compact",
@@ -245,7 +259,9 @@ REVIEWS: list[Review] = [
         initials="PR",
         device="Vivo V29 · Ongole",
         rating=5,
-        text="Water damage save when others gave up. Real board-level skill. Proud AP tech shop energy.",
+        text=(
+            "Water damage save when others gave up. Real board-level skill — phone works like new again."
+        ),
         category="micro-soldering",
         tags=["Board Repair"],
         layout="compact",
@@ -257,7 +273,10 @@ REVIEWS: list[Review] = [
         initials="KV",
         device="OnePlus 12 · Amaravati",
         rating=5,
-        text="Software issue + FRP unlock handled patiently. Phone boots clean. Clear explanation in Telugu.",
+        text=(
+            "Software issue and FRP unlock handled patiently. Phone boots clean. "
+            "Clear explanation in Telugu."
+        ),
         category="micro-soldering",
         tags=["Softwares"],
         layout="compact",
@@ -269,7 +288,10 @@ REVIEWS: list[Review] = [
         initials="DS",
         device="iPhone 13 · Machilipatnam",
         rating=5,
-        text="Bought a case and charger after the repair. Quality matches the service. Will come back from Machilipatnam anytime.",
+        text=(
+            "Bought a case and charger after the repair. Quality matches the service. "
+            "Happy to come back from Machilipatnam anytime."
+        ),
         category="accessories",
         tags=["Accessories"],
         layout="compact",

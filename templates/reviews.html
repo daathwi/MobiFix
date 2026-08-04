@@ -1,117 +1,90 @@
 {% extends "base.html" %}
 
-{% block head_extra %}
-<link rel="stylesheet" href="/static/css/reviews.css"/>
-{% endblock %}
-
 {% block content %}
-<main class="reviews-page">
-  <section class="reviews-hero">
-    <div class="container reviews-hero-grid">
-      <div class="reviews-hero-copy">
-        <h1 class="headline-xl">
-          Precision service.<br/>
-          <span class="accent-soft">Verified hype.</span>
-        </h1>
-        <span class="red-bar" aria-hidden="true"></span>
-        <p class="hero-lead">
-          Real owners. Real board-level saves. Scroll the receipts or drop yours.
-        </p>
-        <div class="reviews-hero-actions">
-          <a class="btn btn-primary btn-lg" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to share a review of my repair experience with you." | urlencode }}' target="_blank" rel="noopener" data-wa="review">
-            Write a Review
-            <span class="material-symbols-outlined">chat</span>
-          </a>
-          <div class="rating-chip glass">
-            <div class="stars" aria-hidden="true">
-              <span class="material-symbols-outlined filled">star</span>
-              <span class="material-symbols-outlined filled">star</span>
-              <span class="material-symbols-outlined filled">star</span>
-              <span class="material-symbols-outlined filled">star</span>
-              <span class="material-symbols-outlined filled">star_half</span>
-            </div>
-            <div class="number-display" id="hero-rating">4.8/5</div>
-          </div>
+<main class="page-main reviews-page">
+  <section class="page-hero" data-in-view>
+    <div class="container">
+      <p class="section-kicker">Reviews</p>
+      <h1 class="headline-xl">What customers say</h1>
+      <p class="section-lead">
+        Feedback from people who got their phones fixed at our Governorpet shop.
+      </p>
+      <div class="page-hero-ctas">
+        <div class="reviews-home-score" style="margin:0;">
+          <strong id="hero-rating">4.9</strong>
+          <span class="reviews-home-stars" aria-hidden="true">★★★★★</span>
+          <span>250+ reviews</span>
         </div>
-      </div>
-      <div class="reviews-hero-media">
-        <div class="hero-media-glow" aria-hidden="true"></div>
-        <div class="hero-media-card glass">
-          <img src="/static/images/reviews/hero.jpg" alt="Phone repair workshop diagnostic station" width="960" height="540"/>
-          <div class="hero-media-overlay">
-            <div>
-              <div class="label-caps accent-soft">Global Ranking</div>
-              <div class="headline-lg media-title">Top 1% Service</div>
-            </div>
-            <div class="avatar-stack" aria-hidden="true">
-              <span class="mini-avatar">JS</span>
-              <span class="mini-avatar dark">RK</span>
-              <span class="mini-avatar primary">+1k</span>
-            </div>
-          </div>
-        </div>
+        <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to share a review of my repair experience with you." | urlencode }}' target="_blank" rel="noopener" data-wa="review">
+          <span class="material-symbols-outlined icon-sm">chat</span>
+          Share your review
+        </a>
       </div>
     </div>
   </section>
 
-  <section class="reviews-filters-wrap">
+  <section class="section section-muted" data-in-view>
     <div class="container">
-      <div class="reviews-filters glass" id="review-filters" role="tablist" aria-label="Filter reviews">
-        <button type="button" class="filter-chip active" data-filter="all" role="tab" aria-selected="true">All Reviews</button>
-        <button type="button" class="filter-chip" data-filter="screen" role="tab" aria-selected="false">Screen Repairs</button>
+      <div class="reviews-filters" id="review-filters" role="tablist" aria-label="Filter reviews">
+        <button type="button" class="filter-chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button type="button" class="filter-chip" data-filter="screen" role="tab" aria-selected="false">Screen</button>
         <button type="button" class="filter-chip" data-filter="battery" role="tab" aria-selected="false">Battery</button>
-        <button type="button" class="filter-chip" data-filter="micro-soldering" role="tab" aria-selected="false">Micro-soldering</button>
+        <button type="button" class="filter-chip" data-filter="micro-soldering" role="tab" aria-selected="false">Board work</button>
         <button type="button" class="filter-chip" data-filter="accessories" role="tab" aria-selected="false">Accessories</button>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-in-view>
     <div class="container">
       <div class="reviews-bento" id="reviews-bento">
-        <div class="skeleton" style="grid-column: span 2; min-height: 280px;"></div>
-        <div class="skeleton" style="min-height: 280px;"></div>
+        <div class="skeleton review-ticker-card" aria-hidden="true"></div>
+        <div class="skeleton review-ticker-card" aria-hidden="true"></div>
+        <div class="skeleton review-ticker-card" aria-hidden="true"></div>
+        <div class="skeleton review-ticker-card" aria-hidden="true"></div>
       </div>
       <div class="reviews-load-more">
         <button class="btn btn-secondary" type="button" id="load-more-reviews">
-          View More Testimonials
-          <span class="material-symbols-outlined">keyboard_arrow_down</span>
+          View more reviews
+          <span class="material-symbols-outlined icon-sm">keyboard_arrow_down</span>
         </button>
       </div>
     </div>
   </section>
 
-  <section class="section section-muted">
-    <div class="container reviews-stats" id="reviews-stats">
-      <div class="stat">
-        <div class="number-display stat-value">12k+</div>
-        <div class="label-caps">Devices Repaired</div>
-      </div>
-      <div class="stat">
-        <div class="number-display stat-value">98%</div>
-        <div class="label-caps">Success Rate</div>
-      </div>
-      <div class="stat">
-        <div class="number-display stat-value">500+</div>
-        <div class="label-caps">5-Star Ratings</div>
-      </div>
-      <div class="stat">
-        <div class="number-display stat-value">24h</div>
-        <div class="label-caps">Average Turnaround</div>
+  <section class="section section-muted" data-in-view>
+    <div class="container">
+      <div class="reviews-stats-row" id="reviews-stats">
+        <div class="reviews-stat">
+          <strong class="stat-value">12k+</strong>
+          <span>Devices repaired</span>
+        </div>
+        <div class="reviews-stat">
+          <strong class="stat-value">98%</strong>
+          <span>Success rate</span>
+        </div>
+        <div class="reviews-stat">
+          <strong class="stat-value">500+</strong>
+          <span>5-star ratings</span>
+        </div>
+        <div class="reviews-stat">
+          <strong class="stat-value">~25 min</strong>
+          <span>Typical turnaround</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-in-view>
     <div class="container">
-      <div class="reviews-cta glass">
-        <h2 class="headline-xl">Experience the Precision.</h2>
-        <p>
-          Our technicians are standing by to restore your device to factory standards. Message us for a priority repair diagnostic.
-        </p>
-        <div class="reviews-cta-actions">
-          <a class="btn btn-primary btn-lg" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">Repair now</a>
-          <a class="btn btn-secondary btn-lg" href="/services">View Pricing</a>
+      <div class="page-cta card-surface">
+        <div>
+          <h2 class="headline-lg">Need the same care?</h2>
+          <p>WhatsApp us for a quote — walk in or ask for doorstep repair nearby.</p>
+        </div>
+        <div class="page-cta-actions">
+          <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">Repair on WhatsApp</a>
+          <a class="btn btn-tertiary" href="/#popular-services">See repair prices</a>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     app_name: str = "SS Mobifix"
-    app_tagline: str = "Phone Repairing Unlocking Original Accessories"
+    app_tagline: str = "Phone repair in Vijayawada"
     owner_name: str = "K. Yathinivas"
     debug: bool = True
     host: str = "0.0.0.0"
@@ -18,13 +18,15 @@ class Settings(BaseSettings):
     whatsapp_number: str = "919292353522"
     phone_display: str = "9292 3535 22"
     email: str = "kothamasuyathinivas@gmail.com"
-    address: str = (
-        "Dr.no. 26-27-63, Opp. Hotel Ilapuram Main Gate, "
-        "Gandhi Nagar, Vijayawada - 520003"
-    )
+    address: str = "Mobifix, Governorpet, Vijayawada, Andhra Pradesh"
     maps_url: str = (
-        "https://www.google.com/maps/search/?api=1&query="
-        "Hotel+Ilapuram+Gandhi+Nagar+Vijayawada+520003"
+        "https://www.google.com/maps/place/Mobifix-2/@16.5122646,80.6296066,17z/"
+        "data=!4m10!1m2!2m1!1sMobifix+governorpet!3m6!1s0x3a35f100716d9023:0xe7f796d8ce823f7"
+        "!8m2!3d16.5122646!4d80.6296066!15sChNNb2JpZml4IGdvdmVybm9ycGV0"
+        "kgEYbW9iaWxlX3Bob25lX3JlcGFpcl9zaG9w4AEA!16s%2Fg%2F11ybykfbh3"
+    )
+    maps_embed_url: str = (
+        "https://www.google.com/maps?q=16.5122646,80.6296066&z=17&output=embed"
     )
 
     static_dir: Path = BASE_DIR / "static"

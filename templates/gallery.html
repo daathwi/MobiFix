@@ -2,55 +2,66 @@
 
 {% block content %}
 <main class="page-main">
-  <section class="page-hero section">
+  <section class="page-hero" data-in-view>
     <div class="container">
-      <p class="script-accent" style="font-size: 32px;">bench life</p>
-      <h1 class="headline-xl">Gallery</h1>
-      <span class="red-bar" aria-hidden="true"></span>
-      <p class="page-lead">
-        ESD benches, calibration, genuine inventory, surgical tools — the shop where the X gets work done.
+      <p class="section-kicker">Gallery</p>
+      <h1 class="headline-xl">Inside the Governorpet shop</h1>
+      <p class="section-lead">
+        Bench, tools, and parts — repairs done in the open where you can see the work.
       </p>
+      <div class="page-hero-ctas">
+        <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need a phone repair." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
+          <span class="material-symbols-outlined icon-sm">chat</span>
+          WhatsApp us
+        </a>
+        <a class="btn btn-secondary" href="/#our-shop">Shop photos</a>
+      </div>
     </div>
   </section>
 
-  <section class="section section-muted">
+  <section class="section section-muted" data-in-view>
     <div class="container">
-      <div class="gallery-grid">
+      <div class="gallery-grid" data-stagger>
         <figure class="gallery-card">
-          <img src="/static/images/gallery/bench.jpg" alt="ESD-safe workbench with open device" loading="lazy"/>
-          <figcaption class="gallery-caption">ESD-safe workbench</figcaption>
+          <img src="/static/images/gallery/bench.jpg" alt="Repair workbench with open device" loading="lazy" width="800" height="600"/>
+          <figcaption class="gallery-caption">Workbench</figcaption>
         </figure>
         <figure class="gallery-card">
-          <img src="/static/images/gallery/screen.jpg" alt="Display calibration station" loading="lazy"/>
-          <figcaption class="gallery-caption">Display calibration</figcaption>
+          <img src="/static/images/gallery/screen.jpg" alt="Display repair station" loading="lazy" width="800" height="600"/>
+          <figcaption class="gallery-caption">Screen station</figcaption>
         </figure>
         <figure class="gallery-card">
-          <img src="/static/images/gallery/parts.jpg" alt="Genuine parts inventory trays" loading="lazy"/>
-          <figcaption class="gallery-caption">Genuine parts</figcaption>
+          <img src="/static/images/gallery/parts.jpg" alt="Parts inventory trays" loading="lazy" width="800" height="600"/>
+          <figcaption class="gallery-caption">Parts stock</figcaption>
         </figure>
         <figure class="gallery-card">
-          <img src="/static/images/gallery/tools.jpg" alt="Surgical precision toolset" loading="lazy"/>
-          <figcaption class="gallery-caption">Surgical toolset</figcaption>
+          <img src="/static/images/gallery/tools.jpg" alt="Phone repair tools" loading="lazy" width="800" height="600"/>
+          <figcaption class="gallery-caption">Tools</figcaption>
         </figure>
         <figure class="gallery-card">
-          <img src="/static/images/gallery/board.jpg" alt="Smartphone board-level repair" loading="lazy"/>
-          <figcaption class="gallery-caption">Board-level repair</figcaption>
+          <img src="/static/images/gallery/board.jpg" alt="Board-level phone repair" loading="lazy" width="800" height="600"/>
+          <figcaption class="gallery-caption">Board repair</figcaption>
         </figure>
         <figure class="gallery-card">
-          <img src="/static/images/gallery/diagnostics.jpg" alt="Diagnostic micro-soldering station" loading="lazy"/>
-          <figcaption class="gallery-caption">Diagnostics bay</figcaption>
+          <img src="/static/images/gallery/diagnostics.jpg" alt="Diagnostics station" loading="lazy" width="800" height="600"/>
+          <figcaption class="gallery-caption">Diagnostics</figcaption>
         </figure>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container page-teaser glass">
-      <div>
-        <h2 class="headline-lg">Ready for a precision repair?</h2>
-        <p style="color: var(--on-surface-variant); margin-top: 8px;">Ping us on WhatsApp — most jobs finish while you wait.</p>
+  <section class="section" data-in-view>
+    <div class="container">
+      <div class="page-cta card-surface">
+        <div>
+          <h2 class="headline-lg">Bring your phone in</h2>
+          <p>Message us on WhatsApp — most jobs finish while you wait.</p>
+        </div>
+        <div class="page-cta-actions">
+          <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need a phone repair." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">WhatsApp us</a>
+          <a class="btn btn-tertiary" href="/#location">Visit the shop</a>
+        </div>
       </div>
-      <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">Repair now</a>
     </div>
   </section>
 </main>

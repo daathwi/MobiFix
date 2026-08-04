@@ -1,352 +1,304 @@
 {% extends "base.html" %}
 
 {% block content %}
-<main class="home-main">
-  <div class="depth-field" aria-hidden="true">
-    <span class="depth-ring depth-ring--a"></span>
-    <span class="depth-slab depth-slab--a"></span>
-    <span class="depth-ring depth-ring--b"></span>
-    <span class="depth-orb depth-orb--a"></span>
-    <span class="depth-slab depth-slab--b"></span>
-    <span class="depth-orb depth-orb--b"></span>
-    <span class="depth-ring depth-ring--c"></span>
-  </div>
-
-  <section class="hero" id="home">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <div class="hero-mark" aria-hidden="true">
-          <img class="logo-dark" src="/static/images/logo-dark.png" alt=""/>
-          <img class="logo-light" src="/static/images/logo-light.png" alt=""/>
-        </div>
-        <h1 class="headline-xl">
-          Phone fixed<br/>
-          <span class="accent">while you wait</span><span class="x-mark">.</span>
-        </h1>
-        <span class="red-bar" aria-hidden="true"></span>
-        <p class="hero-lead">
-          Clear <strong>starts-from</strong> prices. Free check-up. We repair only after you approve the quote —
-          no pressure, no surprise bills.
-        </p>
-        <div class="hero-ctas">
-          <a class="btn btn-primary btn-lg" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
-            Get free quote on WhatsApp
-            <span class="material-symbols-outlined">arrow_forward</span>
-          </a>
-          <a class="btn btn-secondary btn-lg" href="tel:{{ phone | replace(' ', '') }}">
-            <span class="material-symbols-outlined">call</span>
-            {{ phone }}
-          </a>
-        </div>
-        <p class="hero-footnote">Send a photo of the issue on WhatsApp — get an estimate before you visit.</p>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-glow" aria-hidden="true"></div>
-        <figure class="hero-photo">
+<main class="home-main home-modern home-local">
+  <section class="hero hero-visual" id="home">
+    <div class="container hero-visual-grid">
+      <div class="hero-visual-media" data-in-view="left">
+        <figure class="hero-stage">
           <img
-            src="/static/images/hero-repair.jpg"
-            alt="Smartphone repair with precision tooling at SS Mobifix"
-            width="960"
-            height="1200"
+            class="hero-stage-img"
+            src="/static/images/shop/hero.png"
+            alt="Phone screen being repaired on the workbench at SS Mobifix"
+            width="1536"
+            height="1024"
+            loading="eager"
           />
         </figure>
       </div>
-    </div>
-  </section>
 
-  <section class="trust-band" aria-label="Why customers choose SS Mobifix">
-    <div class="container trust-band-grid">
-      <article class="trust-band-item">
-        <span class="material-symbols-outlined">receipt_long</span>
-        <h3>Price before repair</h3>
-        <p>We share the estimate first. You approve — then we start. No hidden charges.</p>
-      </article>
-      <article class="trust-band-item">
-        <span class="material-symbols-outlined">schedule</span>
-        <h3>Same-day, walk-in</h3>
-        <p>Most screen and battery jobs finish while you wait. Keep your day on track.</p>
-      </article>
-      <article class="trust-band-item">
-        <span class="material-symbols-outlined">verified</span>
-        <h3>Quality parts</h3>
-        <p>We use reliable assemblies and explain options — good / better — so you choose what fits your budget.</p>
-      </article>
-      <article class="trust-band-item">
-        <span class="material-symbols-outlined">location_on</span>
-        <h3>Local Vijayawada shop</h3>
-        <p>Opp. Hotel Ilapuram, Gandhi Nagar. Easy to find, easy to come back if you need support.</p>
-      </article>
-    </div>
-  </section>
+      <div class="hero-copy" data-in-view="right">
+        <p class="hero-eyebrow">SS Mobifix · Governorpet</p>
+        <h1 class="headline-xl hero-title">Phone repair in Vijayawada</h1>
 
-  <section class="carriers-strip" aria-label="Fancy numbers available">
-    <div class="container carriers-inner">
-      <p class="carriers-label">
-        <span class="material-symbols-outlined icon-sm">sim_card</span>
-        Fancy Numbers Available
-      </p>
-      <ul class="carriers-list brand-logo-row" aria-label="Networks">
-        <li>
-          <span class="logo-mark logo-mark--md" style="--logo: url('/static/images/brands/jio.svg')" role="img" aria-label="Jio"></span>
-        </li>
-        <li>
-          <span class="logo-mark logo-mark--md" style="--logo: url('/static/images/brands/airtel.svg')" role="img" aria-label="Airtel"></span>
-        </li>
-        <li>
-          <span class="logo-mark logo-mark--md" style="--logo: url('/static/images/brands/vi.svg')" role="img" aria-label="VI"></span>
-        </li>
-        <li>
-          <span class="logo-mark logo-mark--md" style="--logo: url('/static/images/brands/bsnl.svg')" role="img" aria-label="BSNL"></span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section section-muted">
-    <div class="container">
-      <div class="section-bar">
-        <div>
-          <p class="script-accent" style="font-size: 28px;">honest pricing</p>
-          <h2 class="headline-lg">Popular repairs</h2>
-          <span class="red-bar" aria-hidden="true"></span>
-          <p class="section-lead">
-            All rates shown as <strong>starts from</strong>. Final cost depends on model and part quality —
-            confirmed before any work begins.
-          </p>
-        </div>
-        <a class="btn btn-tertiary" href="/services">
-          See all services
-          <span class="material-symbols-outlined icon-sm">arrow_forward</span>
+        <a class="trust-badge trust-badge--compact" href="/#reviews" aria-label="4.9 stars from 250+ customer reviews">
+          <strong>4.9</strong>
+          <span class="trust-stars" aria-hidden="true">★★★★★</span>
+          <span class="trust-count">250+ reviews</span>
         </a>
-      </div>
-      <div class="services-grid services-gallery" id="services-grid" data-limit="4">
-        <div class="skeleton"></div>
-        <div class="skeleton"></div>
-        <div class="skeleton"></div>
-        <div class="skeleton"></div>
-      </div>
-      <p class="section-note">
-        Tip: A new phone can cost ₹20,000+. A quality repair often costs a fraction — and saves your data, apps, and photos.
-      </p>
-    </div>
-  </section>
 
-  <section class="section brands-band">
-    <div class="container">
-      <div class="section-header">
-        <p class="script-accent" style="font-size: 28px;">all major brands</p>
-        <h2 class="headline-lg">We service the phones you use</h2>
-        <span class="red-bar" aria-hidden="true"></span>
-        <p class="section-lead centered">
-          iPhone, Samsung, OnePlus, Vivo, Xiaomi (Mi), Oppo and more — hardware + software under one roof.
+        <p class="hero-lead">
+          Most jobs finish while you wait. <strong>90-day warranty</strong>. Free home repair nearby.
         </p>
+
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need help with my phone." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
+            <span class="material-symbols-outlined icon-sm">chat</span>
+            WhatsApp us
+          </a>
+          <a class="btn btn-secondary" href="#repair-estimate">
+            Check your price
+          </a>
+        </div>
       </div>
-      <ul class="brand-logos brand-logo-row" aria-label="Supported brands">
-        <li>
-          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/apple.svg')" role="img" aria-label="iPhone / Apple"></span>
-        </li>
-        <li>
-          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/samsung.svg')" role="img" aria-label="Samsung"></span>
-        </li>
-        <li>
-          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/oneplus.svg')" role="img" aria-label="OnePlus"></span>
-        </li>
-        <li>
-          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/vivo.svg')" role="img" aria-label="Vivo"></span>
-        </li>
-        <li>
-          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/xiaomi.svg')" role="img" aria-label="Xiaomi"></span>
-        </li>
-        <li>
-          <span class="logo-mark logo-mark--lg" style="--logo: url('/static/images/brands/oppo.svg')" role="img" aria-label="Oppo"></span>
-        </li>
-      </ul>
     </div>
   </section>
 
-  <section class="section section-low">
+  <section class="section shop-proof" id="our-shop" data-in-view>
     <div class="container">
-      <div class="section-header">
-        <p class="script-accent" style="font-size: 28px;">simple process</p>
-        <h2 class="headline-lg">3 steps. No confusion.</h2>
-        <span class="red-bar" aria-hidden="true"></span>
-        <p class="section-lead centered">Built for busy families and working professionals who want clarity, not jargon.</p>
-      </div>
-      <div class="steps steps-three">
-        <div class="step">
-          <div class="step-num active glass">01</div>
-          <h4>WhatsApp us</h4>
-          <p>Share your model and the problem. Get a free estimate and guidance — before you leave home.</p>
-        </div>
-        <div class="step">
-          <div class="step-num glass">02</div>
-          <h4>Visit &amp; approve</h4>
-          <p>Walk into Gandhi Nagar. We diagnose in front of you, explain options, and wait for your go-ahead.</p>
-        </div>
-        <div class="step">
-          <div class="step-num glass">03</div>
-          <h4>Collect same day</h4>
-          <p>Most jobs finish while you wait. You leave with a working phone, warranty, and a clear bill.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-bar">
-        <div>
-          <p class="script-accent" style="font-size: 28px;">see the workshop</p>
-          <h2 class="headline-lg">Clean bench. Real tools.</h2>
-          <span class="red-bar" aria-hidden="true"></span>
-          <p class="section-lead">
-            Open workspace — not a closed back room. Ask questions. Watch the process. Trust what you can verify.
-          </p>
-        </div>
-        <a class="btn btn-tertiary" href="/gallery">
-          View gallery
-          <span class="material-symbols-outlined icon-sm">arrow_forward</span>
-        </a>
-      </div>
-      <div class="gallery-grid gallery-teaser">
-        <figure class="gallery-card">
-          <img src="/static/images/gallery/bench.jpg" alt="ESD-safe workbench at SS Mobifix" loading="lazy"/>
-          <figcaption class="gallery-caption">Organised repair bench</figcaption>
-        </figure>
-        <figure class="gallery-card">
-          <img src="/static/images/gallery/screen.jpg" alt="Display calibration" loading="lazy"/>
-          <figcaption class="gallery-caption">Display fitting &amp; checks</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-muted why-band">
-    <div class="container why-grid">
-      <div>
-        <p class="script-accent" style="font-size: 28px;">why SS Mobifix</p>
-        <h2 class="headline-lg">Repair is smarter than panic-buying</h2>
-        <span class="red-bar" aria-hidden="true"></span>
+      <div class="section-header left">
+        <p class="section-kicker">Our shop</p>
+        <h2 class="headline-lg">Come see us in Governorpet</h2>
         <p class="section-lead">
-          Indian buyers value value — and peace of mind. We fix what can be fixed, recommend upgrade only when it
-          truly makes sense, and keep every rupee accounted for.
+          Real storefront, real bench. Walk in, wait for the repair, take your phone home the same day.
         </p>
       </div>
-      <ul class="why-list">
-        <li>
-          <span class="material-symbols-outlined">savings</span>
-          <div>
-            <strong>Save vs buying new</strong>
-            <p>Repair cost is usually a small % of a replacement phone — with your apps and memories intact.</p>
+
+      <div class="shop-bento" data-stagger>
+        <figure class="shop-bento-item shop-bento-item--hero">
+          <div class="shop-bento-frame">
+            <img src="/static/images/shop/storefront.jpg" alt="SS Mobifix storefront in Governorpet, Vijayawada" width="1000" height="1000" loading="eager"/>
           </div>
-        </li>
-        <li>
-          <span class="material-symbols-outlined">handshake</span>
-          <div>
-            <strong>Talk before you pay</strong>
-            <p>Estimate on WhatsApp. Confirm in person. Pay for the approved job only.</p>
+          <figcaption>Storefront</figcaption>
+        </figure>
+        <figure class="shop-bento-item">
+          <div class="shop-bento-frame">
+            <img src="/static/images/shop/workbench.jpg" alt="Clean repair workbench with tools" width="800" height="800" loading="lazy"/>
           </div>
-        </li>
-        <li>
-          <span class="material-symbols-outlined">shield</span>
-          <div>
-            <strong>After-sale support</strong>
-            <p>Warranty on our work. Local shop you can return to — not a one-time booth.</p>
+          <figcaption>Repair desk</figcaption>
+        </figure>
+        <figure class="shop-bento-item">
+          <div class="shop-bento-frame">
+            <img src="/static/images/shop/tools.jpg" alt="Phone repair tools" width="800" height="800" loading="lazy"/>
           </div>
-        </li>
-        <li>
-          <span class="material-symbols-outlined">groups</span>
-          <div>
-            <strong>Trusted across Andhra</strong>
-            <p>Customers from Vijayawada, Guntur, Vizag and nearby towns choose us for chip-level work.</p>
+          <figcaption>Tools</figcaption>
+        </figure>
+        <figure class="shop-bento-item">
+          <div class="shop-bento-frame">
+            <img src="/static/images/shop/technician.jpg" alt="Technician repairing a smartphone at SS Mobifix" width="800" height="800" loading="lazy"/>
           </div>
-        </li>
-      </ul>
+          <figcaption>While you wait</figcaption>
+        </figure>
+        <figure class="shop-bento-item">
+          <div class="shop-bento-frame">
+            <img src="/static/images/shop/hero.png" alt="Phone screen repair in progress on the bench" width="800" height="800" loading="lazy"/>
+          </div>
+          <figcaption>Screen work</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-bar">
+  <section class="section rate-board-section" id="popular-services" data-in-view>
+    <div class="container rate-ledger">
+      <div class="rate-board-head">
         <div>
-          <p class="script-accent" style="font-size: 28px;">protect your phone</p>
-          <h2 class="headline-lg">Original accessories</h2>
-          <span class="red-bar" aria-hidden="true"></span>
+          <p class="section-kicker">Services</p>
+          <h2 class="headline-lg">What we repair</h2>
           <p class="section-lead">
-            Good cover and charger prevent the next repair. Ask us to match accessories with your device while you wait.
+            Hover or tap to see before → after. Free check-up first — book on WhatsApp.
           </p>
         </div>
-        <a class="btn btn-tertiary" href="/accessories">
-          Browse accessories
-          <span class="material-symbols-outlined icon-sm">arrow_forward</span>
-        </a>
       </div>
-      <div class="accessories-grid" id="accessories-grid" data-limit="2">
-        <div class="skeleton" style="min-height: 280px;"></div>
-        <div class="skeleton" style="min-height: 280px;"></div>
+
+      <div class="rate-board rate-grid" id="rate-board" role="list" data-rate-board></div>
+      <div class="rate-load-more-wrap">
+        <button type="button" class="btn btn-secondary" id="rate-load-more" hidden>
+          Load more
+        </button>
+      </div>
+
+      <div class="rate-board-foot">
+        <p>Starting prices shown · 90-day warranty on our work · Final bill before we open the phone</p>
+        <div class="rate-board-foot-actions">
+          <a class="btn btn-tertiary" href="#repair-estimate">Check your model price <span class="material-symbols-outlined icon-sm">arrow_forward</span></a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section section-muted reviews-home">
+  <section class="section section-muted estimate-section" id="repair-estimate" data-in-view>
     <div class="container">
-      <div class="section-header">
-        <div class="reviews-rating" id="reviews-rating" aria-label="Average rating 4.8 out of 5">
-          <span class="material-symbols-outlined filled">star</span>
-          <span class="material-symbols-outlined filled">star</span>
-          <span class="material-symbols-outlined filled">star</span>
-          <span class="material-symbols-outlined filled">star</span>
-          <span class="material-symbols-outlined filled">star_half</span>
-          <span class="number-display score">4.8/5</span>
+      <div class="estimate-head">
+        <div>
+          <p class="section-kicker">Quick quote</p>
+          <h2 class="headline-lg">Check your repair price</h2>
+          <p class="section-lead">
+            Choose brand, model, and issue. Then book on WhatsApp — shop visit or home repair.
+          </p>
         </div>
-        <h2 class="headline-lg">What local customers say</h2>
-        <span class="red-bar" aria-hidden="true"></span>
-        <p class="section-lead centered">
-          Real feedback from Andhra Pradesh owners — transparent pricing and work they can verify.
+        <p class="doorstep-badge">
+          <span class="material-symbols-outlined icon-sm">home_repair_service</span>
+          <strong>Home repair free</strong>
+          <span>in Governorpet &amp; nearby</span>
         </p>
-        <p><a class="btn btn-tertiary" href="/reviews">Read all reviews <span class="material-symbols-outlined icon-sm">arrow_forward</span></a></p>
+      </div>
+
+      <div class="estimate-layout">
+        <div class="estimate-card card-surface" id="repair-selector" data-whatsapp="{{ whatsapp }}">
+          <div class="estimate-brand-block">
+            <span class="estimate-field-label">Brand</span>
+            <div class="brand-pick" id="brand-pick" role="listbox" aria-label="Select brand"></div>
+          </div>
+
+          <div class="estimate-stack">
+            <div class="cdd is-disabled" id="cdd-model">
+              <span class="estimate-field-label">Model</span>
+              <button type="button" class="cdd-trigger" aria-haspopup="listbox" aria-expanded="false" disabled>
+                <span class="cdd-value is-placeholder">Select brand first</span>
+                <span class="material-symbols-outlined cdd-caret">expand_more</span>
+              </button>
+              <div class="cdd-menu" hidden>
+                <ul class="cdd-list" id="cdd-model-list" role="listbox"></ul>
+              </div>
+            </div>
+
+            <div class="cdd" id="cdd-issue">
+              <span class="estimate-field-label">Issue</span>
+              <button type="button" class="cdd-trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="cdd-value is-placeholder">Select issue</span>
+                <span class="material-symbols-outlined cdd-caret">expand_more</span>
+              </button>
+              <div class="cdd-menu" hidden>
+                <ul class="cdd-list" id="cdd-issue-list" role="listbox"></ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="estimate-place">
+            <p class="estimate-field-label">Repair at</p>
+            <div class="place-seg" role="radiogroup" aria-label="Repair location">
+              <button type="button" class="place-seg-btn is-active" data-place="shop" role="radio" aria-checked="true">
+                <span class="material-symbols-outlined icon-sm">storefront</span>
+                Shop
+              </button>
+              <button type="button" class="place-seg-btn" data-place="home" role="radio" aria-checked="false">
+                <span class="material-symbols-outlined icon-sm">home</span>
+                Home
+              </button>
+            </div>
+            <p class="place-hint">Home visits free in Governorpet &amp; nearby</p>
+          </div>
+
+          <div class="estimate-result" id="selector-result" hidden>
+            <div class="estimate-result-copy">
+              <p class="selector-result-meta" id="selector-summary"></p>
+              <p class="estimate-result-meta-row">
+                <span><span class="material-symbols-outlined icon-sm">schedule</span> <span id="selector-time"></span></span>
+                <span>Starts from <strong id="selector-price"></strong></span>
+              </p>
+            </div>
+            <a class="btn btn-primary" id="selector-book" href="#" target="_blank" rel="noopener">
+              Book on WhatsApp
+              <span class="material-symbols-outlined">chat</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="estimate-visual" aria-label="Repair bench">
+          <figure class="estimate-visual-frame">
+            <img
+              src="/static/images/shop/workbench.jpg"
+              alt="Phone repair underway on the SS Mobifix workbench"
+              width="800"
+              height="1000"
+              loading="lazy"
+            />
+            <figcaption class="estimate-visual-cap">
+              Most screens &amp; batteries done while you wait
+            </figcaption>
+          </figure>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reviews-home" id="reviews" data-in-view>
+    <div class="container">
+      <div class="section-header reviews-home-head">
+        <p class="section-kicker">Reviews</p>
+        <h2 class="headline-lg">What customers say</h2>
+        <p class="section-lead centered">Feedback from people who got their phones fixed here.</p>
+        <div class="reviews-home-score">
+          <strong>4.9</strong>
+          <span class="reviews-home-stars" aria-hidden="true">★★★★★</span>
+          <span>250+ reviews</span>
+        </div>
       </div>
     </div>
     <div class="reviews-marquee" aria-label="Customer reviews scrolling">
       <div class="reviews-marquee-track" id="reviews-track">
-        <div class="skeleton review-ticker-card" style="min-width: 320px; min-height: 160px;"></div>
-        <div class="skeleton review-ticker-card" style="min-width: 320px; min-height: 160px;"></div>
-        <div class="skeleton review-ticker-card" style="min-width: 320px; min-height: 160px;"></div>
+        <div class="skeleton review-ticker-card" aria-hidden="true"></div>
+        <div class="skeleton review-ticker-card" aria-hidden="true"></div>
+        <div class="skeleton review-ticker-card" aria-hidden="true"></div>
       </div>
     </div>
   </section>
 
-  <section class="section section-low">
-    <div class="container page-teaser glass">
-      <div>
-        <p class="script-accent" style="font-size: 24px;">visit us</p>
-        <h2 class="headline-lg">Gandhi Nagar, Vijayawada</h2>
-        <p style="color: var(--on-surface-variant); margin-top: 8px; max-width: 36rem;">
-          Dr.no. 26-27-63, Opp. Hotel Ilapuram Main Gate, Gandhi Nagar, Vijayawada - 520003.
-          Walk-ins welcome. Prefer WhatsApp first for a free quote.
+  <section class="section location-block" id="location" data-in-view>
+    <div class="container location-grid">
+      <div class="location-copy card-surface">
+        <p class="section-kicker">Find us</p>
+        <h2 class="headline-lg">Governorpet, Vijayawada</h2>
+        <p class="open-status open-status--panel" id="open-status" data-timezone="Asia/Kolkata">
+          <span class="open-dot" aria-hidden="true"></span>
+          <span class="open-status-text">Checking today’s hours…</span>
         </p>
+        <ul class="location-meta">
+          <li>
+            <span class="material-symbols-outlined">location_on</span>
+            <span>{{ address }}</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">call</span>
+            <a href="tel:{{ phone | replace(' ', '') }}">{{ phone }}</a>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">schedule</span>
+            <span>Mon–Sat 10 AM – 8 PM · Sun 11 AM – 4 PM</span>
+          </li>
+        </ul>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="{{ maps_url }}" target="_blank" rel="noopener">
+            Get directions
+            <span class="material-symbols-outlined">directions</span>
+          </a>
+          <a class="btn btn-secondary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need help with my phone." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
+            WhatsApp us
+          </a>
+        </div>
       </div>
-      <div class="page-teaser-actions">
-        <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
-          WhatsApp now
-        </a>
-        <a class="btn btn-secondary" href="/about">
-          Directions &amp; hours
-          <span class="material-symbols-outlined icon-sm">arrow_forward</span>
-        </a>
+      <div class="location-map card-surface">
+        <iframe
+          title="SS Mobifix location in Governorpet, Vijayawada"
+          src="{{ maps_embed_url }}"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
   </section>
 
-  <div class="mobile-sticky-cta" aria-label="Quick contact">
-    <a class="btn btn-secondary" href="tel:{{ phone | replace(' ', '') }}">
-      <span class="material-symbols-outlined icon-sm">call</span>
+  <div class="mobile-sticky-cta mobile-sticky-cta--modern" aria-label="Quick actions">
+    <a href="tel:{{ phone | replace(' ', '') }}">
+      <span class="material-symbols-outlined">call</span>
       Call
     </a>
-    <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
-      <span class="material-symbols-outlined icon-sm">chat</span>
-      Free quote
+    <a href="{{ maps_url }}" target="_blank" rel="noopener">
+      <span class="material-symbols-outlined">map</span>
+      Map
+    </a>
+    <a href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need help with my phone." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
+      <span class="material-symbols-outlined">chat</span>
+      WhatsApp
     </a>
   </div>
 </main>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/repair-prices.js" defer></script>
+<script src="/static/js/repair-selector.js" defer></script>
+<script src="/static/js/open-status.js" defer></script>
 {% endblock %}

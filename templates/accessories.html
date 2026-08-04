@@ -2,35 +2,56 @@
 
 {% block content %}
 <main class="page-main">
-  <section class="page-hero section">
+  <section class="page-hero" data-in-view>
     <div class="container">
-      <p class="script-accent" style="font-size: 32px;">original only</p>
-      <h1 class="headline-xl">Accessories</h1>
-      <span class="red-bar" aria-hidden="true"></span>
-      <p class="page-lead">
-        Cases, GaN power, cables — stacked next to the bench so your repair leaves ready to flex.
+      <p class="section-kicker">Shop</p>
+      <h1 class="headline-xl">Buy cases, chargers &amp; more</h1>
+      <p class="section-lead">
+        Clear prices from our Governorpet shelf. Order on WhatsApp — pick up in the shop, or take it with your repair.
       </p>
+      <div class="page-hero-ctas">
+        <a class="btn btn-primary" href="#shop-catalog">
+          Browse products
+        </a>
+        <a class="btn btn-secondary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I want to buy an accessory." | urlencode }}' target="_blank" rel="noopener">
+          <span class="material-symbols-outlined icon-sm">chat</span>
+          Order on WhatsApp
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="section section-muted">
+  <section class="section section-muted" id="shop-catalog" data-in-view>
     <div class="container">
-      <div class="accessories-grid" id="accessories-grid" data-limit="all">
-        <div class="skeleton" style="min-height: 280px;"></div>
-        <div class="skeleton" style="min-height: 280px;"></div>
-        <div class="skeleton" style="min-height: 280px;"></div>
-        <div class="skeleton" style="min-height: 280px;"></div>
+      <div class="section-header left shop-catalog-head">
+        <p class="section-kicker">In stock</p>
+        <h2 class="headline-lg">Shop products</h2>
+        <p class="section-lead">Tap a product to order. We’ll confirm stock and pickup.</p>
+      </div>
+      <div class="catalog-grid shop-grid" id="accessories-grid" data-limit="all">
+        <div class="skeleton catalog-card" style="min-height: 300px;"></div>
+        <div class="skeleton catalog-card" style="min-height: 300px;"></div>
+        <div class="skeleton catalog-card" style="min-height: 300px;"></div>
+        <div class="skeleton catalog-card" style="min-height: 300px;"></div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container page-teaser glass">
-      <div>
-        <h2 class="headline-lg">Need a part with your repair?</h2>
-        <p style="color: var(--on-surface-variant); margin-top: 8px;">Message us on WhatsApp — we'll check stock before you arrive.</p>
+  <section class="section" data-in-view>
+    <div class="container">
+      <div class="page-cta card-surface">
+        <div>
+          <h2 class="headline-lg">Ready to order?</h2>
+          <p>WhatsApp the product name — we’ll confirm stock, price, and pickup.</p>
+        </div>
+        <div class="page-cta-actions">
+          <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I want to buy an accessory from your shop." | urlencode }}' target="_blank" rel="noopener">
+            <span class="material-symbols-outlined icon-sm">chat</span>
+            Order on WhatsApp
+          </a>
+          <a class="btn btn-tertiary" href="/#location">Get directions</a>
+        </div>
       </div>
-      <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair and add an accessory. Please help." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">Chat on WhatsApp</a>
     </div>
   </section>
 </main>

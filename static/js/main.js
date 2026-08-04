@@ -23,15 +23,15 @@
 
   const MSG = {
     repair:
-      "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps.",
+      "Hi SS Mobifix! I need a phone repair. Please help.",
     custom:
-      "Hi SS Mobifix! I need a custom / other repair (board, software, buttons, etc.). Please help.",
+      "Hi SS Mobifix! I need help with another phone issue. Please help.",
     accessory: (name, price) =>
-      `Hi SS Mobifix! I'm interested in ${name} (${formatINR(price)}). Is it available?`,
+      `Hi SS Mobifix! I'd like to order ${name} (${formatINR(price)}) from your shop. Is it available for pickup?`,
     service: (name, priceFrom) =>
-      `Hi SS Mobifix! I need ${name} repair for my phone (from ${formatINR(priceFrom)}). Please share availability and quote.`,
+      `Hi SS Mobifix! I need ${name} (from ${formatINR(priceFrom)}). Please confirm quote and timing.`,
     review:
-      "Hi SS Mobifix! I'd like to share a review of my repair experience with you.",
+      "Hi SS Mobifix! I'd like to share a review of my repair.",
   };
 
   async function api(path, options) {
@@ -50,34 +50,8 @@
     return data;
   }
 
-  /* Theme toggle */
-  const THEME_KEY = "mobifix-theme";
-  const root = document.documentElement;
-  const themeToggle = $("#theme-toggle");
-
-  function getTheme() {
-    return root.getAttribute("data-theme") === "light" ? "light" : "dark";
-  }
-
-  function setTheme(theme) {
-    root.setAttribute("data-theme", theme);
-    try {
-      localStorage.setItem(THEME_KEY, theme);
-    } catch (_) {
-      /* ignore */
-    }
-    if (themeToggle) {
-      themeToggle.setAttribute(
-        "aria-label",
-        theme === "light" ? "Switch to dark mode" : "Switch to light mode"
-      );
-    }
-  }
-
-  themeToggle?.addEventListener("click", () => {
-    setTheme(getTheme() === "dark" ? "light" : "dark");
-  });
-  setTheme(getTheme());
+  /* Theme fixed to light */
+  document.documentElement.setAttribute("data-theme", "light");
 
   /* Mobile nav drawer */
   const navToggle = $("#nav-toggle");
@@ -133,6 +107,54 @@
     { passive: true }
   );
 
+  /* Mobile: hide navbar on scroll down, show on scroll up */
+  const topNav = $("#top-nav");
+  if (topNav) {
+    let lastY = window.scrollY || 0;
+    let ticking = false;
+    const MOBILE_MAX = 1023;
+    const TOP_SHOW = 24;
+    const MIN_DELTA = 6;
+
+    const updateNavHide = () => {
+      ticking = false;
+      if (window.innerWidth > MOBILE_MAX) {
+        topNav.classList.remove("is-nav-hidden");
+        lastY = window.scrollY || 0;
+        return;
+      }
+      if (document.body.classList.contains("nav-open")) {
+        topNav.classList.remove("is-nav-hidden");
+        lastY = window.scrollY || 0;
+        return;
+      }
+
+      const y = window.scrollY || 0;
+      const delta = y - lastY;
+
+      if (y <= TOP_SHOW) {
+        topNav.classList.remove("is-nav-hidden");
+      } else if (delta > MIN_DELTA) {
+        topNav.classList.add("is-nav-hidden");
+      } else if (delta < -MIN_DELTA) {
+        topNav.classList.remove("is-nav-hidden");
+      }
+
+      lastY = y;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateNavHide);
+        }
+      },
+      { passive: true }
+    );
+  }
+
   /* Smooth scroll only for in-page hash targets */
   $$('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (e) => {
@@ -168,7 +190,8 @@
     const grid = $("#services-grid");
     if (!grid) return;
 
-    grid.classList.add("services-gallery");
+    grid.classList.add("catalog-grid");
+    grid.classList.remove("services-gallery");
 
     const limitAttr = grid.dataset.limit || "all";
     const limited = limitAttr !== "all";
@@ -176,18 +199,17 @@
 
     const tiles = list
       .map(
-        (s, i) => `
-      <figure class="service-tile${i === 0 ? " featured" : ""}" data-service="${s.id}" tabindex="0" role="link" aria-label="WhatsApp about ${s.name} repair">
-        <img src="${s.image_url}" alt="${s.name} repair" loading="lazy" width="800" height="600"/>
-        <figcaption class="service-overlay">
-          <span class="service-overlay-icon material-symbols-outlined">${s.icon}</span>
-          <div class="service-overlay-copy">
-            <h3>${s.name}</h3>
-            <p><span class="number-display">${formatINR(s.price_from)}</span> · ${s.time_label}</p>
-          </div>
-          <span class="service-overlay-cta">Repair Now <span class="material-symbols-outlined icon-sm">arrow_forward</span></span>
-        </figcaption>
-      </figure>`
+        (s) => `
+      <article class="catalog-card card-surface" data-service="${s.id}" tabindex="0" role="link" aria-label="WhatsApp about ${escapeHtml(s.name)} repair">
+        <div class="catalog-card-media">
+          <img src="${escapeHtml(s.image_url)}" alt="${escapeHtml(s.name)} repair" loading="lazy" width="800" height="500"/>
+        </div>
+        <div class="catalog-card-body">
+          <h3>${escapeHtml(s.name)}</h3>
+          <p class="catalog-meta"><strong>from ${formatINR(s.price_from)}</strong> · ${escapeHtml(s.time_label)}</p>
+          <span class="catalog-cta">WhatsApp <span aria-hidden="true">→</span></span>
+        </div>
+      </article>`
       )
       .join("");
 
@@ -220,30 +242,49 @@
     const list =
       limitAttr !== "all" ? items.slice(0, Number(limitAttr) || 2) : items;
 
+    const categoryLabel = {
+      protection: "Cases",
+      power: "Charging",
+      audio: "Audio",
+    };
+
+    grid.classList.add("catalog-grid", "shop-grid");
+
     grid.innerHTML = list
       .map(
         (a) => `
-      <article class="accessory-card">
-        <img src="${a.image_url}" alt="${a.name}" loading="lazy"/>
-        <div class="accessory-overlay">
-          <h3>${a.name}</h3>
-          <p>${a.description}</p>
-          <button class="btn btn-white" type="button" data-accessory="${a.id}">
-            Shop on WhatsApp · ${formatINR(a.price)}
-          </button>
+      <article class="catalog-card shop-card card-surface" data-accessory-card="${a.id}" tabindex="0" role="link" aria-label="Order ${escapeHtml(a.name)} on WhatsApp">
+        <div class="catalog-card-media">
+          <img src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.name)}" loading="lazy" width="800" height="500"/>
+          <span class="shop-card-tag">${escapeHtml(categoryLabel[a.category] || a.category || "Accessory")}</span>
+        </div>
+        <div class="catalog-card-body">
+          <h3>${escapeHtml(a.name)}</h3>
+          <p class="catalog-desc">${escapeHtml(a.description || "")}</p>
+          <div class="shop-card-foot">
+            <p class="shop-price">${formatINR(a.price)}</p>
+            <span class="catalog-cta">Order on WhatsApp <span aria-hidden="true">→</span></span>
+          </div>
         </div>
       </article>`
       )
       .join("");
 
-    grid.querySelectorAll("[data-accessory]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const item = items.find((a) => a.id === btn.dataset.accessory);
+    grid.querySelectorAll("[data-accessory-card]").forEach((card) => {
+      const go = () => {
+        const item = items.find((a) => a.id === card.dataset.accessoryCard);
         if (!item) {
           openWhatsApp(MSG.repair);
           return;
         }
         openWhatsApp(MSG.accessory(item.name, item.price));
+      };
+      card.addEventListener("click", go);
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          go();
+        }
       });
     });
   }
@@ -263,25 +304,41 @@
     }).join("");
   }
 
+  function shortReviewerName(name) {
+    const parts = String(name || "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+    if (!parts.length) return "Local customer";
+    if (parts.length === 1) return parts[0];
+    return `${parts[0]} ${parts[parts.length - 1][0]}.`;
+  }
+
   function reviewCardHtml(r) {
-    const quote = escapeHtml(r.headline || r.text);
+    const body = escapeHtml(r.text || r.headline || "");
     const name = escapeHtml(r.name);
+    const credit = escapeHtml(shortReviewerName(r.name));
     const device = escapeHtml(r.device || "");
     const avatar = r.avatar_url
-      ? `<div class="avatar photo"><img src="${escapeHtml(r.avatar_url)}" alt="${name}" loading="lazy"/></div>`
-      : `<div class="avatar">${escapeHtml(r.initials || "")}</div>`;
+      ? `<div class="avatar photo"><img src="${escapeHtml(r.avatar_url)}" alt="" loading="lazy"/></div>`
+      : `<div class="avatar">${escapeHtml(r.initials || name.slice(0, 1))}</div>`;
 
     return `
       <article class="review-ticker-card">
-        <div class="review-stars" aria-hidden="true">${starsHtml(r.rating)}</div>
-        <blockquote>“${quote}”</blockquote>
-        <div class="reviewer">
-          ${avatar}
-          <div>
-            <strong>${name}</strong>
-            <span>${device}</span>
+        <div class="review-stars" aria-label="${Math.round(r.rating)} out of 5 stars">${starsHtml(r.rating)}</div>
+        <blockquote>
+          <p class="review-quote-lead">“${body}”</p>
+        </blockquote>
+        <footer class="review-card-foot">
+          <div class="reviewer">
+            ${avatar}
+            <div>
+              <strong class="review-credit">— ${credit}</strong>
+              <span class="review-platform">Customer</span>
+            </div>
           </div>
-        </div>
+          ${device ? `<div class="review-card-meta"><span class="review-device-tag">${device}</span></div>` : ""}
+        </footer>
       </article>`;
   }
 

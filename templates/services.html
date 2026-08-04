@@ -2,57 +2,77 @@
 
 {% block content %}
 <main class="page-main">
-  <section class="page-hero section">
+  <section class="page-hero" data-in-view>
     <div class="container">
-      <p class="script-accent" style="font-size: 32px;">fix menu</p>
-      <h1 class="headline-xl">Services</h1>
-      <span class="red-bar" aria-hidden="true"></span>
-      <p class="page-lead">
-        Screens, unlocking, water damage, battery, software & motherboard — chip-level service in Vijayawada.
+      <p class="section-kicker">Services</p>
+      <h1 class="headline-xl">Phone repairs with clear prices</h1>
+      <p class="section-lead">
+        Screens, batteries, charging, water damage, unlocks, and board work — at our shop in Governorpet.
       </p>
-      <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I'd like to book a phone repair. Please share availability and next steps." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
-        Repair now
-        <span class="material-symbols-outlined icon-sm">arrow_forward</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="section section-muted">
-    <div class="container">
-      <div class="services-grid services-gallery" id="services-grid" data-limit="all">
-        <div class="skeleton"></div>
-        <div class="skeleton"></div>
-        <div class="skeleton"></div>
-        <div class="skeleton"></div>
+      <div class="page-hero-ctas">
+        <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need a phone repair." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
+          <span class="material-symbols-outlined icon-sm">chat</span>
+          WhatsApp us
+        </a>
+        <a class="btn btn-secondary" href="/#repair-estimate">Check your price</a>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-muted" data-in-view>
     <div class="container">
-      <div class="section-header">
-        <h2 class="headline-lg">The Mobifix Advantage</h2>
+      <div class="catalog-grid" id="services-grid" data-limit="all">
+        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
+        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
+        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
+        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
+        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
+        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
       </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num active glass">01</div>
-          <h4>WhatsApp</h4>
-          <p>Message us the issue — we reply with quote and slot.</p>
+    </div>
+  </section>
+
+  <section class="section" data-in-view>
+    <div class="container">
+      <div class="section-header left">
+        <p class="section-kicker">How it works</p>
+        <h2 class="headline-lg">Simple from start to finish</h2>
+      </div>
+      <div class="page-steps" data-stagger>
+        <div class="page-step">
+          <span class="page-step-num">01</span>
+          <h3>Message us</h3>
+          <p>Tell us the issue on WhatsApp. We’ll share a price and timing.</p>
         </div>
-        <div class="step">
-          <div class="step-num glass">02</div>
-          <h4>Visit</h4>
-          <p>Drop by our workshop or use our pickup service.</p>
+        <div class="page-step">
+          <span class="page-step-num">02</span>
+          <h3>Come in or call us home</h3>
+          <p>Walk into Governorpet, or ask for free home repair nearby.</p>
         </div>
-        <div class="step">
-          <div class="step-num glass">03</div>
-          <h4>Repair</h4>
-          <p>Relax for 30 minutes while we work our magic.</p>
+        <div class="page-step">
+          <span class="page-step-num">03</span>
+          <h3>We repair</h3>
+          <p>Most screens and batteries finish while you wait.</p>
         </div>
-        <div class="step">
-          <div class="step-num glass">04</div>
-          <h4>Done</h4>
-          <p>Collect your like-new phone with a warranty.</p>
+        <div class="page-step">
+          <span class="page-step-num">04</span>
+          <h3>You leave with a bill</h3>
+          <p>Clear bill, 90-day warranty on our work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted" data-in-view>
+    <div class="container">
+      <div class="page-cta card-surface">
+        <div>
+          <h2 class="headline-lg">Need a repair today?</h2>
+          <p>WhatsApp the shop — most jobs finish while you wait.</p>
+        </div>
+        <div class="page-cta-actions">
+          <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need a phone repair." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">WhatsApp us</a>
+          <a class="btn btn-tertiary" href="/#popular-services">See prices</a>
         </div>
       </div>
     </div>

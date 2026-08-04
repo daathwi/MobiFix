@@ -22,33 +22,33 @@ templates = Jinja2Templates(directory=settings.templates_dir)
 PAGES = {
     "home": {
         "template": "index.html",
-        "page_title": "SS Mobifix | Phone Repair · Unlock · Accessories",
-        "page_description": "SS Mobifix Vijayawada — transparent starts-from pricing, same-day phone repair, unlocking & accessories. Opp. Hotel Ilapuram, Gandhi Nagar.",
+        "page_title": "SS Mobifix | Phone Repair in Vijayawada",
+        "page_description": "Phone repair in Vijayawada. Clear starting prices, while-you-wait service, 90-day warranty. WhatsApp SS Mobifix in Governorpet.",
     },
     "services": {
         "template": "services.html",
         "page_title": "Services | SS Mobifix",
-        "page_description": "Screen, battery, board repair, unlock — SS Mobifix services.",
+        "page_description": "Screen, battery, charging, unlock and board repairs at SS Mobifix, Governorpet.",
     },
     "gallery": {
         "template": "gallery.html",
         "page_title": "Gallery | SS Mobifix",
-        "page_description": "Inside the SS Mobifix workshop.",
+        "page_description": "Inside the SS Mobifix shop in Governorpet.",
     },
     "accessories": {
         "template": "accessories.html",
-        "page_title": "Accessories | SS Mobifix",
-        "page_description": "Original accessories from SS Mobifix.",
+        "page_title": "Shop | SS Mobifix",
+        "page_description": "Buy phone cases, chargers, cables and earbuds from SS Mobifix shop in Governorpet. Order on WhatsApp.",
     },
     "reviews": {
         "template": "reviews.html",
         "page_title": "Reviews | SS Mobifix",
-        "page_description": "Real customer reviews for SS Mobifix repairs.",
+        "page_description": "Customer reviews for SS Mobifix repairs.",
     },
     "about": {
         "template": "about.html",
-        "page_title": "About Us | SS Mobifix",
-        "page_description": "About SS Mobifix — workshop, hours, and how to reach us.",
+        "page_title": "About | SS Mobifix",
+        "page_description": "Visit SS Mobifix in Governorpet — hours, address, and how to reach us.",
     },
 }
 
@@ -63,6 +63,7 @@ def _page_context(request: Request, active_page: str, **extra: object) -> dict:
         "email": settings.email,
         "address": settings.address,
         "maps_url": settings.maps_url,
+        "maps_embed_url": settings.maps_embed_url,
         "owner_name": settings.owner_name,
         "tagline": settings.app_tagline,
         "active_page": active_page,
@@ -86,34 +87,37 @@ async def home(request: Request) -> HTMLResponse:
     return _render(request, "home")
 
 
-@app.get("/services", response_class=HTMLResponse)
-async def services_page(request: Request) -> HTMLResponse:
-    return _render(request, "services")
-
+@app.get("/services", include_in_schema=False)
+async def services_redirect() -> RedirectResponse:
+    return RedirectResponse(url="/#popular-services", status_code=302)
 
 @app.get("/gallery", response_class=HTMLResponse)
 async def gallery_page(request: Request) -> HTMLResponse:
     return _render(request, "gallery")
 
 
-@app.get("/accessories", response_class=HTMLResponse)
-async def accessories_page(request: Request) -> HTMLResponse:
+@app.get("/shop", response_class=HTMLResponse)
+async def shop_page(request: Request) -> HTMLResponse:
     return _render(request, "accessories")
 
 
-@app.get("/reviews", response_class=HTMLResponse)
-async def reviews_page(request: Request) -> HTMLResponse:
-    return _render(request, "reviews")
+@app.get("/accessories", include_in_schema=False)
+async def accessories_redirect() -> RedirectResponse:
+    return RedirectResponse(url="/shop", status_code=301)
+
+@app.get("/reviews", include_in_schema=False)
+async def reviews_redirect() -> RedirectResponse:
+    return RedirectResponse(url="/#reviews", status_code=302)
 
 
-@app.get("/about", response_class=HTMLResponse)
-async def about_page(request: Request) -> HTMLResponse:
-    return _render(request, "about")
+@app.get("/about", include_in_schema=False)
+async def about_redirect() -> RedirectResponse:
+    return RedirectResponse(url="/#location", status_code=302)
 
 
 @app.get("/contact", include_in_schema=False)
 async def contact_redirect() -> RedirectResponse:
-    return RedirectResponse(url="/about", status_code=301)
+    return RedirectResponse(url="/#location", status_code=301)
 
 
 @app.get("/favicon.ico", include_in_schema=False)

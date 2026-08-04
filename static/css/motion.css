@@ -1,0 +1,260 @@
+/* Motion layer — Motion Primitives–inspired CSS/JS patterns */
+
+:root {
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
+  --motion-duration: 700ms;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  z-index: 80;
+  background: linear-gradient(90deg, var(--brand-red), var(--brand-red-bright));
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+/* —— In View (fade + rise + soft blur) —— */
+[data-in-view] {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity var(--motion-duration) var(--motion-ease),
+    transform var(--motion-duration) var(--motion-ease),
+    filter calc(var(--motion-duration) - 80ms) var(--motion-ease);
+  transition-delay: var(--motion-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+[data-in-view].is-in-view {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0);
+}
+
+[data-in-view="left"] {
+  transform: translate3d(-24px, 12px, 0);
+}
+
+[data-in-view="left"].is-in-view {
+  transform: translate3d(0, 0, 0);
+}
+
+[data-in-view="right"] {
+  transform: translate3d(24px, 12px, 0);
+}
+
+[data-in-view="right"].is-in-view {
+  transform: translate3d(0, 0, 0);
+}
+
+[data-in-view="scale"] {
+  transform: translate3d(0, 16px, 0) scale(0.97);
+}
+
+[data-in-view="scale"].is-in-view {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* —— Stagger children —— */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity 520ms var(--motion-ease),
+    transform 520ms var(--motion-spring);
+  transition-delay: calc(var(--stagger-step, 60ms) * var(--i, 0));
+}
+
+[data-stagger].is-in-view > *,
+.is-in-view[data-stagger] > *,
+[data-stagger].is-staggered > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* —— Text effect (word / char reveal) —— */
+[data-text-reveal] .mp-word,
+[data-text-reveal] .mp-char {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(6px);
+  transform: translate3d(0, 0.55em, 0);
+  transition:
+    opacity 480ms var(--motion-ease),
+    transform 560ms var(--motion-spring),
+    filter 480ms var(--motion-ease);
+  transition-delay: calc(var(--i, 0) * var(--text-step, 45ms) + var(--text-delay, 80ms));
+}
+
+[data-text-reveal].is-in-view .mp-word,
+[data-text-reveal].is-in-view .mp-char {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0);
+}
+
+[data-text-reveal] .mp-space {
+  display: inline-block;
+  width: 0.28em;
+}
+
+/* —— Interactive polish —— */
+.btn,
+.brand-chip,
+.place-seg-btn,
+.rate-card,
+.cdd-trigger {
+  transition:
+    transform 280ms var(--motion-spring),
+    box-shadow 280ms var(--motion-ease),
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    gap 220ms ease,
+    opacity 220ms ease;
+}
+
+.btn:hover {
+  transform: none;
+  filter: brightness(0.97);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.brand-chip:hover {
+  transform: none;
+}
+
+.shop-bento-item {
+  transition: none;
+}
+
+.shop-bento-item:hover {
+  transform: none;
+}
+
+.shop-bento-frame {
+  transition: border-color 200ms ease;
+}
+
+.shop-bento-item:hover .shop-bento-frame {
+  border-color: color-mix(in srgb, var(--brand-red) 30%, var(--muted-border));
+  box-shadow: none;
+}
+
+.rate-card-price {
+  transition: color 220ms ease;
+}
+
+.rate-card:hover .rate-card-price {
+  color: var(--brand-red-deep);
+}
+
+/* Border trail on primary CTA */
+.btn-primary.mp-trail {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.btn-primary.mp-trail::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  background: conic-gradient(
+    from var(--trail-angle, 0deg),
+    transparent 0%,
+    transparent 55%,
+    color-mix(in srgb, #fff 55%, transparent) 72%,
+    transparent 88%
+  );
+  opacity: 0;
+  transition: opacity 240ms ease;
+  animation: mp-trail-spin 2.8s linear infinite;
+  animation-play-state: paused;
+}
+
+.btn-primary.mp-trail::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--brand-red);
+}
+
+.btn-primary.mp-trail:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+.btn-primary.mp-trail > * {
+  position: relative;
+  z-index: 1;
+}
+
+@property --trail-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes mp-trail-spin {
+  to {
+    --trail-angle: 360deg;
+  }
+}
+
+/* Magnetic helper uses inline transform from JS */
+[data-magnetic] {
+  will-change: transform;
+}
+
+/* Soft spotlight under hero media */
+.hero-stage {
+  transition: transform 500ms var(--motion-ease), box-shadow 500ms ease;
+}
+
+.hero-visual-media.is-in-view .hero-stage {
+  animation: mp-hero-settle 900ms var(--motion-spring) both;
+}
+
+@keyframes mp-hero-settle {
+  from {
+    transform: translate3d(0, 18px, 0) scale(0.985);
+    opacity: 0.85;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress,
+  [data-in-view],
+  [data-stagger] > *,
+  [data-text-reveal] .mp-word,
+  [data-text-reveal] .mp-char,
+  .btn-primary.mp-trail::before,
+  .hero-visual-media.is-in-view .hero-stage {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .scroll-progress {
+    display: none;
+  }
+}
