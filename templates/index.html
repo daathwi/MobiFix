@@ -40,11 +40,11 @@
           </p>
 
           <div class="hero-ctas">
-            <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need help with my phone." | urlencode }}' target="_blank" rel="noopener" data-wa="repair" data-magnetic="20">
+            <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need help with my phone." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
               <span class="material-symbols-outlined icon-sm">chat</span>
               WhatsApp us
             </a>
-            <a class="btn btn-secondary" href="#repair-estimate">
+            <a class="btn btn-secondary" href="#book" data-book-open>
               Check your price
             </a>
           </div>
@@ -53,40 +53,53 @@
     </div>
   </section>
 
-  <div class="kinetic-ticker" aria-hidden="true">
-    <div class="kinetic-ticker-scan"></div>
-    <div class="kinetic-ticker-track">
-      <div class="kinetic-ticker-set">
-        <span>SS Mobifix</span>
-        <span>Governorpet</span>
-        <span>90-day warranty</span>
-        <span>While you wait</span>
-        <span>Free home repair</span>
-        <span>Phone repair in Vijayawada</span>
-        <span>Same day</span>
-        <span>Walk in</span>
-      </div>
-      <div class="kinetic-ticker-set">
-        <span>SS Mobifix</span>
-        <span>Governorpet</span>
-        <span>90-day warranty</span>
-        <span>While you wait</span>
-        <span>Free home repair</span>
-        <span>Phone repair in Vijayawada</span>
-        <span>Same day</span>
-        <span>Walk in</span>
-      </div>
-    </div>
-  </div>
-
   <section class="section shop-proof" id="our-shop" data-in-view>
     <div class="container">
       <div class="section-header left">
-        <p class="section-kicker">Our shop</p>
-        <h2 class="headline-lg">Come see us in Governorpet</h2>
+        <p class="section-kicker">Our shops</p>
+        <h2 class="headline-lg">Two branches in Vijayawada</h2>
         <p class="section-lead">
-          Real storefront, real bench. Walk in, wait for the repair, take your phone home the same day.
+          Governorpet and Gandhi Nagar. Same care, same bench standards — walk in or message first.
         </p>
+      </div>
+
+      <div class="shop-branches" data-stagger>
+        {% for branch in branches %}
+        <article class="shop-branch">
+          <p class="shop-branch-tag">Branch {{ loop.index }}</p>
+          <h3>{{ branch.name }}</h3>
+          <p class="shop-branch-blurb">{{ branch.blurb }}</p>
+          <ul class="shop-branch-meta">
+            <li>
+              <span class="material-symbols-outlined icon-sm" aria-hidden="true">location_on</span>
+              <span>{{ branch.address }}</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined icon-sm" aria-hidden="true">call</span>
+              <a href="tel:{{ branch.phone | replace(' ', '') }}">{{ branch.phone }}</a>
+            </li>
+            <li>
+              <span class="material-symbols-outlined icon-sm" aria-hidden="true">schedule</span>
+              <span>{{ branch.hours }}</span>
+            </li>
+          </ul>
+          <div class="shop-branch-actions">
+            <a class="btn btn-primary" href="{{ branch.maps_url }}" target="_blank" rel="noopener">
+              Get directions
+              <span class="material-symbols-outlined icon-sm">directions</span>
+            </a>
+            <a
+              class="btn btn-secondary"
+              href='https://wa.me/{{ whatsapp }}?text={{ ("Hi SS Mobifix! I want to visit the " ~ branch.name ~ " shop.") | urlencode }}'
+              target="_blank"
+              rel="noopener"
+              data-wa="repair"
+            >
+              WhatsApp
+            </a>
+          </div>
+        </article>
+        {% endfor %}
       </div>
     </div>
 
@@ -124,130 +137,46 @@
     </div>
   </section>
 
-  <section class="section rate-board-section" id="popular-services" data-in-view>
+  <section class="section section-muted how-it-works" id="how-it-works" data-in-view>
     <div class="container">
-      <div class="rate-board-head">
-        <div>
-          <p class="section-kicker">Services</p>
-          <h2 class="headline-lg">What we repair</h2>
-          <p class="section-lead">
-            Free check-up first — book on WhatsApp.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="rate-board rate-grid rate-grid--bleed" id="rate-board" role="list" data-rate-board data-stagger></div>
-
-    <div class="container">
-      <div class="rate-load-more-wrap">
-        <button type="button" class="btn btn-secondary" id="rate-load-more" hidden>
-          Load more
-        </button>
-      </div>
-
-      <div class="rate-board-foot">
-        <p>Starting prices shown · 90-day warranty on our work · Final bill before we open the phone</p>
-        <div class="rate-board-foot-actions">
-          <a class="btn btn-tertiary" href="#repair-estimate">Check your model price <span class="material-symbols-outlined icon-sm">arrow_forward</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-muted estimate-section" id="repair-estimate" data-in-view>
-    <div class="container">
-      <div class="estimate-head">
-        <div>
-          <p class="section-kicker">Quick quote</p>
-          <h2 class="headline-lg">Check your repair price</h2>
-          <p class="section-lead">
-            Choose brand, model, and issue. Then book on WhatsApp — shop visit or home repair.
-          </p>
-        </div>
-        <p class="doorstep-badge">
-          <span class="material-symbols-outlined icon-sm">home_repair_service</span>
-          <strong>Home repair free</strong>
-          <span>in Governorpet &amp; nearby</span>
+      <div class="how-head">
+        <p class="section-kicker">How it works</p>
+        <h2 class="headline-lg">Simple from start to finish</h2>
+        <p class="section-lead">
+          Four steps. Clear bill before we open the phone. Most jobs finish while you wait.
         </p>
       </div>
 
-      <div class="estimate-layout">
-        <div class="estimate-card card-surface" id="repair-selector" data-whatsapp="{{ whatsapp }}">
-          <div class="estimate-brand-block">
-            <span class="estimate-field-label">Brand</span>
-            <div class="brand-pick" id="brand-pick" role="listbox" aria-label="Select brand"></div>
-          </div>
-
-          <div class="estimate-stack">
-            <div class="cdd is-disabled" id="cdd-model">
-              <span class="estimate-field-label">Model</span>
-              <button type="button" class="cdd-trigger" aria-haspopup="listbox" aria-expanded="false" disabled>
-                <span class="cdd-value is-placeholder">Select brand first</span>
-                <span class="material-symbols-outlined cdd-caret">expand_more</span>
-              </button>
-              <div class="cdd-menu" hidden>
-                <ul class="cdd-list" id="cdd-model-list" role="listbox"></ul>
-              </div>
-            </div>
-
-            <div class="cdd" id="cdd-issue">
-              <span class="estimate-field-label">Issue</span>
-              <button type="button" class="cdd-trigger" aria-haspopup="listbox" aria-expanded="false">
-                <span class="cdd-value is-placeholder">Select issue</span>
-                <span class="material-symbols-outlined cdd-caret">expand_more</span>
-              </button>
-              <div class="cdd-menu" hidden>
-                <ul class="cdd-list" id="cdd-issue-list" role="listbox"></ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="estimate-place">
-            <p class="estimate-field-label">Repair at</p>
-            <div class="place-seg" role="radiogroup" aria-label="Repair location">
-              <button type="button" class="place-seg-btn is-active" data-place="shop" role="radio" aria-checked="true">
-                <span class="material-symbols-outlined icon-sm">storefront</span>
-                Shop
-              </button>
-              <button type="button" class="place-seg-btn" data-place="home" role="radio" aria-checked="false">
-                <span class="material-symbols-outlined icon-sm">home</span>
-                Home
-              </button>
-            </div>
-            <p class="place-hint">Home visits free in Governorpet &amp; nearby</p>
-          </div>
-
-          <div class="estimate-result" id="selector-result" hidden>
-            <div class="estimate-result-copy">
-              <p class="selector-result-meta" id="selector-summary"></p>
-              <p class="estimate-result-meta-row">
-                <span><span class="material-symbols-outlined icon-sm">schedule</span> <span id="selector-time"></span></span>
-                <span>Starts from <strong id="selector-price"></strong></span>
-              </p>
-            </div>
-            <a class="btn btn-primary" id="selector-book" href="#" target="_blank" rel="noopener">
-              Book on WhatsApp
-              <span class="material-symbols-outlined">chat</span>
-            </a>
-          </div>
-        </div>
-
-        <aside class="estimate-visual" aria-label="Repair bench">
-          <figure class="estimate-visual-frame">
-            <img
-              src="/static/images/shop/workbench.jpg"
-              alt="Phone repair underway on the SS Mobifix workbench"
-              width="800"
-              height="1000"
-              loading="lazy"
-            />
-            <figcaption class="estimate-visual-cap">
-              Most screens &amp; batteries done while you wait
-            </figcaption>
-          </figure>
-        </aside>
-      </div>
+      <ol class="how-track" data-stagger>
+        <li class="how-step">
+          <article class="how-card">
+            <p class="how-step-tag">WhatsApp</p>
+            <h3>Message us</h3>
+            <p>Tell us the issue on WhatsApp. We’ll share a starting price and timing.</p>
+          </article>
+        </li>
+        <li class="how-step">
+          <article class="how-card">
+            <p class="how-step-tag">Shop or home</p>
+            <h3>Come in or home visit</h3>
+            <p>Walk into Governorpet, or ask for free home repair nearby.</p>
+          </article>
+        </li>
+        <li class="how-step">
+          <article class="how-card">
+            <p class="how-step-tag">While you wait</p>
+            <h3>We repair</h3>
+            <p>Screens and batteries often finish while you wait at the bench.</p>
+          </article>
+        </li>
+        <li class="how-step">
+          <article class="how-card">
+            <p class="how-step-tag">90-day cover</p>
+            <h3>Bill &amp; warranty</h3>
+            <p>Clear bill before work starts. 90-day warranty on our workmanship.</p>
+          </article>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -274,10 +203,48 @@
   </section>
 
   <section class="section location-block" id="location" data-in-view>
-    <div class="container location-grid">
-      <div class="location-copy card-surface">
+    <div
+      class="location-split"
+      id="location-finder"
+      data-branches='{{ branches | tojson }}'
+      data-active="{{ branches[0].id }}"
+    >
+      <div class="location-copy">
         <p class="section-kicker">Find us</p>
-        <h2 class="headline-lg">Governorpet, Vijayawada</h2>
+
+        <div class="cdd location-branch-cdd" id="location-branch-cdd">
+          <span class="estimate-field-label" id="location-branch-label">Branch</span>
+          <button
+            type="button"
+            class="cdd-trigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="location-branch-label"
+          >
+            <span class="cdd-value" id="location-branch-value">{{ branches[0].name }}</span>
+            <span class="material-symbols-outlined cdd-caret">expand_more</span>
+          </button>
+          <div class="cdd-menu" hidden>
+            <ul class="cdd-list" role="listbox" aria-labelledby="location-branch-label">
+              {% for branch in branches %}
+              <li role="none">
+                <button
+                  type="button"
+                  class="cdd-option{% if loop.first %} is-selected{% endif %}"
+                  role="option"
+                  data-value="{{ branch.id }}"
+                  data-label="{{ branch.name }}"
+                  aria-selected="{{ 'true' if loop.first else 'false' }}"
+                >
+                  {{ branch.name }}
+                </button>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="headline-lg" id="location-title">{{ branches[0].title }}</h2>
         <p class="open-status open-status--panel" id="open-status" data-timezone="Asia/Kolkata">
           <span class="open-dot" aria-hidden="true"></span>
           <span class="open-status-text">Checking today’s hours…</span>
@@ -285,19 +252,19 @@
         <ul class="location-meta">
           <li>
             <span class="material-symbols-outlined">location_on</span>
-            <span>{{ address }}</span>
+            <span id="location-address">{{ branches[0].address }}</span>
           </li>
           <li>
             <span class="material-symbols-outlined">call</span>
-            <a href="tel:{{ phone | replace(' ', '') }}">{{ phone }}</a>
+            <a id="location-phone" href="tel:{{ branches[0].phone | replace(' ', '') }}">{{ branches[0].phone }}</a>
           </li>
           <li>
             <span class="material-symbols-outlined">schedule</span>
-            <span>Mon–Sat 10 AM – 8 PM · Sun 11 AM – 4 PM</span>
+            <span id="location-hours">{{ branches[0].hours }}</span>
           </li>
         </ul>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="{{ maps_url }}" target="_blank" rel="noopener">
+          <a class="btn btn-primary" id="location-directions" href="{{ branches[0].maps_url }}" target="_blank" rel="noopener">
             Get directions
             <span class="material-symbols-outlined">directions</span>
           </a>
@@ -306,10 +273,11 @@
           </a>
         </div>
       </div>
-      <div class="location-map card-surface">
+      <div class="location-map">
         <iframe
-          title="SS Mobifix location in Governorpet, Vijayawada"
-          src="{{ maps_embed_url }}"
+          id="location-map"
+          title="SS Mobifix — {{ branches[0].title }}"
+          src="{{ branches[0].maps_embed_url }}"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           allowfullscreen
@@ -317,26 +285,10 @@
       </div>
     </div>
   </section>
-
-  <div class="mobile-sticky-cta mobile-sticky-cta--modern" aria-label="Quick actions">
-    <a href="tel:{{ phone | replace(' ', '') }}">
-      <span class="material-symbols-outlined">call</span>
-      Call
-    </a>
-    <a href="{{ maps_url }}" target="_blank" rel="noopener">
-      <span class="material-symbols-outlined">map</span>
-      Map
-    </a>
-    <a href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need help with my phone." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
-      <span class="material-symbols-outlined">chat</span>
-      WhatsApp
-    </a>
-  </div>
 </main>
 {% endblock %}
 
 {% block scripts %}
-<script src="/static/js/repair-prices.js" defer></script>
-<script src="/static/js/repair-selector.js" defer></script>
 <script src="/static/js/open-status.js" defer></script>
+<script src="/static/js/location-branches.js" defer></script>
 {% endblock %}

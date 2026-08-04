@@ -95,19 +95,20 @@ body.site-kinetic {
   background: var(--signal-red) !important;
   border-color: var(--signal-red) !important;
   color: #fff !important;
-  box-shadow: 0 10px 24px rgba(225, 6, 19, 0.28) !important;
+  box-shadow: none !important;
 }
 
 .btn-primary:hover {
   background: var(--brand-red-bright) !important;
   border-color: var(--brand-red-bright) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 14px 30px rgba(225, 6, 19, 0.34) !important;
+  transform: none !important;
+  box-shadow: none !important;
   filter: none !important;
 }
 
 .btn-primary:active {
-  transform: translateY(0) scale(0.98) !important;
+  transform: none !important;
+  filter: brightness(0.92) !important;
 }
 
 .btn-secondary {
@@ -119,9 +120,9 @@ body.site-kinetic {
 
 .btn-secondary:hover {
   border-color: var(--graphite) !important;
-  background: #fff !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 10px 24px rgba(18, 21, 26, 0.08) !important;
+  background: #eef1f4 !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 .btn-tertiary {
@@ -269,7 +270,7 @@ body.site-kinetic {
   backdrop-filter: blur(8px);
 }
 
-.nav-wa {
+.nav-book {
   border-radius: 999px !important;
 }
 
@@ -412,8 +413,14 @@ body.site-kinetic {
   z-index: 2;
   width: 100%;
   max-width: var(--container-max);
-  padding-top: 120px;
+  padding-top: 56px;
   padding-bottom: 48px;
+}
+
+@media (min-width: 1024px) {
+  .hero-kinetic-content {
+    padding-top: 120px;
+  }
 }
 
 .hero-shard {
@@ -791,6 +798,191 @@ body.site-kinetic {
   line-height: 1.35;
 }
 
+/* —— How it works (light cards) —— */
+.how-it-works {
+  scroll-margin-top: 72px;
+  position: relative;
+  overflow: hidden;
+  color: var(--on-surface);
+  border: none;
+}
+
+@media (min-width: 1024px) {
+  .how-it-works {
+    scroll-margin-top: 96px;
+  }
+}
+
+.how-it-works > .container {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: none;
+}
+
+.how-head {
+  max-width: 38rem;
+  margin-bottom: clamp(28px, 4vw, 40px);
+}
+
+.how-head .section-kicker {
+  margin-bottom: 8px;
+}
+
+.how-head h2 {
+  margin: 0 0 10px;
+  color: var(--heading);
+}
+
+.how-head .section-lead {
+  margin: 0;
+  color: var(--on-surface-variant);
+}
+
+.how-track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  position: relative;
+  counter-reset: how-step;
+}
+
+.how-step {
+  position: relative;
+  counter-increment: how-step;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+/* Discoverability: flow arrow between cards */
+.how-step:not(:last-child)::after {
+  content: "arrow_downward";
+  font-family: "Material Symbols Outlined";
+  font-size: 20px;
+  font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 20;
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transform: translate(-50%, 50%);
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--signal-red);
+  border: 1px solid var(--muted-border);
+  box-shadow: 0 4px 10px rgba(18, 21, 26, 0.06);
+  line-height: 1;
+}
+
+.how-card {
+  height: 100%;
+  margin: 0;
+  padding: 22px 20px 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--muted-border);
+  background: #fff;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.how-card::before {
+  content: "Step " counter(how-step);
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--signal-red) 9%, #fff);
+  border: 1px solid color-mix(in srgb, var(--signal-red) 22%, var(--muted-border));
+  color: var(--signal-red);
+  font-family: var(--font-tech);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.how-card:hover,
+.how-card:focus-within {
+  border-color: color-mix(in srgb, var(--signal-red) 35%, var(--muted-border));
+  background: color-mix(in srgb, var(--signal-red) 3%, #fff);
+  box-shadow: 0 10px 24px rgba(18, 21, 26, 0.08);
+}
+
+.how-step-tag {
+  margin: 0 0 8px;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-tech);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
+
+.how-card h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-headline);
+  font-size: clamp(1.35rem, 2.8vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--heading);
+  line-height: 1.15;
+}
+
+.how-card > p:last-child {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+}
+
+@media (min-width: 900px) {
+  .how-track {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .how-step:not(:last-child)::after {
+    content: "arrow_forward";
+    left: auto;
+    right: -12px;
+    top: 50%;
+    bottom: auto;
+    transform: translate(50%, -50%);
+  }
+
+  .how-card {
+    padding: 24px 20px 26px;
+  }
+
+  .how-card h3 {
+    font-size: clamp(1.4rem, 1.8vw, 1.7rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .how-card {
+    transition: none;
+  }
+}
+
 .reviews-home-score {
   display: inline-flex;
   align-items: center;
@@ -923,12 +1115,18 @@ body.site-kinetic {
 }
 
 .page-hero {
-  padding-top: 140px;
+  padding-top: 48px;
   padding-bottom: 48px;
   border-bottom: 1px solid var(--muted-border);
   background:
     radial-gradient(ellipse 60% 50% at 100% 0%, rgba(0, 229, 155, 0.08), transparent 55%),
     var(--porcelain);
+}
+
+@media (min-width: 1024px) {
+  .page-hero {
+    padding-top: 140px;
+  }
 }
 
 .scroll-progress {
@@ -937,8 +1135,18 @@ body.site-kinetic {
 }
 
 /* Tone down previous motion hover conflicts inside bench system */
+.site-kinetic .btn:hover,
+.site-kinetic .btn:active,
+.site-kinetic .btn:focus-visible {
+  transform: none !important;
+}
+
 .site-kinetic .btn:hover .material-symbols-outlined {
   transform: none;
+}
+
+.site-kinetic .btn:active {
+  filter: brightness(0.94);
 }
 
 @media (prefers-reduced-motion: reduce) {

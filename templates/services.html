@@ -1,65 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
-<main class="page-main">
+<main class="page-main home-local home-kinetic services-page">
   <section class="page-hero" data-in-view>
     <div class="container">
       <p class="section-kicker">Services</p>
       <h1 class="headline-xl">Phone repairs with clear prices</h1>
       <p class="section-lead">
-        Screens, batteries, charging, water damage, unlocks, and board work — at our shop in Governorpet.
+        Every repair below is explained plainly — what we fix, how long it takes, and what you can expect. Free check-up first.
       </p>
       <div class="page-hero-ctas">
-        <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need a phone repair." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
-          <span class="material-symbols-outlined icon-sm">chat</span>
+        <button type="button" class="btn btn-primary" data-book-open>
+          <span class="material-symbols-outlined icon-sm">calendar_month</span>
+          Book now
+        </button>
+        <a class="btn btn-secondary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need a phone repair." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
           WhatsApp us
         </a>
-        <a class="btn btn-secondary" href="/#repair-estimate">Check your price</a>
       </div>
     </div>
   </section>
 
-  <section class="section section-muted" data-in-view>
+  <section class="section svc-list-section" id="popular-services" data-in-view>
     <div class="container">
-      <div class="catalog-grid" id="services-grid" data-limit="all">
-        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
-        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
-        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
-        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
-        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
-        <div class="skeleton catalog-card" style="min-height: 280px;"></div>
+      <div class="svc-list-head">
+        <p class="section-kicker">Repair menu</p>
+        <h2 class="headline-lg">What we repair</h2>
+        <p class="section-lead">
+          Image and details side by side — starting prices shown. Final bill only after free diagnosis.
+        </p>
       </div>
-    </div>
-  </section>
 
-  <section class="section" data-in-view>
-    <div class="container">
-      <div class="section-header left">
-        <p class="section-kicker">How it works</p>
-        <h2 class="headline-lg">Simple from start to finish</h2>
-      </div>
-      <div class="page-steps" data-stagger>
-        <div class="page-step">
-          <span class="page-step-num">01</span>
-          <h3>Message us</h3>
-          <p>Tell us the issue on WhatsApp. We’ll share a price and timing.</p>
-        </div>
-        <div class="page-step">
-          <span class="page-step-num">02</span>
-          <h3>Come in or call us home</h3>
-          <p>Walk into Governorpet, or ask for free home repair nearby.</p>
-        </div>
-        <div class="page-step">
-          <span class="page-step-num">03</span>
-          <h3>We repair</h3>
-          <p>Most screens and batteries finish while you wait.</p>
-        </div>
-        <div class="page-step">
-          <span class="page-step-num">04</span>
-          <h3>You leave with a bill</h3>
-          <p>Clear bill, 90-day warranty on our work.</p>
+      <div class="svc-list" id="service-list" data-service-list data-stagger>
+        <div class="svc-row svc-row--skeleton" aria-hidden="true">
+          <div class="skeleton svc-row-media"></div>
+          <div class="svc-row-copy">
+            <div class="skeleton" style="height: 18px; width: 40%; margin-bottom: 12px;"></div>
+            <div class="skeleton" style="height: 32px; width: 70%; margin-bottom: 12px;"></div>
+            <div class="skeleton" style="height: 48px; width: 95%; margin-bottom: 16px;"></div>
+            <div class="skeleton" style="height: 120px; width: 100%;"></div>
+          </div>
         </div>
       </div>
+
+      <div class="svc-load-more-wrap">
+        <button type="button" class="btn btn-secondary" id="svc-load-more" hidden>
+          Show more services
+        </button>
+      </div>
+
+      <p class="svc-list-note">
+        Starting prices · 90-day warranty on our work · Final bill before we open the phone
+      </p>
     </div>
   </section>
 
@@ -68,11 +60,11 @@
       <div class="page-cta card-surface">
         <div>
           <h2 class="headline-lg">Need a repair today?</h2>
-          <p>WhatsApp the shop — most jobs finish while you wait.</p>
+          <p>Book a quote — most jobs finish while you wait.</p>
         </div>
         <div class="page-cta-actions">
-          <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need a phone repair." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">WhatsApp us</a>
-          <a class="btn btn-tertiary" href="/#popular-services">See prices</a>
+          <button type="button" class="btn btn-primary" data-book-open>Book now</button>
+          <a class="btn btn-tertiary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need a phone repair." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">WhatsApp us</a>
         </div>
       </div>
     </div>

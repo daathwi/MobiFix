@@ -17,8 +17,8 @@ services:
       - key: EMAIL
         value: "kothamasuyathinivas@gmail.com"
       - key: ADDRESS
-        value: "Dr.no. 26-27-63, Opp. Hotel Ilapuram Main Gate, Gandhi Nagar, Vijayawada - 520003"
+        value: "Mobifix, Governorpet, Vijayawada, Andhra Pradesh"
       - key: MAPS_URL
-        value: "https://www.google.com/maps/search/?api=1&query=Hotel+Ilapuram+Gandhi+Nagar+Vijayawada+520003"
+        value: "https://www.google.com/maps/place/Mobifix-2/@16.5122646,80.6296066,18z/data=!4m10!1m2!2m1!1sMobifix!3m6!1s0x3a35f100716d9023:0xe7f796d8ce823f7!8m2!3d16.5122646!4d80.6296066!15sCgdNb2JpZml4kgEYbW9iaWxlX3Bob25lX3JlcGFpcl9zaG9w4AEA!16s%2Fg%2F11ybykfbh3"
       - key: OWNER_NAME
         value: "K. Yathinivas"

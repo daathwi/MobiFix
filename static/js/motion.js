@@ -143,33 +143,18 @@
 
   /* Magnetic buttons (desktop fine pointer only) */
   function bindMagnetic(el) {
-    if (el.dataset.mpMagnetic === "1" || !canHover) return;
-    el.dataset.mpMagnetic = "1";
-    const strength = Number(el.dataset.magnetic || 18);
-    el.addEventListener("pointermove", (event) => {
-      const rect = el.getBoundingClientRect();
-      const x = event.clientX - rect.left - rect.width / 2;
-      const y = event.clientY - rect.top - rect.height / 2;
-      el.style.transform = `translate3d(${x / strength}px, ${y / strength}px, 0)`;
-    });
-    el.addEventListener("pointerleave", () => {
-      el.style.transform = "";
-    });
+    /* Disabled — buttons stay still; hover uses shade only */
+    return;
   }
 
-  document.querySelectorAll("[data-magnetic]").forEach(bindMagnetic);
-
-  /* Trail + magnetic on key primary CTAs */
+  /* Shade trail on key primary CTAs (no magnetic slide) */
   document
     .querySelectorAll(
-      ".hero-ctas .btn-primary, .nav-wa, .page-hero-ctas .btn-primary, .page-cta .btn-primary, .location-copy .btn-primary"
+      ".hero-ctas .btn-primary, .nav-book, .page-hero-ctas .btn-primary, .page-cta .btn-primary, .location-copy .btn-primary"
     )
     .forEach((btn) => {
       btn.classList.add("mp-trail");
-      if (!btn.hasAttribute("data-magnetic")) {
-        btn.setAttribute("data-magnetic", "22");
-      }
-      bindMagnetic(btn);
+      btn.removeAttribute("data-magnetic");
     });
 
   /* FAQ accordion — one open at a time */

@@ -53,107 +53,70 @@
   /* Theme fixed to light */
   document.documentElement.setAttribute("data-theme", "light");
 
-  /* Mobile nav drawer */
-  const navToggle = $("#nav-toggle");
-  const mobileMenu = $("#mobile-menu");
-  const navScrim = $("#nav-scrim");
+  /* Book now — full-screen repair selector */
+  const bookModal = $("#book-modal");
+  let bookLastFocus = null;
 
-  function setNavOpen(open) {
-    if (!mobileMenu || !navToggle) return;
-    if (open) {
-      mobileMenu.hidden = false;
-      if (navScrim) navScrim.hidden = false;
-      requestAnimationFrame(() => {
-        mobileMenu.classList.add("open");
-      });
-    } else {
-      mobileMenu.classList.remove("open");
-      window.setTimeout(() => {
-        if (!mobileMenu.classList.contains("open")) {
-          mobileMenu.hidden = true;
-          if (navScrim) navScrim.hidden = true;
-        }
-      }, 260);
+  function openBookModal() {
+    if (!bookModal) return;
+    bookLastFocus = document.activeElement;
+    bookModal.hidden = false;
+    requestAnimationFrame(() => {
+      bookModal.classList.add("open");
+    });
+    document.body.classList.add("book-open");
+    bookModal.querySelector("[data-book-close]")?.focus();
+    if (location.hash !== "#book") {
+      history.replaceState(null, "", "#book");
     }
-    navToggle.setAttribute("aria-expanded", String(open));
-    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    const icon = navToggle.querySelector(".material-symbols-outlined");
-    if (icon) icon.textContent = open ? "close" : "menu";
-    document.body.classList.toggle("nav-open", open);
   }
 
-  navToggle?.addEventListener("click", () => {
-    const open = !mobileMenu.classList.contains("open");
-    setNavOpen(open);
-  });
+  function closeBookModal() {
+    if (!bookModal) return;
+    bookModal.classList.remove("open");
+    document.body.classList.remove("book-open");
+    window.setTimeout(() => {
+      if (!bookModal.classList.contains("open")) bookModal.hidden = true;
+    }, 200);
+    if (location.hash === "#book" || location.hash === "#repair-estimate") {
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+    if (bookLastFocus && typeof bookLastFocus.focus === "function") {
+      bookLastFocus.focus();
+    }
+  }
 
-  navScrim?.addEventListener("click", () => setNavOpen(false));
-
-  $$(".mobile-menu a, .mobile-menu-cta a").forEach((link) => {
-    link.addEventListener("click", () => setNavOpen(false));
+  document.addEventListener("click", (e) => {
+    const openBtn = e.target.closest("[data-book-open]");
+    if (openBtn) {
+      e.preventDefault();
+      if (bookModal?.classList.contains("open")) closeBookModal();
+      else openBookModal();
+      return;
+    }
+    if (e.target.closest("[data-book-close]")) {
+      e.preventDefault();
+      closeBookModal();
+    }
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && mobileMenu?.classList.contains("open")) {
-      setNavOpen(false);
+    if (e.key === "Escape" && bookModal?.classList.contains("open")) {
+      closeBookModal();
     }
   });
 
-  window.addEventListener(
-    "resize",
-    () => {
-      if (window.innerWidth >= 1024) setNavOpen(false);
-    },
-    { passive: true }
-  );
-
-  /* Mobile: hide navbar on scroll down, show on scroll up */
-  const topNav = $("#top-nav");
-  if (topNav) {
-    let lastY = window.scrollY || 0;
-    let ticking = false;
-    const MOBILE_MAX = 1023;
-    const TOP_SHOW = 24;
-    const MIN_DELTA = 6;
-
-    const updateNavHide = () => {
-      ticking = false;
-      if (window.innerWidth > MOBILE_MAX) {
-        topNav.classList.remove("is-nav-hidden");
-        lastY = window.scrollY || 0;
-        return;
-      }
-      if (document.body.classList.contains("nav-open")) {
-        topNav.classList.remove("is-nav-hidden");
-        lastY = window.scrollY || 0;
-        return;
-      }
-
-      const y = window.scrollY || 0;
-      const delta = y - lastY;
-
-      if (y <= TOP_SHOW) {
-        topNav.classList.remove("is-nav-hidden");
-      } else if (delta > MIN_DELTA) {
-        topNav.classList.add("is-nav-hidden");
-      } else if (delta < -MIN_DELTA) {
-        topNav.classList.remove("is-nav-hidden");
-      }
-
-      lastY = y;
-    };
-
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(updateNavHide);
-        }
-      },
-      { passive: true }
-    );
+  if (location.hash === "#book" || location.hash === "#repair-estimate") {
+    openBookModal();
   }
+
+  window.addEventListener("hashchange", () => {
+    if (location.hash === "#book" || location.hash === "#repair-estimate") {
+      openBookModal();
+    } else if (bookModal?.classList.contains("open")) {
+      closeBookModal();
+    }
+  });
 
   /* Smooth scroll only for in-page hash targets */
   $$('a[href^="#"]').forEach((anchor) => {

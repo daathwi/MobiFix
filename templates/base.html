@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="{{ page_description | default('SS Mobifix — phone repair in Vijayawada. Clear prices, while-you-wait service, WhatsApp booking.') }}"/>
   <meta name="color-scheme" content="light"/>
+  <meta name="theme-color" content="#ffffff"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
   <title>{{ page_title | default('SS Mobifix | Phone Repair in Vijayawada') }}</title>
   <link rel="icon" href="/static/images/favicon.svg" type="image/svg+xml"/>
   <script>
@@ -26,9 +30,6 @@
   <header class="top-nav glass" id="top-nav">
     <div class="nav-inner">
       <div class="nav-start">
-        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
-        </button>
         <a class="brand-lockup" href="/" aria-label="SS Mobifix home">
           <img class="logo-dark" src="/static/images/logo-dark.png" alt="SS Mobifix"/>
           <img class="logo-light" src="/static/images/logo-light.png" alt="SS Mobifix"/>
@@ -36,36 +37,154 @@
       </div>
       <nav class="nav-links" aria-label="Primary">
         <a href="/" class="{{ 'active' if active_page == 'home' else '' }}">Home</a>
+        <a href="/services" class="{{ 'active' if active_page == 'services' else '' }}">Services</a>
         <a href="/gallery" class="{{ 'active' if active_page == 'gallery' else '' }}">Gallery</a>
         <a href="/shop" class="{{ 'active' if active_page == 'accessories' else '' }}">Shop</a>
       </nav>
       <div class="nav-actions">
-        <a class="btn btn-primary nav-wa" href="https://wa.me/{{ whatsapp }}?text={{ 'Hi SS Mobifix! I need help with my phone.' | urlencode }}" target="_blank" rel="noopener" data-magnetic="24">
-          <span class="material-symbols-outlined icon-sm">chat</span>
-          <span class="nav-wa-label">WhatsApp</span>
-        </a>
+        <button type="button" class="btn btn-primary nav-book" id="nav-book" data-book-open>
+          <span class="material-symbols-outlined icon-sm">calendar_month</span>
+          <span class="nav-book-label">Book now</span>
+        </button>
       </div>
     </div>
-    <div class="mobile-drawer" id="mobile-menu" hidden>
-      <nav class="mobile-menu" aria-label="Mobile">
-        <a href="/" class="{{ 'active' if active_page == 'home' else '' }}">Home</a>
-        <a href="/gallery" class="{{ 'active' if active_page == 'gallery' else '' }}">Gallery</a>
-        <a href="/shop" class="{{ 'active' if active_page == 'accessories' else '' }}">Shop</a>
-      </nav>
-      <div class="mobile-menu-cta">
-        <a class="btn btn-primary btn-lg" href="https://wa.me/{{ whatsapp }}?text={{ 'Hi SS Mobifix! I need help with my phone.' | urlencode }}" target="_blank" rel="noopener">
-          <span class="material-symbols-outlined icon-sm">chat</span>
-          WhatsApp us
-        </a>
-        <a class="btn btn-secondary" href="tel:{{ phone | replace(' ', '') }}">
-          <span class="material-symbols-outlined icon-sm">call</span>
-          Call {{ phone }}
-        </a>
-        <p class="mobile-menu-note">Governorpet, Vijayawada</p>
-      </div>
-    </div>
-    <div class="nav-scrim" id="nav-scrim" hidden></div>
   </header>
+
+  {# Android-style app bar — phones & tablets only #}
+  <header class="app-bar" id="app-bar">
+    {% if active_page == 'home' %}
+      <a class="app-bar-brand" href="/" aria-label="SS Mobifix home">
+        <img src="/static/images/logo-dark.png" alt="" width="28" height="28"/>
+        <span>SS Mobifix</span>
+      </a>
+    {% else %}
+      <h1 class="app-bar-title">{{ app_bar_title | default('SS Mobifix') }}</h1>
+    {% endif %}
+    <div class="app-bar-actions">
+      <button type="button" class="btn btn-primary app-bar-book" data-book-open>
+        <span class="material-symbols-outlined icon-sm">calendar_month</span>
+        <span>Book now</span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="bottom-tabbar" aria-label="Main">
+    <a href="/" class="bottom-tab {{ 'is-active' if active_page == 'home' else '' }}">
+      <span class="material-symbols-outlined" aria-hidden="true">home</span>
+      <span class="bottom-tab-label">Home</span>
+    </a>
+    <a href="/services" class="bottom-tab {{ 'is-active' if active_page == 'services' else '' }}">
+      <span class="material-symbols-outlined" aria-hidden="true">build</span>
+      <span class="bottom-tab-label">Services</span>
+    </a>
+    <a href="/gallery" class="bottom-tab {{ 'is-active' if active_page == 'gallery' else '' }}">
+      <span class="material-symbols-outlined" aria-hidden="true">photo_library</span>
+      <span class="bottom-tab-label">Gallery</span>
+    </a>
+    <a href="/shop" class="bottom-tab {{ 'is-active' if active_page == 'accessories' else '' }}">
+      <span class="material-symbols-outlined" aria-hidden="true">shopping_bag</span>
+      <span class="bottom-tab-label">Shop</span>
+    </a>
+  </nav>
+
+  <div class="book-screen" id="book-modal" hidden role="dialog" aria-modal="true" aria-labelledby="book-modal-title">
+    <div class="book-screen-panel" role="document">
+      <div class="book-screen-layout">
+        <aside class="book-screen-visual">
+          <img
+            class="book-screen-visual-photo"
+            src="/static/images/shop/hero.png"
+            alt=""
+            width="960"
+            height="1280"
+            decoding="async"
+            aria-hidden="true"
+          />
+          <button type="button" class="book-screen-back" data-book-close aria-label="Close booking">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
+        </aside>
+
+        <div class="book-screen-body">
+          <img
+            class="book-screen-form-logo"
+            src="/static/images/logo-light.png"
+            alt="SS Mobifix"
+            width="200"
+            height="60"
+            decoding="async"
+          />
+          <h2 id="book-modal-title" class="headline-lg">Check your repair price</h2>
+          <p class="book-modal-lead">Choose brand, model, and issue — then book on WhatsApp.</p>
+          <p class="doorstep-badge doorstep-badge--modal">
+            <span class="material-symbols-outlined icon-sm">home_repair_service</span>
+            <strong>Home repair free</strong>
+            <span>in Governorpet &amp; nearby</span>
+          </p>
+
+          <div class="estimate-card book-estimate" id="repair-selector" data-whatsapp="{{ whatsapp }}">
+            <div class="estimate-brand-block">
+              <span class="estimate-field-label">Brand</span>
+              <div class="brand-pick" id="brand-pick" role="listbox" aria-label="Select brand"></div>
+            </div>
+
+            <div class="estimate-stack">
+              <div class="cdd is-disabled" id="cdd-model">
+                <span class="estimate-field-label">Model</span>
+                <button type="button" class="cdd-trigger" aria-haspopup="listbox" aria-expanded="false" disabled>
+                  <span class="cdd-value is-placeholder">Select brand first</span>
+                  <span class="material-symbols-outlined cdd-caret">expand_more</span>
+                </button>
+                <div class="cdd-menu" hidden>
+                  <ul class="cdd-list" id="cdd-model-list" role="listbox"></ul>
+                </div>
+              </div>
+
+              <div class="cdd" id="cdd-issue">
+                <span class="estimate-field-label">Issue</span>
+                <button type="button" class="cdd-trigger" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cdd-value is-placeholder">Select issue</span>
+                  <span class="material-symbols-outlined cdd-caret">expand_more</span>
+                </button>
+                <div class="cdd-menu" hidden>
+                  <ul class="cdd-list" id="cdd-issue-list" role="listbox"></ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="estimate-place">
+              <p class="estimate-field-label">Repair at</p>
+              <div class="place-seg" role="radiogroup" aria-label="Repair location">
+                <button type="button" class="place-seg-btn is-active" data-place="shop" role="radio" aria-checked="true">
+                  <span class="material-symbols-outlined icon-sm">storefront</span>
+                  Shop
+                </button>
+                <button type="button" class="place-seg-btn" data-place="home" role="radio" aria-checked="false">
+                  <span class="material-symbols-outlined icon-sm">home</span>
+                  Home
+                </button>
+              </div>
+              <p class="place-hint">Home visits free in Governorpet &amp; nearby</p>
+            </div>
+
+            <div class="estimate-result" id="selector-result" hidden>
+              <div class="estimate-result-copy">
+                <p class="selector-result-meta" id="selector-summary"></p>
+                <p class="estimate-result-meta-row">
+                  <span><span class="material-symbols-outlined icon-sm">schedule</span> <span id="selector-time"></span></span>
+                  <span>Starts from <strong id="selector-price"></strong></span>
+                </p>
+              </div>
+              <a class="btn btn-primary" id="selector-book" href="#" target="_blank" rel="noopener">
+                Book on WhatsApp
+                <span class="material-symbols-outlined">chat</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   {% block content %}{% endblock %}
 
@@ -96,6 +215,7 @@
         <h4>Explore</h4>
         <ul>
           <li><a href="/">Home</a></li>
+          <li><a href="/services">Services</a></li>
           <li><a href="/gallery">Gallery</a></li>
           <li><a href="/shop">Shop</a></li>
         </ul>
@@ -133,6 +253,8 @@
 
   <script src="/static/js/main.js" defer></script>
   <script src="/static/js/motion.js" defer></script>
+  <script src="/static/js/repair-prices.js" defer></script>
+  <script src="/static/js/repair-selector.js" defer></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

@@ -126,32 +126,31 @@
 /* —— Buttons —— */
 .btn {
   transition:
-    transform 280ms var(--motion-spring),
-    box-shadow 280ms var(--motion-ease),
     background-color var(--motion-fast) ease,
     border-color var(--motion-fast) ease,
     color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
     filter var(--motion-fast) ease,
-    gap var(--motion-fast) ease,
     opacity var(--motion-fast) ease;
 }
 
 .btn:hover {
-  transform: translate3d(0, -1px, 0) scale(1.015);
+  transform: none;
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: none;
+  filter: brightness(0.94);
   transition-duration: var(--motion-press);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 10px 28px color-mix(in srgb, var(--brand-red) 36%, transparent);
+  box-shadow: none;
 }
 
 .btn-secondary:hover {
-  transform: translate3d(0, -1px, 0);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-tertiary {
@@ -180,11 +179,11 @@
 }
 
 .btn .material-symbols-outlined {
-  transition: transform 280ms var(--motion-spring);
+  transition: none;
 }
 
 .btn:hover .material-symbols-outlined {
-  transform: translate3d(1px, 0, 0);
+  transform: none;
 }
 
 .btn-primary:hover .material-symbols-outlined {
@@ -437,21 +436,6 @@
   }
 }
 
-.estimate-stack .cdd.is-open > .cdd-menu {
-  animation-name: mp-menu-in-up;
-}
-
-@keyframes mp-menu-in-up {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -6px, 0) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 .cdd-option:hover,
 .brand-more-item:hover {
   transform: translate3d(2px, 0, 0);
@@ -560,9 +544,7 @@
 
 .catalog-card,
 .gallery-card,
-.page-cta.card-surface,
-.location-copy.card-surface,
-.location-map.card-surface {
+.page-cta.card-surface {
   transition:
     transform 320ms var(--motion-spring),
     box-shadow 320ms var(--motion-ease),
