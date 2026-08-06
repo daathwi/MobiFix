@@ -1,52 +1,55 @@
 {% extends "base.html" %}
 
+{% block head_extra %}
+<script>document.documentElement.classList.add("hero-seq-active");</script>
+{% endblock %}
+
 {% block content %}
 <main class="home-main home-modern home-local home-kinetic">
-  <section class="hero hero-visual hero-kinetic" id="home">
-    <figure class="hero-kinetic-plane" data-in-view="scale">
-      <img
-        class="hero-kinetic-img"
-        src="/static/images/shop/hero.png"
-        alt="Phone screen being repaired on the workbench at SS Mobifix"
-        width="1536"
-        height="1024"
-        loading="eager"
-      />
-      <div class="hero-kinetic-veil" aria-hidden="true"></div>
-      <div class="hero-crack" aria-hidden="true">
-        <svg viewBox="0 0 1200 900" preserveAspectRatio="none">
-          <path class="hero-crack-glow" d="M780 0 L640 210 L710 280 L520 480 L610 560 L420 900"/>
-          <path class="hero-crack-path" d="M780 0 L640 210 L710 280 L520 480 L610 560 L420 900"/>
-          <path class="hero-crack-path" d="M640 210 L560 190 L590 250"/>
-          <path class="hero-crack-path" d="M520 480 L470 450 L500 510"/>
-        </svg>
-      </div>
-    </figure>
+  <section
+    class="hero hero-seq hero-kinetic"
+    id="home"
+    data-hero-seq
+    data-frame-start="1"
+    data-frame-end="228"
+    data-frame-step="2"
+    data-frame-pad="3"
+    data-frame-base="/static/images/mobile_phone_assembly/ezgif-frame-"
+  >
+    <div class="hero-seq-track">
+      <div class="hero-seq-sticky">
+        <canvas class="hero-seq-canvas" id="hero-seq-canvas" aria-hidden="true"></canvas>
+        <div class="hero-seq-veil" aria-hidden="true"></div>
+        <p class="hero-seq-hint" data-hero-seq-hint>
+          <span class="material-symbols-outlined" aria-hidden="true">swipe_vertical</span>
+          Scroll to assemble
+        </p>
+        <div class="container hero-kinetic-content hero-seq-copy" data-hero-seq-copy>
+          <div class="hero-shard">
+            <div class="hero-copy">
+              <p class="hero-eyebrow hero-brand">SS Mobifix · Governorpet</p>
+              <h1 class="headline-xl hero-title">Phone repair in Vijayawada</h1>
 
-    <div class="container hero-kinetic-content">
-      <div class="hero-shard" data-in-view="right">
-        <div class="hero-copy">
-          <p class="hero-eyebrow hero-brand">SS Mobifix · Governorpet</p>
-          <h1 class="headline-xl hero-title" data-text-reveal>Phone repair in Vijayawada</h1>
+              <a class="trust-badge trust-badge--compact" href="/#reviews" aria-label="4.9 stars from 250+ customer reviews">
+                <strong>4.9</strong>
+                <span class="trust-stars" aria-hidden="true">★★★★★</span>
+                <span class="trust-count">250+ reviews</span>
+              </a>
 
-          <a class="trust-badge trust-badge--compact" href="/#reviews" aria-label="4.9 stars from 250+ customer reviews">
-            <strong>4.9</strong>
-            <span class="trust-stars" aria-hidden="true">★★★★★</span>
-            <span class="trust-count">250+ reviews</span>
-          </a>
+              <p class="hero-lead">
+                Most jobs finish while you wait. <strong>90-day warranty</strong>. Free home repair nearby.
+              </p>
 
-          <p class="hero-lead">
-            Most jobs finish while you wait. <strong>90-day warranty</strong>. Free home repair nearby.
-          </p>
-
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need help with my phone." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
-              <span class="material-symbols-outlined icon-sm">chat</span>
-              WhatsApp us
-            </a>
-            <a class="btn btn-secondary" href="#book" data-book-open>
-              Check your price
-            </a>
+              <div class="hero-ctas">
+                <a class="btn btn-primary" href='https://wa.me/{{ whatsapp }}?text={{ "Hi SS Mobifix! I need help with my phone." | urlencode }}' target="_blank" rel="noopener" data-wa="repair">
+                  <span class="material-symbols-outlined icon-sm">chat</span>
+                  WhatsApp us
+                </a>
+                <a class="btn btn-secondary" href="#book" data-book-open>
+                  Check your price
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -289,6 +292,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="/static/js/hero-sequence.js" defer></script>
 <script src="/static/js/open-status.js" defer></script>
 <script src="/static/js/location-branches.js" defer></script>
 {% endblock %}
