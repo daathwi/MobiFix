@@ -1173,6 +1173,7 @@ body.site-kinetic {
 /* —— Scroll-scrubbed phone assembly hero —— */
 .hero-seq {
   --hero-seq-progress: 0;
+  --hero-load-progress: 0;
   position: relative;
   margin: 0;
   padding: 0;
@@ -1182,6 +1183,64 @@ body.site-kinetic {
   display: block;
   overflow: visible;
   align-items: stretch;
+}
+
+.hero-seq-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 24px;
+  background: #fff;
+  transition: opacity 420ms ease, visibility 420ms ease;
+}
+
+.hero-seq-loader-logo {
+  display: block;
+  width: auto;
+  height: clamp(52px, 10vw, 72px);
+  object-fit: contain;
+}
+
+.hero-seq-loader-bar {
+  width: min(240px, 62vw);
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--muted-border) 80%, #fff);
+  overflow: hidden;
+}
+
+.hero-seq-loader-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: var(--signal-red);
+  transition: width 120ms linear;
+}
+
+.hero-seq-loader-label {
+  margin: 0;
+  font-family: var(--font-tech);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--on-surface-variant);
+}
+
+html.hero-seq-ready .hero-seq-loader,
+.hero-seq-loader[aria-hidden="true"] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+html.hero-seq-loading body {
+  overflow: hidden !important;
 }
 
 .hero-seq-track {
@@ -1347,7 +1406,15 @@ html.hero-seq-done .bottom-tabbar {
   }
 
   .hero-seq-track {
-    height: 340vh;
+    height: 100svh;
+  }
+
+  .hero-seq.is-autoplay .hero-seq-sticky {
+    position: relative;
+  }
+
+  .hero-seq-hint {
+    display: none;
   }
 
   .hero-seq .hero-kinetic-content {

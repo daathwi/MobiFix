@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block head_extra %}
-<script>document.documentElement.classList.add("hero-seq-active");</script>
+<script>document.documentElement.classList.add("hero-seq-active","hero-seq-loading");</script>
 {% endblock %}
 
 {% block content %}
@@ -16,6 +16,29 @@
     data-frame-pad="3"
     data-frame-base="/static/images/mobile_phone_assembly/ezgif-frame-"
   >
+    <div class="hero-seq-loader" data-hero-seq-loader aria-busy="true" aria-live="polite">
+      <img
+        class="hero-seq-loader-logo"
+        src="/static/images/logo-light.png"
+        alt="SS Mobifix"
+        width="220"
+        height="66"
+        decoding="async"
+      />
+      <div
+        class="hero-seq-loader-bar"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+        aria-label="Loading assembly frames"
+        data-hero-seq-bar
+      >
+        <span class="hero-seq-loader-fill" data-hero-seq-fill></span>
+      </div>
+      <p class="hero-seq-loader-label"><span data-hero-seq-pct>0</span>%</p>
+    </div>
+
     <div class="hero-seq-track">
       <div class="hero-seq-sticky">
         <canvas class="hero-seq-canvas" id="hero-seq-canvas" aria-hidden="true"></canvas>

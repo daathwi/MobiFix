@@ -6,6 +6,10 @@
   const track = root.querySelector(".hero-seq-track");
   const hint = root.querySelector("[data-hero-seq-hint]");
   const copy = root.querySelector("[data-hero-seq-copy]");
+  const loader = root.querySelector("[data-hero-seq-loader]");
+  const bar = root.querySelector("[data-hero-seq-bar]");
+  const fill = root.querySelector("[data-hero-seq-fill]");
+  const pctEl = root.querySelector("[data-hero-seq-pct]");
   const ctx = canvas.getContext("2d", { alpha: false });
   if (!ctx || !track) return;
 
@@ -15,8 +19,10 @@
   const pad = Number(root.dataset.framePad || 3);
   const base = root.dataset.frameBase || "/static/images/mobile_phone_assembly/ezgif-frame-";
   const revealAt = 0.9;
-  /** Extra sticky travel after last frame (~2s at ~1 viewport / second). */
-  const HOLD_SECONDS = 2;
+  /** Extra sticky travel after last frame on desktop (~1s at ~1 viewport / second). */
+  const HOLD_SECONDS = 1;
+  const MOBILE_FPS = 28;
+  const MOBILE_HOLD_MS = 2000;
 
   const frameNums = [];
   for (let i = start; i <= end; i += step) frameNums.push(i);
@@ -27,11 +33,27 @@
   let ready = false;
   let revealed = false;
   let raf = 0;
+  let loadedCount = 0;
+  let autoplayTimer = 0;
+  let mode = "desktop";
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mobileMq = window.matchMedia("(max-width: 1023px)");
+
+  function isMobile() {
+    return mobileMq.matches;
+  }
 
   function frameUrl(n) {
     return `${base}${String(n).padStart(pad, "0")}.jpg`;
+  }
+
+  function setLoadProgress(loaded, total) {
+    const pct = total ? Math.round((loaded / total) * 100) : 0;
+    if (fill) fill.style.width = `${pct}%`;
+    if (bar) bar.setAttribute("aria-valuenow", String(pct));
+    if (pctEl) pctEl.textContent = String(pct);
+    root.style.setProperty("--hero-load-progress", String(pct / 100));
   }
 
   function loadImage(src) {
@@ -44,24 +66,38 @@
     });
   }
 
-  async function preload(concurrency = 8) {
+  async function preload(concurrency = 10) {
+    const total = frameNums.length;
+    setLoadProgress(0, total);
     let cursor = 0;
+
     async function worker() {
-      while (cursor < frameNums.length) {
+      while (cursor < total) {
         const i = cursor++;
         frames[i] = await loadImage(frameUrl(frameNums[i]));
-        if (i === 0 && frames[0]) {
-          ready = true;
-          resize();
-          paint(0);
-        }
+        loadedCount += 1;
+        setLoadProgress(loadedCount, total);
       }
     }
-    await Promise.all(Array.from({ length: Math.min(concurrency, frameNums.length) }, worker));
+
+    await Promise.all(Array.from({ length: Math.min(concurrency, total) }, worker));
+  }
+
+  function dismissLoader() {
+    document.documentElement.classList.add("hero-seq-ready");
+    document.documentElement.classList.remove("hero-seq-loading");
+    if (loader) {
+      loader.setAttribute("aria-busy", "false");
+      loader.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  function lockScroll(on) {
+    document.body.style.overflow = on ? "hidden" : "";
   }
 
   function sizeTrack() {
-    if (reduceMotion) {
+    if (reduceMotion || isMobile()) {
       track.style.height = "100svh";
       return;
     }
@@ -129,11 +165,23 @@
     root.classList.toggle("is-revealed", on);
     if (hint) hint.setAttribute("aria-hidden", on ? "true" : "false");
     if (copy) copy.setAttribute("aria-hidden", on ? "false" : "true");
+    if (on && mode === "mobile") lockScroll(false);
   }
 
-  function tick() {
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearTimeout(autoplayTimer);
+      autoplayTimer = 0;
+    }
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    }
+  }
+
+  function tickScroll() {
     raf = 0;
-    if (!ready) return;
+    if (!ready || mode !== "desktop") return;
     const { seq, overall } = scrollState();
     const idx = Math.round(seq * (frameNums.length - 1));
     paint(idx);
@@ -141,41 +189,130 @@
     root.style.setProperty("--hero-seq-progress", overall.toFixed(4));
   }
 
-  function requestTick() {
-    if (raf) return;
-    raf = requestAnimationFrame(tick);
+  function requestScrollTick() {
+    if (raf || mode !== "desktop") return;
+    raf = requestAnimationFrame(tickScroll);
   }
 
-  function finishImmediately() {
-    ready = true;
+  function playAutoplay() {
+    mode = "mobile";
+    root.classList.add("is-autoplay");
+    if (hint) hint.setAttribute("aria-hidden", "true");
+    lockScroll(true);
+
     const last = frames.length - 1;
-    if (!frames[last]) {
-      loadImage(frameUrl(frameNums[last])).then((img) => {
-        frames[last] = img;
-        resize();
+    const frameMs = 1000 / MOBILE_FPS;
+    let index = 0;
+    let lastTs = 0;
+
+    function stepAuto(ts) {
+      if (mode !== "mobile") return;
+      if (!lastTs) lastTs = ts;
+      const elapsed = ts - lastTs;
+      if (elapsed >= frameMs) {
+        const advance = Math.max(1, Math.floor(elapsed / frameMs));
+        lastTs = ts;
+        index = Math.min(last, index + advance);
+        paint(index);
+        root.style.setProperty("--hero-seq-progress", (index / last).toFixed(4));
+      }
+
+      if (index >= last) {
         paint(last, true);
-        setRevealed(true);
-      });
+        autoplayTimer = window.setTimeout(() => {
+          setRevealed(true);
+        }, MOBILE_HOLD_MS);
+        return;
+      }
+
+      raf = requestAnimationFrame(stepAuto);
+    }
+
+    paint(0, true);
+    raf = requestAnimationFrame(stepAuto);
+  }
+
+  function startDesktop() {
+    mode = "desktop";
+    root.classList.remove("is-autoplay");
+    lockScroll(false);
+    if (hint) hint.setAttribute("aria-hidden", "false");
+    requestScrollTick();
+  }
+
+  function startExperience() {
+    ready = true;
+    dismissLoader();
+    resize();
+
+    if (reduceMotion) {
+      paint(frames.length - 1, true);
+      setRevealed(true);
+      lockScroll(false);
+      return;
+    }
+
+    if (isMobile()) {
+      playAutoplay();
+    } else {
+      paint(0, true);
+      startDesktop();
+    }
+  }
+
+  function onBreakpointChange() {
+    if (!ready || reduceMotion) {
+      sizeTrack();
+      return;
+    }
+
+    const wantMobile = isMobile();
+    if (wantMobile && mode !== "mobile") {
+      stopAutoplay();
+      setRevealed(false);
+      playAutoplay();
+      resize();
+      return;
+    }
+    if (!wantMobile && mode !== "desktop") {
+      stopAutoplay();
+      setRevealed(false);
+      paint(0, true);
+      startDesktop();
+      resize();
+    }
+  }
+
+  document.documentElement.classList.add("hero-seq-active", "hero-seq-loading");
+  lockScroll(true);
+  if (copy) copy.setAttribute("aria-hidden", "true");
+  sizeTrack();
+  setLoadProgress(0, frameNums.length);
+
+  preload(reduceMotion ? 6 : 12)
+    .then(startExperience)
+    .catch(startExperience);
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (mode === "desktop") requestScrollTick();
+    },
+    { passive: true }
+  );
+
+  window.addEventListener("resize", () => {
+    if (!ready) {
+      sizeTrack();
       return;
     }
     resize();
-    paint(last, true);
-    setRevealed(true);
-  }
-
-  document.documentElement.classList.add("hero-seq-active");
-  if (copy) copy.setAttribute("aria-hidden", "true");
-  sizeTrack();
-
-  if (reduceMotion) {
-    preload(4).then(finishImmediately);
-  } else {
-    preload(8).then(() => requestTick());
-  }
-
-  window.addEventListener("scroll", requestTick, { passive: true });
-  window.addEventListener("resize", () => {
-    resize();
-    requestTick();
+    if (mode === "desktop") requestScrollTick();
   });
+
+  if (typeof mobileMq.addEventListener === "function") {
+    mobileMq.addEventListener("change", onBreakpointChange);
+  } else {
+    mobileMq.addListener(onBreakpointChange);
+  }
 })();
