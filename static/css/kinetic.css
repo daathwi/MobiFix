@@ -1177,7 +1177,7 @@ body.site-kinetic {
   position: relative;
   margin: 0;
   padding: 0;
-  background: #cfcfcf;
+  background: #d4d4d4;
   border: none;
   min-height: 0;
   display: block;
@@ -1244,8 +1244,8 @@ html.hero-seq-loading body {
 }
 
 .hero-seq-track {
-  /* Fallback; JS sets exact height (longer sequence + 1s hold). */
-  height: 540vh;
+  /* Fallback; JS sets exact height (sequence + ~2s last-frame hold). */
+  height: 390vh;
   position: relative;
 }
 
@@ -1257,7 +1257,6 @@ html.hero-seq-loading body {
   overflow: hidden;
   display: grid;
   align-items: end;
-  background: #cfcfcf;
 }
 
 .hero-seq-canvas {
@@ -1267,7 +1266,7 @@ html.hero-seq-loading body {
   width: 100%;
   height: 100%;
   display: block;
-  background: #cfcfcf;
+  background: #d4d4d4;
 }
 
 .hero-seq-veil {

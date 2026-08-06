@@ -10,20 +10,19 @@
   const bar = root.querySelector("[data-hero-seq-bar]");
   const fill = root.querySelector("[data-hero-seq-fill]");
   const pctEl = root.querySelector("[data-hero-seq-pct]");
-  const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true });
+  const ctx = canvas.getContext("2d", { alpha: false });
   if (!ctx || !track) return;
 
   const start = Number(root.dataset.frameStart || 1);
   const end = Number(root.dataset.frameEnd || 228);
-  const step = Math.max(1, Number(root.dataset.frameStep || 1));
+  const step = Math.max(1, Number(root.dataset.frameStep || 2));
   const pad = Number(root.dataset.framePad || 3);
   const base = root.dataset.frameBase || "/static/images/mobile_phone_assembly/ezgif-frame-";
-  const revealAt = 0.92;
+  const revealAt = 0.9;
   /** Extra sticky travel after last frame on desktop (~1s at ~1 viewport / second). */
   const HOLD_SECONDS = 1;
-  const MOBILE_FPS = 18;
+  const MOBILE_FPS = 28;
   const MOBILE_HOLD_MS = 2000;
-  const FRAME_BG = "#cfcfcf";
 
   const frameNums = [];
   for (let i = start; i <= end; i += step) frameNums.push(i);
@@ -103,15 +102,14 @@
       return;
     }
     const vh = window.innerHeight;
-    /* More scroll distance so each frame reads clearly */
-    const seqTravel = vh * 3.4;
+    const seqTravel = vh * 1.9;
     const holdTravel = vh * HOLD_SECONDS;
     track.style.height = `${Math.round(seqTravel + holdTravel + vh)}px`;
   }
 
   function resize() {
     sizeTrack();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = Math.max(1, Math.floor(window.innerWidth));
     const h = Math.max(1, Math.floor(window.innerHeight));
     canvas.width = Math.floor(w * dpr);
@@ -119,8 +117,6 @@
     canvas.style.width = `${w}px`;
     canvas.style.height = `${h}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.imageSmoothingEnabled = true;
-    if ("imageSmoothingQuality" in ctx) ctx.imageSmoothingQuality = "high";
     if (drawn >= 0) paint(drawn, true);
   }
 
@@ -132,23 +128,20 @@
 
     const cw = canvas.clientWidth || window.innerWidth;
     const ch = canvas.clientHeight || window.innerHeight;
-    const ir = img.naturalWidth / Math.max(1, img.naturalHeight);
+    const ir = img.naturalWidth / img.naturalHeight;
     const cr = cw / ch;
-
-    /* contain — full assembly visible, no edge cropping */
     let dw;
     let dh;
     if (ir > cr) {
-      dw = cw;
-      dh = cw / ir;
-    } else {
       dh = ch;
       dw = ch * ir;
+    } else {
+      dw = cw;
+      dh = cw / ir;
     }
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
-
-    ctx.fillStyle = FRAME_BG;
+    ctx.fillStyle = "#d4d4d4";
     ctx.fillRect(0, 0, cw, ch);
     ctx.drawImage(img, dx, dy, dw, dh);
   }
@@ -156,7 +149,7 @@
   function scrollState() {
     const rect = track.getBoundingClientRect();
     const travel = Math.max(1, track.offsetHeight - window.innerHeight);
-    const holdTravel = Math.min(travel * 0.35, window.innerHeight * HOLD_SECONDS);
+    const holdTravel = Math.min(travel * 0.55, window.innerHeight * HOLD_SECONDS);
     const seqTravel = Math.max(1, travel - holdTravel);
     const scrolled = Math.min(travel, Math.max(0, -rect.top));
     if (scrolled <= seqTravel) {
